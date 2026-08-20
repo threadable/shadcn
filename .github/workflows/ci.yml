@@ -33,7 +33,7 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile --prefer-offline
+        run: pnpm install --frozen-lockfile
 
       - name: Check registry source files
         run: pnpm exec vitest run tests/unit/registry.test.ts
@@ -75,7 +75,7 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile --prefer-offline
+        run: pnpm install --frozen-lockfile
 
       - name: Run Vitest
         run: pnpm test:unit
@@ -99,7 +99,7 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile --prefer-offline
+        run: pnpm install --frozen-lockfile
 
       - name: Install Playwright Chromium
         run: pnpm exec playwright install --with-deps chromium
@@ -140,7 +140,7 @@ jobs:
           cache: pnpm
 
       - name: Install registry dependencies
-        run: pnpm install --frozen-lockfile --prefer-offline
+        run: pnpm install --frozen-lockfile
 
       - name: Build registry
         run: pnpm registry:build
@@ -216,7 +216,7 @@ jobs:
             ${{ runner.os }}-composer-
 
       - name: Install registry dependencies
-        run: pnpm install --frozen-lockfile --prefer-offline
+        run: pnpm install --frozen-lockfile
 
       - name: Generate Laravel Vue consumer and build it
         shell: bash

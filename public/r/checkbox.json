@@ -1,0 +1,25 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "checkbox",
+  "description": "Accessible checkbox primitive",
+  "dependencies": [
+    "@lucide/vue",
+    "reka-ui"
+  ],
+  "registryDependencies": [
+    "@threadable/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/threadable/ui/checkbox/Checkbox.vue",
+      "content": "<script setup lang=\"ts\">\nimport type { CheckboxRootEmits, CheckboxRootProps } from \"reka-ui\";\nimport { cn } from \"@/registry/threadable/lib/utils\";\nimport { Check } from \"@lucide/vue\";\nimport { CheckboxIndicator, CheckboxRoot, useForwardPropsEmits } from \"reka-ui\";\nimport { computed, type HTMLAttributes } from \"vue\";\n\nconst props = defineProps<\n  CheckboxRootProps & { class?: HTMLAttributes[\"class\"] }\n>();\nconst emits = defineEmits<CheckboxRootEmits>();\n\nconst delegatedProps = computed(() => {\n  const { class: _, ...delegated } = props;\n\n  return delegated;\n});\n\nconst forwarded = useForwardPropsEmits(delegatedProps, emits);\n</script>\n\n<template>\n  <CheckboxRoot\n    data-slot=\"checkbox\"\n    v-bind=\"forwarded\"\n    :class=\"\n      cn(\n        'peer size-4 shrink-0 rounded-[4px] border border-input shadow-xs transition-shadow outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:aria-invalid:ring-destructive/40',\n        props.class,\n      )\n    \"\n  >\n    <CheckboxIndicator\n      data-slot=\"checkbox-indicator\"\n      class=\"flex items-center justify-center text-current transition-none\"\n    >\n      <slot>\n        <Check class=\"size-3.5\" />\n      </slot>\n    </CheckboxIndicator>\n  </CheckboxRoot>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/checkbox/index.ts",
+      "content": "export { default as Checkbox } from \"./Checkbox.vue\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

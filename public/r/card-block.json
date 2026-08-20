@@ -1,0 +1,31 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "card-block",
+  "description": "Threadable card layout primitives",
+  "dependencies": [
+    "@vueuse/core",
+    "class-variance-authority",
+    "reka-ui"
+  ],
+  "registryDependencies": [
+    "@threadable/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/threadable/ui/card-block/CardBlock.vue",
+      "content": "<script setup lang=\"ts\">\nimport type { PrimitiveProps } from \"reka-ui\";\nimport type { HTMLAttributes } from \"vue\";\nimport type { CardBlockVariants } from \".\";\nimport { reactiveOmit } from \"@vueuse/core\";\nimport { Primitive } from \"reka-ui\";\nimport { cn } from \"@/registry/threadable/lib/utils\";\nimport { cardBlockVariants } from \".\";\n\nconst props = defineProps<\n  PrimitiveProps & {\n    variant?: CardBlockVariants[\"variant\"];\n    class?: HTMLAttributes[\"class\"];\n  }\n>();\n\nconst delegatedProps = reactiveOmit(props, \"class\");\n</script>\n\n<template>\n  <Primitive\n    data-slot=\"card-block\"\n    :class=\"cn(cardBlockVariants({ variant }), props.class)\"\n    v-bind=\"delegatedProps\"\n  >\n    <slot />\n  </Primitive>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/card-block/CardBlockFooter.vue",
+      "content": "<script setup lang=\"ts\"></script>\n\n<template>\n  <div class=\"mt-4 flex flex-col gap-2\">\n    <slot />\n  </div>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/card-block/index.ts",
+      "content": "import { cva, type VariantProps } from \"class-variance-authority\";\n\nexport { default as CardBlock } from \"./CardBlock.vue\";\nexport { default as CardBlockFooter } from \"./CardBlockFooter.vue\";\n\nexport const cardBlockVariants = cva(\"\", {\n  variants: {\n    variant: {\n      default:\n        \"flex flex-col gap-6 rounded-xl border bg-card py-6 text-card-foreground shadow-sm\",\n      \"datatable-mobile\":\n        \"rounded-md border border-black/10 bg-accent p-2 text-primary\",\n      \"bordered-orange\":\n        \"rounded-md border border-orange/25 bg-card text-card-foreground shadow-none\",\n      checkout: \"rounded-lg border border-orange/25 bg-card p-4 shadow-none\",\n      summary:\n        \"rounded-lg border border-orange/25 bg-orange/25 p-4 shadow-none\",\n      destructive:\n        \"rounded-lg border border-destructive/25 bg-destructive/25 p-4 shadow-none\",\n    },\n  },\n  defaultVariants: {\n    variant: \"default\",\n  },\n});\n\nexport type CardBlockVariants = VariantProps<typeof cardBlockVariants>;\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

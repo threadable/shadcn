@@ -1,0 +1,26 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "select-group-block",
+  "description": "Threadable grouped select field wrapper",
+  "dependencies": [
+    "reka-ui"
+  ],
+  "registryDependencies": [
+    "@threadable/select",
+    "@threadable/field",
+    "@threadable/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/threadable/ui/select-group-block/SelectGroupBlock.vue",
+      "content": "<script setup lang=\"ts\">\nimport { computed, type HTMLAttributes } from \"vue\";\nimport { cn, guidGenerator } from \"@/registry/threadable/lib/utils\";\nimport { Field } from \"@/registry/threadable/ui/field\";\nimport type { PrimitiveProps } from \"reka-ui\";\nimport {\n  Select,\n  SelectContent,\n  SelectGroup as BaseSelectGroup,\n  SelectItem,\n  SelectLabel,\n  SelectTrigger,\n  SelectValue,\n} from \"@/registry/threadable/ui/base-select\";\n\ninterface SelectItems {\n  value: string | number;\n  name: string;\n}\n\ninterface SelectGroup {\n  group: string;\n  items: SelectItems[];\n}\n\ninterface Props extends PrimitiveProps {\n  defaultValue?: string | number;\n  class?: HTMLAttributes[\"class\"];\n  error?: string | undefined;\n  label?: string;\n  description?: string;\n  name: string;\n  placeholder?: string;\n  multiple?: boolean;\n  id?: string;\n  dataTest?: string;\n  processing?: boolean;\n  disabled?: boolean;\n  items: SelectGroup[];\n  showError?: boolean;\n  required?: boolean;\n}\n\nconst props = withDefaults(defineProps<Props>(), {\n  multiple: false,\n  id: \"select-group-block-\" + guidGenerator(),\n  processing: false,\n  disabled: false,\n  showError: true,\n});\n\nconst labelId = computed(() => `${props.id}-label`);\n\nconst model = defineModel<any | null>(\"modelValue\");\n</script>\n\n<template>\n  <Field\n    :id=\"id\"\n    :label=\"label\"\n    :error=\"error\"\n    :description=\"description\"\n    :label-id=\"labelId\"\n    :class=\"cn('grid gap-1', props.class)\"\n    :showError=\"showError\"\n    :required=\"required\"\n  >\n    <Select\n      v-model=\"model\"\n      :name=\"name\"\n      :id=\"id\"\n      :multiple=\"multiple\"\n      :required=\"required\"\n      tabindex=\"0\"\n      :aria-placeholder=\"placeholder\"\n      class=\"w-full\"\n    >\n      <SelectTrigger\n        :class=\"cn(props.class)\"\n        :disabled=\"disabled || processing\"\n        :aria-invalid=\"error ? 'true' : 'false'\"\n        :aria-labelledby=\"label ? labelId : undefined\"\n        :aria-required=\"required ? 'true' : undefined\"\n        class=\"select-trigger cursor-pointer border-primary bg-white! aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40\"\n        :data-test=\"dataTest || 'select-block-' + name\"\n      >\n        <div\n          class=\"flex items-center justify-center gap-1 text-black md:justify-start md:gap-2\"\n        >\n          <slot name=\"icon\" />\n          <SelectValue :placeholder=\"placeholder\" />\n        </div>\n      </SelectTrigger>\n      <SelectContent>\n        <template v-for=\"group in items\" :key=\"group.group\">\n          <BaseSelectGroup>\n            <SelectLabel\n              class=\"rounded-sm bg-black/5 text-sm font-bold text-black\"\n              :for=\"id\"\n            >\n              {{ group.group }}\n            </SelectLabel>\n            <div class=\"ml-1\">\n              <template v-for=\"item in group.items\" :key=\"item.value\">\n                <SelectItem :value=\"item.value\" class=\"cursor-pointer\">\n                  {{ item.name }}\n                </SelectItem>\n              </template>\n            </div>\n          </BaseSelectGroup>\n        </template>\n      </SelectContent>\n    </Select>\n    <slot name=\"description\" />\n  </Field>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/select-group-block/index.ts",
+      "content": "export { default as SelectGroupBlock } from \"./SelectGroupBlock.vue\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

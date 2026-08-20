@@ -1,0 +1,35 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "label",
+  "description": "Threadable label export retaining the customized API",
+  "dependencies": [
+    "@vueuse/core",
+    "reka-ui"
+  ],
+  "registryDependencies": [
+    "@threadable/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/threadable/ui/label/Label.vue",
+      "content": "<script setup lang=\"ts\">\nimport { Label } from \"@/registry/threadable/ui/base-label\";\n\ndefineOptions({\n  inheritAttrs: false,\n});\n\nconst props = defineProps<{\n  for?: string | number;\n  id?: string | number;\n  label?: string;\n}>();\n</script>\n\n<template>\n  <Label v-bind=\"$attrs\" :for=\"(props.for ?? props.id) as string\">\n    <slot />\n  </Label>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/label/index.ts",
+      "content": "export { default as Label } from \"./Label.vue\";\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/base-label/Label.vue",
+      "content": "<script setup lang=\"ts\">\nimport type { LabelProps } from \"reka-ui\";\nimport type { HTMLAttributes } from \"vue\";\nimport { reactiveOmit } from \"@vueuse/core\";\nimport { Label } from \"reka-ui\";\nimport { cn } from \"@/registry/threadable/lib/utils\";\n\nconst props = defineProps<\n  LabelProps & { class?: HTMLAttributes[\"class\"]; required?: boolean }\n>();\n\nconst delegatedProps = reactiveOmit(props, \"class\", \"required\");\n</script>\n\n<template>\n  <Label\n    data-slot=\"label\"\n    v-bind=\"delegatedProps\"\n    :class=\"\n      cn(\n        'flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50',\n        props.class,\n      )\n    \"\n  >\n    <slot />\n    <span v-if=\"required\" class=\"text-muted-foreground\"> (required) </span>\n  </Label>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/base-label/index.ts",
+      "content": "export { default as Label } from \"./Label.vue\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

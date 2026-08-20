@@ -1,0 +1,26 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "input-block",
+  "description": "Threadable labelled input field wrapper",
+  "dependencies": [
+    "reka-ui"
+  ],
+  "registryDependencies": [
+    "@threadable/field",
+    "@threadable/input",
+    "@threadable/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/threadable/ui/input-block/InputBlock.vue",
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from \"vue\";\nimport { computed } from \"vue\";\nimport { cn, guidGenerator } from \"@/registry/threadable/lib/utils\";\nimport { Field } from \"@/registry/threadable/ui/field\";\nimport type { PrimitiveProps } from \"reka-ui\";\nimport { Input } from \"@/registry/threadable/ui/input\";\n\ninterface Props extends PrimitiveProps {\n  class?: HTMLAttributes[\"class\"];\n  error?: string | undefined;\n  label?: string;\n  description?: string;\n  name: string;\n  placeholder?: string;\n  type?: \"text\" | \"number\" | \"email\" | \"password\" | \"tel\";\n  inputmode?:\n    | \"none\"\n    | \"text\"\n    | \"tel\"\n    | \"url\"\n    | \"email\"\n    | \"numeric\"\n    | \"decimal\"\n    | \"search\";\n  id?: string;\n  dataTest?: string;\n  processing?: boolean;\n  disabled?: boolean;\n  showError?: boolean;\n  showGap?: boolean;\n  maxlength?: number;\n  autocomplete?: string;\n  required?: boolean;\n}\n\nconst props = withDefaults(defineProps<Props>(), {\n  type: \"text\",\n  disabled: false,\n  showError: true,\n  showGap: true,\n  maxlength: 255,\n  autocomplete: \"off\",\n});\n\nconst generatedId = \"input-\" + guidGenerator();\nconst inputId = computed(() => props.id || generatedId);\nconst labelId = computed(() => `${inputId.value}-label`);\nconst descriptionId = computed(() =>\n  props.description ? `${inputId.value}-description` : undefined,\n);\nconst errorId = computed(() =>\n  props.showError && props.error ? `${inputId.value}-error` : undefined,\n);\nconst describedBy = computed(\n  () =>\n    [descriptionId.value, errorId.value].filter(Boolean).join(\" \") || undefined,\n);\n\nconst model = defineModel<any | null>(\"modelValue\");\n</script>\n\n<template>\n  <Field\n    :id=\"inputId\"\n    :label=\"label\"\n    :error=\"error\"\n    :description=\"description\"\n    :label-id=\"labelId\"\n    :description-id=\"descriptionId\"\n    :error-id=\"errorId\"\n    :class=\"cn('grid gap-1', props.class)\"\n    :showError=\"showError\"\n    :showGap=\"showGap\"\n    :required=\"required\"\n  >\n    <Input\n      v-model=\"model\"\n      :id=\"inputId\"\n      :type=\"type\"\n      :name=\"name\"\n      :tabindex=\"0\"\n      :placeholder=\"placeholder\"\n      :inputmode=\"inputmode\"\n      :disabled=\"disabled || processing\"\n      :required=\"required\"\n      :data-test=\"dataTest || 'input-block-' + name\"\n      role=\"textbox\"\n      :aria-labelledby=\"label ? labelId : undefined\"\n      :aria-placeholder=\"placeholder\"\n      :aria-describedby=\"describedBy\"\n      :aria-errormessage=\"errorId\"\n      class=\"w-full border-primary bg-white! focus-visible:border-primary focus-visible:ring-[2px] focus-visible:ring-primary/20! disabled:text-black/50 disabled:opacity-100\"\n      :aria-invalid=\"error ? 'true' : 'false'\"\n      :aria-required=\"required ? 'true' : undefined\"\n      :maxlength=\"maxlength\"\n    />\n    <slot name=\"description\" />\n  </Field>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/input-block/index.ts",
+      "content": "export { default as InputBlock } from \"./InputBlock.vue\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "search",
+  "description": "Threadable search input wrapper",
+  "dependencies": [
+    "@lucide/vue"
+  ],
+  "registryDependencies": [
+    "@threadable/input-group"
+  ],
+  "files": [
+    {
+      "path": "registry/threadable/ui/search/Search.vue",
+      "content": "<script setup lang=\"ts\">\nimport { SearchIcon } from \"@lucide/vue\";\nimport {\n  InputGroup,\n  InputGroupAddon,\n  InputGroupInput,\n} from \"@/registry/threadable/ui/input-group\";\n\ninterface Props {\n  placeholder: string;\n}\n\nconst props = defineProps<Props>();\n\nconst model = defineModel<string>(\"modelValue\");\n</script>\n\n<template>\n  <InputGroup>\n    <InputGroupInput v-model=\"model\" :placeholder=\"props.placeholder\" />\n    <InputGroupAddon>\n      <SearchIcon aria-hidden=\"true\" />\n    </InputGroupAddon>\n  </InputGroup>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/search/index.ts",
+      "content": "export { default as Search } from \"./Search.vue\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

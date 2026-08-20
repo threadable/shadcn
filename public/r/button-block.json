@@ -1,0 +1,27 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "button-block",
+  "description": "Threadable button wrapper preserving loading and form semantics",
+  "dependencies": [
+    "@lucide/vue",
+    "reka-ui"
+  ],
+  "registryDependencies": [
+    "@threadable/button",
+    "@threadable/field",
+    "@threadable/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/threadable/ui/button-block/ButtonBlock.vue",
+      "content": "<script setup lang=\"ts\">\nimport { computed } from \"vue\";\nimport type { HTMLAttributes } from \"vue\";\nimport { cn, guidGenerator } from \"@/registry/threadable/lib/utils\";\nimport { Field } from \"@/registry/threadable/ui/field\";\nimport type { PrimitiveProps } from \"reka-ui\";\nimport { Button, type ButtonVariants } from \"@/registry/threadable/ui/button\";\nimport { LoaderCircle } from \"@lucide/vue\";\n\ninterface Props extends PrimitiveProps {\n  class?: HTMLAttributes[\"class\"];\n  label?: string;\n  description?: string;\n  type?: \"submit\" | \"button\";\n  id?: string;\n  processing?: boolean;\n  dataTest?: string;\n  variant?: ButtonVariants[\"variant\"];\n  size?: ButtonVariants[\"size\"];\n  disabled?: boolean;\n  showError?: boolean;\n  showGap?: boolean;\n  buttonClass?: HTMLAttributes[\"class\"];\n  ariaLabel?: string;\n  ariaDescribedBy?: string;\n}\n\nconst props = withDefaults(defineProps<Props>(), {\n  type: \"submit\",\n  processing: false,\n  variant: \"default\",\n  size: \"default\",\n  disabled: false,\n  showError: true,\n  showGap: true,\n});\n\nconst emit = defineEmits<{\n  click: [event: MouseEvent];\n}>();\n\nconst generatedId = \"button-\" + guidGenerator();\nconst buttonId = computed(() => props.id || generatedId);\nconst isUnavailable = computed(() => props.disabled || props.processing);\n</script>\n\n<template>\n  <Field\n    :id=\"buttonId\"\n    :description=\"description\"\n    :class=\"cn('grid gap-1', props.class)\"\n    :showError=\"false\"\n    :showGap=\"showGap\"\n  >\n    <Button\n      as=\"button\"\n      :id=\"buttonId\"\n      :type=\"type\"\n      :variant=\"variant\"\n      :size=\"size\"\n      :data-test=\"dataTest || 'button-block-' + buttonId\"\n      :disabled=\"isUnavailable\"\n      :class=\"cn('w-full cursor-pointer', props.buttonClass)\"\n      :aria-label=\"ariaLabel\"\n      :aria-disabled=\"isUnavailable ? 'true' : undefined\"\n      :aria-describedby=\"ariaDescribedBy\"\n      @click=\"emit('click', $event)\"\n    >\n      <LoaderCircle v-if=\"processing\" class=\"h-4 w-4 animate-spin\" />\n      <span aria-hidden=\"true\" class=\"contents\">\n        <slot name=\"icon\" />\n      </span>\n      <slot>\n        {{ label }}\n      </slot>\n    </Button>\n    <slot name=\"description\" />\n  </Field>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/button-block/index.ts",
+      "content": "export { default as ButtonBlock } from \"./ButtonBlock.vue\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

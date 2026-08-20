@@ -1,0 +1,26 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "info",
+  "description": "Threadable informational message primitive",
+  "dependencies": [
+    "@lucide/vue",
+    "class-variance-authority",
+    "reka-ui"
+  ],
+  "registryDependencies": [
+    "@threadable/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/threadable/ui/info/Info.vue",
+      "content": "<script setup lang=\"ts\">\nimport { Info, TriangleAlert } from \"@lucide/vue\";\nimport { cn } from \"@/registry/threadable/lib/utils\";\nimport { type InfoVariants, infoVariants } from \"@/registry/threadable/ui/info\";\nimport { type PrimitiveProps } from \"reka-ui\";\nimport type { HTMLAttributes } from \"vue\";\n\ninterface Props extends PrimitiveProps {\n  message: string | null;\n  variant?: InfoVariants[\"variant\"];\n  size?: InfoVariants[\"size\"];\n  class?: HTMLAttributes[\"class\"];\n}\n\nconst props = defineProps<Props>();\n\nconst iconClass = props.size === \"sm\" ? \"mr-2 size-6\" : \"mr-2 size-8\";\n</script>\n\n<template>\n  <div v-if=\"message\" :class=\"cn(infoVariants({ variant, size }), props.class)\">\n    <TriangleAlert :class=\"iconClass\" v-if=\"variant === 'destructive'\" />\n    <Info :class=\"iconClass\" v-else />\n    {{ message }}\n  </div>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/info/index.ts",
+      "content": "import { cva, type VariantProps } from \"class-variance-authority\";\n\nexport { default as Info } from \"./Info.vue\";\n\nexport const infoVariants = cva(\n  \"rounded p-2 text-white border-1 flex flex-row items-center\",\n  {\n    variants: {\n      variant: {\n        default:\n          \"border-blue-800 bg-blue-400/20 text-blue-800 dark:text-blue-100 dark:border-blue-800/20\",\n        destructive:\n          \"border-red-800 bg-red-400/20 text-red-800 dark:text-red-100 dark:border-red-800/20\",\n      },\n      size: {\n        default: \"\",\n        sm: \"text-xs\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  },\n);\n\nexport type InfoVariants = VariantProps<typeof infoVariants>;\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

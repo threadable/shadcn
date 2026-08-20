@@ -1,0 +1,28 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "button-link-block",
+  "description": "Threadable Inertia link styled as a button",
+  "dependencies": [
+    "@inertiajs/vue3",
+    "@lucide/vue",
+    "reka-ui"
+  ],
+  "registryDependencies": [
+    "@threadable/button",
+    "@threadable/field",
+    "@threadable/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/threadable/ui/button-link-block/ButtonLinkBlock.vue",
+      "content": "<script setup lang=\"ts\">\nimport { computed } from \"vue\";\nimport type { HTMLAttributes } from \"vue\";\nimport { cn, guidGenerator } from \"@/registry/threadable/lib/utils\";\nimport type { PrimitiveProps } from \"reka-ui\";\nimport { Button, type ButtonVariants } from \"@/registry/threadable/ui/button\";\nimport { LoaderCircle } from \"@lucide/vue\";\nimport { Link } from \"@inertiajs/vue3\";\nimport { Field } from \"@/registry/threadable/ui/field\";\n\ninterface Props extends PrimitiveProps {\n  class?: HTMLAttributes[\"class\"];\n  label: string;\n  description?: string;\n  id?: string;\n  processing?: boolean;\n  dataTest?: string;\n  variant?: ButtonVariants[\"variant\"];\n  size?: ButtonVariants[\"size\"];\n  disabled?: boolean;\n  showError?: boolean;\n  showGap?: boolean;\n  href?: string;\n  buttonClass?: HTMLAttributes[\"class\"];\n  ariaLabel?: string;\n}\n\nconst props = withDefaults(defineProps<Props>(), {\n  processing: false,\n  variant: \"default\",\n  size: \"default\",\n  disabled: false,\n  showGap: true,\n});\n\nconst generatedId = \"button-link-\" + guidGenerator();\nconst buttonLinkId = computed(() => props.id || generatedId);\nconst isUnavailable = computed(() => props.disabled || props.processing);\n</script>\n\n<template>\n  <Field\n    :id=\"buttonLinkId\"\n    :description=\"description\"\n    :class=\"cn('grid gap-1', props.class)\"\n    :showError=\"false\"\n    :showGap=\"showGap\"\n  >\n    <Button\n      :id=\"buttonLinkId\"\n      :tabindex=\"0\"\n      :variant=\"variant\"\n      :size=\"size\"\n      :class=\"cn('w-full cursor-pointer', props.buttonClass)\"\n      :aria-label=\"ariaLabel || label\"\n      :aria-disabled=\"isUnavailable\"\n      as-child\n    >\n      <Link\n        :href=\"href\"\n        :data-test=\"dataTest || 'button-link-block-' + buttonLinkId\"\n        :class=\"cn(isUnavailable && 'pointer-events-none opacity-50')\"\n      >\n        <LoaderCircle v-if=\"processing\" class=\"h-4 w-4 animate-spin\" />\n        <span aria-hidden=\"true\" class=\"contents\">\n          <slot name=\"icon\" />\n        </span>\n        {{ label }}\n      </Link>\n    </Button>\n    <slot name=\"description\" />\n  </Field>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/button-link-block/index.ts",
+      "content": "export { default as ButtonLinkBlock } from \"./ButtonLinkBlock.vue\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

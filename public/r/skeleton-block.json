@@ -1,0 +1,22 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "skeleton-block",
+  "description": "Threadable skeleton and separator loading block",
+  "registryDependencies": [
+    "@threadable/separator",
+    "@threadable/skeleton"
+  ],
+  "files": [
+    {
+      "path": "registry/threadable/ui/skeleton-block/SkeletonBlock.vue",
+      "content": "<script setup lang=\"ts\">\nimport { Skeleton } from \"@/registry/threadable/ui/skeleton\";\nimport { Separator } from \"@/registry/threadable/ui/separator\";\n\ninterface Props {\n  rows?: number;\n  lines?: string[];\n  showSeparator?: boolean;\n}\n\nwithDefaults(defineProps<Props>(), {\n  rows: 3,\n  lines: () => [\"w-3/4\", \"w-1/2\", \"w-1/4\"],\n  showSeparator: true,\n});\n</script>\n\n<template>\n  <div>\n    <div v-for=\"row in rows\" :key=\"row\" class=\"py-4\">\n      <Skeleton\n        v-for=\"(width, index) in lines\"\n        :key=\"index\"\n        :class=\"['h-4', width, { 'mb-2': index < lines.length - 1 }]\"\n      />\n      <Separator v-if=\"showSeparator && row < rows\" class=\"mt-4\" />\n    </div>\n  </div>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/skeleton-block/index.ts",
+      "content": "export { default as SkeletonBlock } from \"./SkeletonBlock.vue\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

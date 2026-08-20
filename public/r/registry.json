@@ -1,0 +1,3172 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry.json",
+  "name": "threadable",
+  "homepage": "https://github.com/threadable/shadcn",
+  "items": [
+    {
+      "name": "threadable-theme",
+      "type": "registry:style",
+      "description": "Threadable Tailwind CSS v4 variables and global accessibility rules",
+      "dependencies": ["tw-animate-css"],
+      "cssVars": {
+        "theme": {
+          "color-background": "var(--background)",
+          "color-foreground": "var(--foreground)",
+          "color-card": "var(--card)",
+          "color-card-foreground": "var(--card-foreground)",
+          "color-popover": "var(--popover)",
+          "color-popover-foreground": "var(--popover-foreground)",
+          "color-primary": "var(--primary)",
+          "color-primary-foreground": "var(--primary-foreground)",
+          "color-secondary": "var(--secondary)",
+          "color-secondary-foreground": "var(--secondary-foreground)",
+          "color-muted": "var(--muted)",
+          "color-muted-foreground": "var(--muted-foreground)",
+          "color-accent": "var(--accent)",
+          "color-accent-foreground": "var(--accent-foreground)",
+          "color-destructive": "var(--destructive)",
+          "color-destructive-foreground": "var(--destructive-foreground)",
+          "color-success": "var(--success)",
+          "color-orange": "var(--orange)",
+          "color-gray": "var(--gray)",
+          "color-primary-white": "var(--primary-white)",
+          "color-border": "var(--border)",
+          "color-input": "var(--input)",
+          "color-ring": "var(--ring)",
+          "radius-lg": "var(--radius)",
+          "radius-md": "calc(var(--radius) - 2px)",
+          "radius-sm": "calc(var(--radius) - 4px)"
+        },
+        "light": {
+          "background": "hsl(0 0% 100%)",
+          "foreground": "hsl(0 0% 3.9%)",
+          "card": "hsl(0 0% 100%)",
+          "card-foreground": "hsl(0 0% 3.9%)",
+          "popover": "hsl(0 0% 100%)",
+          "popover-foreground": "hsl(0 0% 3.9%)",
+          "primary": "oklch(0.3553 0.071271 230.581)",
+          "primary-foreground": "hsl(0 0% 98%)",
+          "secondary": "hsl(0 0% 92.1%)",
+          "secondary-foreground": "hsl(0 0% 9%)",
+          "muted": "hsl(0 0% 96.1%)",
+          "muted-foreground": "hsl(0 0% 45.1%)",
+          "accent": "hsl(0 0% 96.1%)",
+          "accent-foreground": "hsl(0 0% 9%)",
+          "destructive": "hsl(359 87% 44%)",
+          "destructive-foreground": "hsl(0 0% 98%)",
+          "success": "oklch(0.549 0.147 147.102)",
+          "orange": "oklch(0.6938 0.1822 46.04)",
+          "gray": "oklch(0.4778 0.0223 265.8)",
+          "primary-white": "oklch(1 0 0)",
+          "border": "hsl(0 0% 92.8%)",
+          "input": "hsl(0 0% 89.8%)",
+          "ring": "hsl(0 0% 3.9%)",
+          "radius": "0.5rem"
+        }
+      },
+      "css": {
+        "@import \"tw-animate-css\"": {},
+        "@layer base": {
+          "*": {
+            "border-color": "var(--border)",
+            "outline-color": "color-mix(in oklab, var(--ring) 50%, transparent)"
+          },
+          "body": {
+            "background-color": "var(--background)",
+            "color": "var(--foreground)"
+          }
+        },
+        ".select-trigger svg": {
+          "color": "#000",
+          "opacity": "1"
+        }
+      }
+    },
+    {
+      "name": "utils",
+      "type": "registry:lib",
+      "description": "Shared class, identifier and responsive helpers used by Threadable components",
+      "files": [
+        {
+          "path": "registry/threadable/lib/utils.ts",
+          "type": "registry:lib"
+        }
+      ],
+      "dependencies": ["@vueuse/core", "clsx", "tailwind-merge"]
+    },
+    {
+      "name": "use-typeahead-keyboard",
+      "type": "registry:hook",
+      "description": "Keyboard navigation state helper for the Threadable typeahead input",
+      "files": [
+        {
+          "path": "registry/threadable/composables/useTypeaheadKeyboard.ts",
+          "type": "registry:hook"
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "description": "Accessible button primitive and variants",
+      "files": [
+        {
+          "path": "registry/threadable/ui/button/Button.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/button/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["class-variance-authority", "reka-ui"],
+      "registryDependencies": ["@threadable/utils"]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "description": "Accessible checkbox primitive",
+      "files": [
+        {
+          "path": "registry/threadable/ui/checkbox/Checkbox.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/checkbox/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue", "reka-ui"],
+      "registryDependencies": ["@threadable/utils"]
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "description": "Command menu primitives and dialog integration",
+      "files": [
+        {
+          "path": "registry/threadable/ui/command/Command.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/command/CommandDialog.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/command/CommandEmpty.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/command/CommandGroup.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/command/CommandInput.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/command/CommandItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/command/CommandList.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/command/CommandSeparator.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/command/CommandShortcut.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/command/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue", "@vueuse/core", "reka-ui"],
+      "registryDependencies": ["@threadable/dialog", "@threadable/utils"]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "description": "Accessible dialog primitives",
+      "files": [
+        {
+          "path": "registry/threadable/ui/dialog/Dialog.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dialog/DialogClose.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dialog/DialogContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dialog/DialogDescription.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dialog/DialogFooter.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dialog/DialogHeader.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dialog/DialogOverlay.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dialog/DialogScrollContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dialog/DialogTitle.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dialog/DialogTrigger.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dialog/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue", "reka-ui"],
+      "registryDependencies": ["@threadable/utils"]
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "description": "Accessible dropdown menu primitives",
+      "files": [
+        {
+          "path": "registry/threadable/ui/dropdown-menu/DropdownMenu.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dropdown-menu/DropdownMenuCheckboxItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dropdown-menu/DropdownMenuContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dropdown-menu/DropdownMenuGroup.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dropdown-menu/DropdownMenuItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dropdown-menu/DropdownMenuLabel.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dropdown-menu/DropdownMenuRadioGroup.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dropdown-menu/DropdownMenuRadioItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dropdown-menu/DropdownMenuSeparator.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dropdown-menu/DropdownMenuShortcut.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dropdown-menu/DropdownMenuSub.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dropdown-menu/DropdownMenuSubContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dropdown-menu/DropdownMenuSubTrigger.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dropdown-menu/DropdownMenuTrigger.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dropdown-menu/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue", "@vueuse/core", "reka-ui"],
+      "registryDependencies": ["@threadable/utils"]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "description": "Input primitive",
+      "files": [
+        {
+          "path": "registry/threadable/ui/input/Input.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/input/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@vueuse/core"],
+      "registryDependencies": ["@threadable/utils"]
+    },
+    {
+      "name": "input-group",
+      "type": "registry:ui",
+      "description": "Input group primitives for compound controls",
+      "files": [
+        {
+          "path": "registry/threadable/ui/input-group/InputGroup.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/input-group/InputGroupAddon.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/input-group/InputGroupButton.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/input-group/InputGroupInput.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/input-group/InputGroupText.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/input-group/InputGroupTextarea.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/input-group/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["class-variance-authority"],
+      "registryDependencies": [
+        "@threadable/button",
+        "@threadable/input",
+        "@threadable/textarea",
+        "@threadable/utils"
+      ]
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "description": "Accessible popover primitives",
+      "files": [
+        {
+          "path": "registry/threadable/ui/popover/Popover.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/popover/PopoverContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/popover/PopoverTrigger.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/popover/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@vueuse/core", "reka-ui"],
+      "registryDependencies": ["@threadable/utils"]
+    },
+    {
+      "name": "radio-group",
+      "type": "registry:ui",
+      "description": "Accessible radio group primitives",
+      "files": [
+        {
+          "path": "registry/threadable/ui/radio-group/RadioGroup.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/radio-group/RadioGroupItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/radio-group/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue", "@vueuse/core", "reka-ui"],
+      "registryDependencies": ["@threadable/utils"]
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "description": "Accessible separator primitive",
+      "files": [
+        {
+          "path": "registry/threadable/ui/separator/Separator.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/separator/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@vueuse/core", "reka-ui"],
+      "registryDependencies": ["@threadable/utils"]
+    },
+    {
+      "name": "sheet",
+      "type": "registry:ui",
+      "description": "Accessible sheet and overlay primitives",
+      "files": [
+        {
+          "path": "registry/threadable/ui/sheet/Sheet.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sheet/SheetClose.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sheet/SheetContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sheet/SheetDescription.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sheet/SheetFooter.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sheet/SheetHeader.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sheet/SheetOverlay.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sheet/SheetTitle.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sheet/SheetTrigger.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sheet/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue", "@vueuse/core", "reka-ui"],
+      "registryDependencies": ["@threadable/utils"]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "description": "Loading placeholder primitive",
+      "files": [
+        {
+          "path": "registry/threadable/ui/skeleton/Skeleton.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/skeleton/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": ["@threadable/utils"]
+    },
+    {
+      "name": "stepper",
+      "type": "registry:ui",
+      "description": "Accessible stepper primitives",
+      "files": [
+        {
+          "path": "registry/threadable/ui/stepper/Stepper.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/stepper/StepperDescription.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/stepper/StepperIndicator.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/stepper/StepperItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/stepper/StepperSeparator.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/stepper/StepperTitle.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/stepper/StepperTrigger.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/stepper/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["reka-ui"],
+      "registryDependencies": ["@threadable/utils"]
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "description": "Table primitives with empty-state support",
+      "files": [
+        {
+          "path": "registry/threadable/ui/table/Table.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/table/TableBody.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/table/TableCaption.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/table/TableCell.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/table/TableEmpty.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/table/TableFooter.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/table/TableHead.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/table/TableHeader.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/table/TableRow.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/table/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@vueuse/core"],
+      "registryDependencies": ["@threadable/utils"]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "description": "Accessible tabs primitives",
+      "files": [
+        {
+          "path": "registry/threadable/ui/tabs/Tabs.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/tabs/TabsContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/tabs/TabsList.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/tabs/TabsTrigger.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/tabs/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@vueuse/core", "reka-ui"],
+      "registryDependencies": ["@threadable/utils"]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "description": "Textarea primitive",
+      "files": [
+        {
+          "path": "registry/threadable/ui/textarea/Textarea.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/textarea/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@vueuse/core"],
+      "registryDependencies": ["@threadable/utils"]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "description": "Accessible tooltip primitives",
+      "files": [
+        {
+          "path": "registry/threadable/ui/tooltip/Tooltip.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/tooltip/TooltipContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/tooltip/TooltipProvider.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/tooltip/TooltipTrigger.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/tooltip/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@vueuse/core", "reka-ui"],
+      "registryDependencies": ["@threadable/utils"]
+    },
+    {
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "description": "Accessible alert dialog primitives",
+      "files": [
+        {
+          "path": "registry/threadable/ui/alert-dialog/AlertDialog.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/alert-dialog/AlertDialogAction.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/alert-dialog/AlertDialogCancel.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/alert-dialog/AlertDialogContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/alert-dialog/AlertDialogDescription.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/alert-dialog/AlertDialogFooter.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/alert-dialog/AlertDialogHeader.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/alert-dialog/AlertDialogTitle.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/alert-dialog/AlertDialogTrigger.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/alert-dialog/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@vueuse/core", "reka-ui"],
+      "registryDependencies": ["@threadable/button", "@threadable/utils"]
+    },
+    {
+      "name": "no-result-icon",
+      "type": "registry:ui",
+      "description": "Shared empty-result icon used by the data table",
+      "files": [
+        {
+          "path": "registry/threadable/ui/no-result-icon/NoResultIcon.vue",
+          "type": "registry:ui",
+          "target": "src/components/ui/no-result-icon/NoResultIcon.vue"
+        }
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "description": "Threadable badge with accessible variant styling",
+      "files": [
+        {
+          "path": "registry/threadable/ui/badge/Badge.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/badge/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@vueuse/core", "class-variance-authority", "reka-ui"],
+      "registryDependencies": ["@threadable/utils"]
+    },
+    {
+      "name": "button-block",
+      "type": "registry:ui",
+      "description": "Threadable button wrapper preserving loading and form semantics",
+      "files": [
+        {
+          "path": "registry/threadable/ui/button-block/ButtonBlock.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/button-block/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue", "reka-ui"],
+      "registryDependencies": [
+        "@threadable/button",
+        "@threadable/field",
+        "@threadable/utils"
+      ]
+    },
+    {
+      "name": "button-link-block",
+      "type": "registry:ui",
+      "description": "Threadable Inertia link styled as a button",
+      "files": [
+        {
+          "path": "registry/threadable/ui/button-link-block/ButtonLinkBlock.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/button-link-block/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@inertiajs/vue3", "@lucide/vue", "reka-ui"],
+      "registryDependencies": [
+        "@threadable/button",
+        "@threadable/field",
+        "@threadable/utils"
+      ]
+    },
+    {
+      "name": "card-block",
+      "type": "registry:ui",
+      "description": "Threadable card layout primitives",
+      "files": [
+        {
+          "path": "registry/threadable/ui/card-block/CardBlock.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/card-block/CardBlockFooter.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/card-block/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@vueuse/core", "class-variance-authority", "reka-ui"],
+      "registryDependencies": ["@threadable/utils"]
+    },
+    {
+      "name": "checkbox-block",
+      "type": "registry:ui",
+      "description": "Threadable checkbox field and checkbox group wrappers",
+      "files": [
+        {
+          "path": "registry/threadable/ui/checkbox-block/CheckboxBlock.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/checkbox-block/CheckboxGroupBlock.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/checkbox-block/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["reka-ui"],
+      "registryDependencies": [
+        "@threadable/checkbox",
+        "@threadable/field",
+        "@threadable/label",
+        "@threadable/utils"
+      ]
+    },
+    {
+      "name": "combobox-group-block",
+      "type": "registry:ui",
+      "description": "Threadable searchable combobox field wrapper",
+      "files": [
+        {
+          "path": "registry/threadable/ui/combobox-group-block/ComboboxGroupBlock.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/combobox-group-block/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue", "@vueuse/core", "reka-ui"],
+      "registryDependencies": [
+        "@threadable/button",
+        "@threadable/command",
+        "@threadable/field",
+        "@threadable/popover",
+        "@threadable/utils"
+      ]
+    },
+    {
+      "name": "confirm-dialog-block",
+      "type": "registry:block",
+      "description": "Threadable confirmation dialog wrapper",
+      "files": [
+        {
+          "path": "registry/threadable/ui/confirm-dialog-block/ConfirmDialogBlock.vue",
+          "type": "registry:block"
+        },
+        {
+          "path": "registry/threadable/ui/confirm-dialog-block/index.ts",
+          "type": "registry:block"
+        }
+      ],
+      "registryDependencies": ["@threadable/alert-dialog"]
+    },
+    {
+      "name": "datatable-search",
+      "type": "registry:ui",
+      "description": "Search field companion for the Threadable data table",
+      "files": [
+        {
+          "path": "registry/threadable/ui/datatable-search/DatatableSearch.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/datatable-search/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue"],
+      "registryDependencies": [
+        "@threadable/field",
+        "@threadable/input",
+        "@threadable/input-group",
+        "@threadable/utils"
+      ]
+    },
+    {
+      "name": "datatable",
+      "type": "registry:block",
+      "description": "Threadable data table with empty state, pagination and loading behaviour",
+      "files": [
+        {
+          "path": "registry/threadable/ui/datatable/DataTable.vue",
+          "type": "registry:block",
+          "target": "src/components/ui/datatable/DataTable.vue"
+        },
+        {
+          "path": "registry/threadable/ui/datatable/TableNoResult.vue",
+          "type": "registry:block",
+          "target": "src/components/ui/datatable/TableNoResult.vue"
+        },
+        {
+          "path": "registry/threadable/ui/datatable/index.ts",
+          "type": "registry:block",
+          "target": "src/components/ui/datatable/index.ts"
+        }
+      ],
+      "dependencies": ["@tanstack/vue-table@^8.21.3", "@vueuse/core"],
+      "registryDependencies": [
+        "@threadable/card-block",
+        "@threadable/loading-spinner",
+        "@threadable/no-result-icon",
+        "@threadable/pagination",
+        "@threadable/select",
+        "@threadable/table",
+        "@threadable/typography",
+        "@threadable/utils"
+      ]
+    },
+    {
+      "name": "dropdown-menu-block",
+      "type": "registry:ui",
+      "description": "Threadable dropdown menu item wrapper",
+      "files": [
+        {
+          "path": "registry/threadable/ui/dropdown-menu-block/DropdownMenuBlock.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dropdown-menu-block/DropdownMenuItemBlock.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/dropdown-menu-block/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue"],
+      "registryDependencies": [
+        "@threadable/button",
+        "@threadable/dropdown-menu",
+        "@threadable/utils"
+      ]
+    },
+    {
+      "name": "field",
+      "type": "registry:ui",
+      "description": "Threadable field wrapper with labels, descriptions and errors",
+      "files": [
+        {
+          "path": "registry/threadable/ui/field/Field.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/field/index.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-field/Field.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-field/FieldContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-field/FieldDescription.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-field/FieldError.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-field/FieldGroup.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-field/FieldLabel.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-field/FieldLegend.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-field/FieldSeparator.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-field/FieldSet.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-field/FieldTitle.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-field/index.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-label/Label.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-label/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@vueuse/core", "class-variance-authority", "reka-ui"],
+      "registryDependencies": ["@threadable/separator", "@threadable/utils"]
+    },
+    {
+      "name": "help",
+      "type": "registry:ui",
+      "description": "Threadable help tooltip wrapper",
+      "files": [
+        {
+          "path": "registry/threadable/ui/help/Help.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/help/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue"],
+      "registryDependencies": ["@threadable/tooltip", "@threadable/utils"]
+    },
+    {
+      "name": "info",
+      "type": "registry:ui",
+      "description": "Threadable informational message primitive",
+      "files": [
+        {
+          "path": "registry/threadable/ui/info/Info.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/info/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue", "class-variance-authority", "reka-ui"],
+      "registryDependencies": ["@threadable/utils"]
+    },
+    {
+      "name": "input-block",
+      "type": "registry:ui",
+      "description": "Threadable labelled input field wrapper",
+      "files": [
+        {
+          "path": "registry/threadable/ui/input-block/InputBlock.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/input-block/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["reka-ui"],
+      "registryDependencies": [
+        "@threadable/field",
+        "@threadable/input",
+        "@threadable/utils"
+      ]
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "description": "Threadable label export retaining the customized API",
+      "files": [
+        {
+          "path": "registry/threadable/ui/label/Label.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/label/index.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-label/Label.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-label/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@vueuse/core", "reka-ui"],
+      "registryDependencies": ["@threadable/utils"]
+    },
+    {
+      "name": "loading-spinner",
+      "type": "registry:ui",
+      "description": "Threadable loading indicator",
+      "files": [
+        {
+          "path": "registry/threadable/ui/loading-spinner/LoadingSpinner.vue",
+          "type": "registry:ui",
+          "target": "src/components/ui/loading-spinner/LoadingSpinner.vue"
+        }
+      ]
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "description": "Threadable pagination controls with customized labels and icons",
+      "files": [
+        {
+          "path": "registry/threadable/ui/pagination/PaginationNext.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/pagination/PaginationPrevious.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/pagination/index.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-pagination/Pagination.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-pagination/PaginationContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-pagination/PaginationEllipsis.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-pagination/PaginationFirst.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-pagination/PaginationItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-pagination/PaginationLast.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-pagination/PaginationNext.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-pagination/PaginationPrevious.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-pagination/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue", "@vueuse/core", "reka-ui"],
+      "registryDependencies": ["@threadable/button", "@threadable/utils"]
+    },
+    {
+      "name": "radio-block",
+      "type": "registry:ui",
+      "description": "Threadable labelled radio group and item wrappers",
+      "files": [
+        {
+          "path": "registry/threadable/ui/radio-block/RadioGroupBlock.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/radio-block/RadioGroupBlockItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/radio-block/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["reka-ui"],
+      "registryDependencies": [
+        "@threadable/field",
+        "@threadable/label",
+        "@threadable/radio-group",
+        "@threadable/utils"
+      ]
+    },
+    {
+      "name": "search",
+      "type": "registry:ui",
+      "description": "Threadable search input wrapper",
+      "files": [
+        {
+          "path": "registry/threadable/ui/search/Search.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/search/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue"],
+      "registryDependencies": ["@threadable/input-group"]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "description": "Threadable select export retaining the customized API",
+      "files": [
+        {
+          "path": "registry/threadable/ui/select/Select.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/select/index.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-select/Select.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-select/SelectContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-select/SelectGroup.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-select/SelectItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-select/SelectItemText.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-select/SelectLabel.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-select/SelectScrollDownButton.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-select/SelectScrollUpButton.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-select/SelectSeparator.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-select/SelectTrigger.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-select/SelectValue.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/base-select/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue", "@vueuse/core", "reka-ui"],
+      "registryDependencies": ["@threadable/utils"]
+    },
+    {
+      "name": "select-block",
+      "type": "registry:ui",
+      "description": "Threadable labelled select field wrapper",
+      "files": [
+        {
+          "path": "registry/threadable/ui/select-block/SelectBlock.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/select-block/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["reka-ui"],
+      "registryDependencies": [
+        "@threadable/select",
+        "@threadable/field",
+        "@threadable/utils"
+      ]
+    },
+    {
+      "name": "select-group-block",
+      "type": "registry:ui",
+      "description": "Threadable grouped select field wrapper",
+      "files": [
+        {
+          "path": "registry/threadable/ui/select-group-block/SelectGroupBlock.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/select-group-block/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["reka-ui"],
+      "registryDependencies": [
+        "@threadable/select",
+        "@threadable/field",
+        "@threadable/utils"
+      ]
+    },
+    {
+      "name": "sheet-block",
+      "type": "registry:ui",
+      "description": "Threadable Inertia form sheet wrapper",
+      "files": [
+        {
+          "path": "registry/threadable/ui/sheet-block/SheetBlock.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sheet-block/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@inertiajs/vue3", "reka-ui"],
+      "registryDependencies": ["@threadable/sheet"]
+    },
+    {
+      "name": "sheet-content-block",
+      "type": "registry:ui",
+      "description": "Threadable sheet content with customized overlay behaviour",
+      "files": [
+        {
+          "path": "registry/threadable/ui/sheet-content-block/SheetContentBlock.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sheet-content-block/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@vueuse/core", "reka-ui"],
+      "registryDependencies": ["@threadable/sheet", "@threadable/utils"]
+    },
+    {
+      "name": "skeleton-block",
+      "type": "registry:ui",
+      "description": "Threadable skeleton and separator loading block",
+      "files": [
+        {
+          "path": "registry/threadable/ui/skeleton-block/SkeletonBlock.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/skeleton-block/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": ["@threadable/separator", "@threadable/skeleton"]
+    },
+    {
+      "name": "stepper-block",
+      "type": "registry:ui",
+      "description": "Threadable stepper display wrapper",
+      "files": [
+        {
+          "path": "registry/threadable/ui/stepper-block/StepperBlock.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/stepper-block/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue"],
+      "registryDependencies": ["@threadable/stepper"]
+    },
+    {
+      "name": "tabs-select",
+      "type": "registry:ui",
+      "description": "Threadable select-backed tabs wrapper",
+      "files": [
+        {
+          "path": "registry/threadable/ui/tabs-select/TabsSelect.vue",
+          "type": "registry:ui",
+          "target": "src/components/ui/tabs-select/TabsSelect.vue"
+        }
+      ],
+      "registryDependencies": [
+        "@threadable/select",
+        "@threadable/tabs",
+        "@threadable/utils"
+      ]
+    },
+    {
+      "name": "text-link-block",
+      "type": "registry:ui",
+      "description": "Threadable Inertia text link preserving link and method props",
+      "files": [
+        {
+          "path": "registry/threadable/ui/text-link-block/TextLinkBlock.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/text-link-block/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "@inertiajs/core",
+        "@inertiajs/vue3",
+        "class-variance-authority",
+        "reka-ui"
+      ],
+      "registryDependencies": ["@threadable/utils"]
+    },
+    {
+      "name": "textarea-block",
+      "type": "registry:ui",
+      "description": "Threadable labelled textarea field wrapper",
+      "files": [
+        {
+          "path": "registry/threadable/ui/textarea-block/TextareaBlock.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/textarea-block/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["reka-ui"],
+      "registryDependencies": [
+        "@threadable/field",
+        "@threadable/textarea",
+        "@threadable/utils"
+      ]
+    },
+    {
+      "name": "typeahead-input",
+      "type": "registry:ui",
+      "description": "Threadable keyboard-aware typeahead input",
+      "files": [
+        {
+          "path": "registry/threadable/ui/typeahead-input/TypeaheadInput.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/typeahead-input/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "@threadable/input",
+        "@threadable/use-typeahead-keyboard",
+        "@threadable/utils"
+      ]
+    },
+    {
+      "name": "typography",
+      "type": "registry:ui",
+      "description": "Threadable heading, paragraph and list primitives",
+      "files": [
+        {
+          "path": "registry/threadable/ui/typography/H1Block.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/typography/H2Block.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/typography/H3Block.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/typography/H4Block.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/typography/H5Block.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/typography/H6Block.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/typography/OrderedListBlock.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/typography/PBlock.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/typography/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["class-variance-authority", "reka-ui"],
+      "registryDependencies": ["@threadable/utils"]
+    },
+    {
+      "name": "accordion",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/accordion/Accordion.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/accordion/AccordionContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/accordion/AccordionItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/accordion/AccordionTrigger.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/accordion/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue", "@vueuse/core", "reka-ui"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/alert/Alert.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/alert/AlertDescription.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/alert/AlertTitle.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/alert/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["class-variance-authority"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "aspect-ratio",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/aspect-ratio/AspectRatio.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/aspect-ratio/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["reka-ui"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "attachment",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/attachment/Attachment.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/attachment/AttachmentAction.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/attachment/AttachmentActions.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/attachment/AttachmentContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/attachment/AttachmentDescription.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/attachment/AttachmentGroup.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/attachment/AttachmentMedia.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/attachment/AttachmentTitle.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/attachment/AttachmentTrigger.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/attachment/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["class-variance-authority", "reka-ui"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/avatar/Avatar.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/avatar/AvatarFallback.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/avatar/AvatarImage.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/avatar/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@vueuse/core", "reka-ui"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/breadcrumb/Breadcrumb.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/breadcrumb/BreadcrumbEllipsis.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/breadcrumb/BreadcrumbItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/breadcrumb/BreadcrumbLink.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/breadcrumb/BreadcrumbList.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/breadcrumb/BreadcrumbPage.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/breadcrumb/BreadcrumbSeparator.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/breadcrumb/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue", "reka-ui"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "bubble",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/bubble/Bubble.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/bubble/BubbleContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/bubble/BubbleGroup.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/bubble/BubbleReactions.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/bubble/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["class-variance-authority", "reka-ui"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "button-group",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/button-group/ButtonGroup.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/button-group/ButtonGroupSeparator.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/button-group/ButtonGroupText.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/button-group/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@vueuse/core", "class-variance-authority", "reka-ui"],
+      "registryDependencies": ["@threadable/separator"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "calendar",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/calendar/Calendar.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/calendar/CalendarCell.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/calendar/CalendarCellTrigger.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/calendar/CalendarGrid.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/calendar/CalendarGridBody.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/calendar/CalendarGridHead.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/calendar/CalendarGridRow.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/calendar/CalendarHeadCell.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/calendar/CalendarHeader.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/calendar/CalendarHeading.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/calendar/CalendarNextButton.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/calendar/CalendarPrevButton.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/calendar/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "@internationalized/date",
+        "@lucide/vue",
+        "@vueuse/core",
+        "reka-ui"
+      ],
+      "registryDependencies": [
+        "@threadable/native-select",
+        "@threadable/button"
+      ],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "carousel",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/carousel/Carousel.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/carousel/CarouselContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/carousel/CarouselItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/carousel/CarouselNext.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/carousel/CarouselPrevious.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/carousel/index.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/carousel/interface.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/carousel/useCarousel.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue", "@vueuse/core", "embla-carousel-vue"],
+      "registryDependencies": ["@threadable/button"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "chart",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/chart/ChartContainer.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/chart/ChartLegendContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/chart/ChartStyle.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/chart/ChartTooltipContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/chart/index.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/chart/utils.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@unovis/vue", "@vueuse/core", "reka-ui"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "collapsible",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/collapsible/Collapsible.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/collapsible/CollapsibleContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/collapsible/CollapsibleTrigger.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/collapsible/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["reka-ui"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "combobox",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/combobox/Combobox.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/combobox/ComboboxAnchor.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/combobox/ComboboxEmpty.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/combobox/ComboboxGroup.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/combobox/ComboboxInput.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/combobox/ComboboxItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/combobox/ComboboxItemIndicator.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/combobox/ComboboxList.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/combobox/ComboboxSeparator.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/combobox/ComboboxTrigger.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/combobox/ComboboxViewport.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/combobox/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue", "@vueuse/core", "reka-ui"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "context-menu",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/context-menu/ContextMenu.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/context-menu/ContextMenuCheckboxItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/context-menu/ContextMenuContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/context-menu/ContextMenuGroup.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/context-menu/ContextMenuItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/context-menu/ContextMenuLabel.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/context-menu/ContextMenuPortal.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/context-menu/ContextMenuRadioGroup.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/context-menu/ContextMenuRadioItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/context-menu/ContextMenuSeparator.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/context-menu/ContextMenuShortcut.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/context-menu/ContextMenuSub.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/context-menu/ContextMenuSubContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/context-menu/ContextMenuSubTrigger.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/context-menu/ContextMenuTrigger.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/context-menu/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue", "@vueuse/core", "reka-ui"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "drawer",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/drawer/Drawer.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/drawer/DrawerClose.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/drawer/DrawerContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/drawer/DrawerDescription.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/drawer/DrawerFooter.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/drawer/DrawerHeader.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/drawer/DrawerOverlay.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/drawer/DrawerTitle.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/drawer/DrawerTrigger.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/drawer/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@vueuse/core", "reka-ui"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "empty",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/empty/Empty.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/empty/EmptyContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/empty/EmptyDescription.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/empty/EmptyHeader.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/empty/EmptyMedia.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/empty/EmptyTitle.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/empty/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["class-variance-authority"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "form",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/form/FormControl.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/form/FormDescription.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/form/FormItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/form/FormLabel.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/form/FormMessage.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/form/index.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/form/injectionKeys.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/form/useFormField.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["reka-ui", "vee-validate"],
+      "registryDependencies": ["@threadable/label"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "hover-card",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/hover-card/HoverCard.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/hover-card/HoverCardContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/hover-card/HoverCardTrigger.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/hover-card/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@vueuse/core", "reka-ui"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "input-otp",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/input-otp/InputOTP.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/input-otp/InputOTPGroup.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/input-otp/InputOTPSeparator.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/input-otp/InputOTPSlot.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/input-otp/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "@lucide/vue",
+        "@vueuse/core",
+        "reka-ui",
+        "vue-input-otp"
+      ],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "item",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/item/Item.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/item/ItemActions.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/item/ItemContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/item/ItemDescription.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/item/ItemFooter.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/item/ItemGroup.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/item/ItemHeader.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/item/ItemMedia.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/item/ItemSeparator.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/item/ItemTitle.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/item/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["class-variance-authority", "reka-ui"],
+      "registryDependencies": ["@threadable/separator"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "kbd",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/kbd/Kbd.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/kbd/KbdGroup.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/kbd/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "marker",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/marker/Marker.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/marker/MarkerContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/marker/MarkerIcon.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/marker/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["class-variance-authority", "reka-ui"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "menubar",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/menubar/Menubar.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/menubar/MenubarCheckboxItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/menubar/MenubarContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/menubar/MenubarGroup.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/menubar/MenubarItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/menubar/MenubarLabel.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/menubar/MenubarMenu.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/menubar/MenubarRadioGroup.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/menubar/MenubarRadioItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/menubar/MenubarSeparator.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/menubar/MenubarShortcut.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/menubar/MenubarSub.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/menubar/MenubarSubContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/menubar/MenubarSubTrigger.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/menubar/MenubarTrigger.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/menubar/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue", "@vueuse/core", "reka-ui"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "message-scroller",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/message-scroller/MessageScroller.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/message-scroller/MessageScrollerButton.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/message-scroller/MessageScrollerContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/message-scroller/MessageScrollerItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/message-scroller/MessageScrollerProvider.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/message-scroller/MessageScrollerViewport.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/message-scroller/index.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/message-scroller/useMessageScroller.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": ["@threadable/button"],
+      "dependencies": ["@lucide/vue"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "message",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/message/Message.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/message/MessageAvatar.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/message/MessageContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/message/MessageFooter.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/message/MessageGroup.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/message/MessageHeader.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/message/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["reka-ui"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "native-select",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/native-select/NativeSelect.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/native-select/NativeSelectOptGroup.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/native-select/NativeSelectOption.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/native-select/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue", "@vueuse/core", "reka-ui"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "navigation-menu",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/navigation-menu/NavigationMenu.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/navigation-menu/NavigationMenuContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/navigation-menu/NavigationMenuIndicator.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/navigation-menu/NavigationMenuItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/navigation-menu/NavigationMenuLink.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/navigation-menu/NavigationMenuList.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/navigation-menu/NavigationMenuTrigger.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/navigation-menu/NavigationMenuViewport.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/navigation-menu/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "@lucide/vue",
+        "@vueuse/core",
+        "class-variance-authority",
+        "reka-ui"
+      ],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "number-field",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/number-field/NumberField.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/number-field/NumberFieldContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/number-field/NumberFieldDecrement.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/number-field/NumberFieldIncrement.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/number-field/NumberFieldInput.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/number-field/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue", "@vueuse/core", "reka-ui"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "pin-input",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/pin-input/PinInput.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/pin-input/PinInputGroup.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/pin-input/PinInputSeparator.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/pin-input/PinInputSlot.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/pin-input/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue", "@vueuse/core", "reka-ui"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/progress/Progress.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/progress/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@vueuse/core", "reka-ui"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "questionnaire",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/questionnaire/Questionnaire.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/questionnaire/QuestionnaireActions.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/questionnaire/QuestionnaireChoice.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/questionnaire/QuestionnaireChoiceDescription.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/questionnaire/QuestionnaireChoices.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/questionnaire/QuestionnaireDescription.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/questionnaire/QuestionnaireError.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/questionnaire/QuestionnaireInput.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/questionnaire/QuestionnaireItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/questionnaire/QuestionnaireNext.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/questionnaire/QuestionnairePrevious.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/questionnaire/QuestionnaireProgress.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/questionnaire/QuestionnaireSkip.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/questionnaire/QuestionnaireSubmit.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/questionnaire/QuestionnaireTitle.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/questionnaire/index.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/questionnaire/useQuestionnaire.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue", "reka-ui"],
+      "registryDependencies": ["@threadable/button"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "range-calendar",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/range-calendar/RangeCalendar.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/range-calendar/RangeCalendarCell.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/range-calendar/RangeCalendarCellTrigger.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/range-calendar/RangeCalendarGrid.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/range-calendar/RangeCalendarGridBody.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/range-calendar/RangeCalendarGridHead.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/range-calendar/RangeCalendarGridRow.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/range-calendar/RangeCalendarHeadCell.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/range-calendar/RangeCalendarHeader.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/range-calendar/RangeCalendarHeading.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/range-calendar/RangeCalendarNextButton.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/range-calendar/RangeCalendarPrevButton.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/range-calendar/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue", "@vueuse/core", "reka-ui"],
+      "registryDependencies": ["@threadable/button"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "resizable",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/resizable/ResizableHandle.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/resizable/ResizablePanel.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/resizable/ResizablePanelGroup.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/resizable/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue", "@vueuse/core", "reka-ui"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "scroll-area",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/scroll-area/ScrollArea.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/scroll-area/ScrollBar.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/scroll-area/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@vueuse/core", "reka-ui"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "sidebar",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/sidebar/Sidebar.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sidebar/SidebarContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sidebar/SidebarFooter.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sidebar/SidebarGroup.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sidebar/SidebarGroupAction.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sidebar/SidebarGroupContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sidebar/SidebarGroupLabel.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sidebar/SidebarHeader.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sidebar/SidebarInput.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sidebar/SidebarInset.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sidebar/SidebarMenu.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sidebar/SidebarMenuAction.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sidebar/SidebarMenuBadge.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sidebar/SidebarMenuButton.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sidebar/SidebarMenuButtonChild.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sidebar/SidebarMenuItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sidebar/SidebarMenuSkeleton.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sidebar/SidebarMenuSub.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sidebar/SidebarMenuSubButton.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sidebar/SidebarMenuSubItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sidebar/SidebarProvider.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sidebar/SidebarRail.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sidebar/SidebarSeparator.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sidebar/SidebarTrigger.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sidebar/index.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sidebar/utils.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "@lucide/vue",
+        "@vueuse/core",
+        "class-variance-authority",
+        "reka-ui"
+      ],
+      "registryDependencies": [
+        "@threadable/sheet",
+        "@threadable/input",
+        "@threadable/tooltip",
+        "@threadable/skeleton",
+        "@threadable/separator",
+        "@threadable/button"
+      ],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/slider/Slider.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/slider/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@vueuse/core", "reka-ui"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "sonner",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/sonner/Sonner.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/sonner/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue", "vue-sonner"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/switch/Switch.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/switch/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@vueuse/core", "reka-ui"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "tags-input",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/tags-input/TagsInput.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/tags-input/TagsInputInput.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/tags-input/TagsInputItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/tags-input/TagsInputItemDelete.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/tags-input/TagsInputItemText.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/tags-input/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue", "@vueuse/core", "reka-ui"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "toast",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/toast/Toast.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/toast/ToastAction.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/toast/ToastClose.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/toast/ToastDescription.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/toast/ToastProvider.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/toast/ToastTitle.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/toast/ToastViewport.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/toast/Toaster.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/toast/index.ts",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/toast/use-toast.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "@lucide/vue",
+        "@vueuse/core",
+        "class-variance-authority",
+        "reka-ui"
+      ],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "toggle-group",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/toggle-group/ToggleGroup.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/toggle-group/ToggleGroupItem.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/toggle-group/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@vueuse/core", "class-variance-authority", "reka-ui"],
+      "registryDependencies": ["@threadable/toggle"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "toggle",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/threadable/ui/toggle/Toggle.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/toggle/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@vueuse/core", "class-variance-authority", "reka-ui"],
+      "description": "Threadable registry component"
+    },
+    {
+      "name": "date-picker",
+      "type": "registry:block",
+      "description": "Date picker composition using Calendar and Popover",
+      "files": [
+        {
+          "path": "registry/threadable/ui/date-picker/DatePicker.vue",
+          "type": "registry:block"
+        },
+        {
+          "path": "registry/threadable/ui/date-picker/index.ts",
+          "type": "registry:block"
+        }
+      ],
+      "dependencies": ["@internationalized/date", "@lucide/vue"],
+      "registryDependencies": [
+        "@threadable/button",
+        "@threadable/calendar",
+        "@threadable/popover",
+        "@threadable/utils"
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "description": "Threadable registry component",
+      "files": [
+        {
+          "path": "registry/threadable/ui/card/Card.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/card/CardAction.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/card/CardContent.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/card/CardDescription.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/card/CardFooter.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/card/CardHeader.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/card/CardTitle.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/card/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": ["@threadable/utils"]
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui",
+      "description": "Threadable registry component",
+      "files": [
+        {
+          "path": "registry/threadable/ui/spinner/Spinner.vue",
+          "type": "registry:ui"
+        },
+        {
+          "path": "registry/threadable/ui/spinner/index.ts",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": ["@lucide/vue"],
+      "registryDependencies": ["@threadable/utils"]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "help",
+  "description": "Threadable help tooltip wrapper",
+  "dependencies": [
+    "@lucide/vue"
+  ],
+  "registryDependencies": [
+    "@threadable/tooltip",
+    "@threadable/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/threadable/ui/help/Help.vue",
+      "content": "<script setup lang=\"ts\">\nimport { cn } from \"@/registry/threadable/lib/utils\";\nimport {\n  Tooltip,\n  TooltipContent,\n  TooltipTrigger,\n} from \"@/registry/threadable/ui/tooltip\";\n\nimport { Info } from \"@lucide/vue\";\nimport type { HTMLAttributes } from \"vue\";\n\nconst props = defineProps<{\n  class?: HTMLAttributes[\"class\"];\n  side: \"top\" | \"right\" | \"bottom\" | \"left\" | undefined;\n  tooltip: string;\n}>();\n</script>\n\n<template>\n  <Tooltip :class=\"cn(props.class)\">\n    <TooltipTrigger as-child>\n      <div class=\"flex flex-row items-center\" :class=\"cn(props.class)\">\n        <slot />\n        <Info class=\"ml-1 size-4\" />\n      </div>\n    </TooltipTrigger>\n    <TooltipContent :side=\"side\" align=\"center\" class=\"w-[200px]\">\n      {{ tooltip }}\n    </TooltipContent>\n  </Tooltip>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/help/index.ts",
+      "content": "export { default as Help } from \"./Help.vue\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

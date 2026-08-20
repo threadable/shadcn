@@ -1,0 +1,27 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "text-link-block",
+  "description": "Threadable Inertia text link preserving link and method props",
+  "dependencies": [
+    "@inertiajs/core",
+    "@inertiajs/vue3",
+    "class-variance-authority",
+    "reka-ui"
+  ],
+  "registryDependencies": [
+    "@threadable/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/threadable/ui/text-link-block/TextLinkBlock.vue",
+      "content": "<script setup lang=\"ts\">\nimport { computed } from \"vue\";\nimport type { LinkComponentBaseProps, Method } from \"@inertiajs/core\";\nimport { Link } from \"@inertiajs/vue3\";\nimport type { PrimitiveProps } from \"reka-ui\";\nimport { textLinkBlockVariants, type TextLinkBlockVariants } from \".\";\nimport { cn, guidGenerator } from \"@/registry/threadable/lib/utils\";\n\ninterface Props extends PrimitiveProps {\n  href: LinkComponentBaseProps[\"href\"];\n  tabindex?: number;\n  method?: Method;\n  as?: string;\n  id?: string;\n  variant?: TextLinkBlockVariants[\"variant\"];\n  ariaLabel?: string;\n}\n\nconst props = withDefaults(defineProps<Props>(), {\n  variant: \"default\",\n  as: \"a\",\n});\n\nconst generatedId = \"text-link-\" + guidGenerator();\nconst linkId = computed(() => props.id || generatedId);\nconst ariaAttributes = computed(() =>\n  props.ariaLabel ? { \"aria-label\": props.ariaLabel } : {},\n);\n</script>\n\n<template>\n  <Link\n    :id=\"linkId\"\n    :href=\"href\"\n    :tabindex=\"tabindex\"\n    :method=\"method\"\n    :as=\"as\"\n    v-bind=\"ariaAttributes\"\n    :class=\"cn(textLinkBlockVariants({ variant }))\"\n  >\n    <slot />\n  </Link>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/text-link-block/index.ts",
+      "content": "import { cva, type VariantProps } from \"class-variance-authority\";\n\nexport { default as TextLinkBlock } from \"./TextLinkBlock.vue\";\n\nexport const textLinkBlockVariants = cva(\n  \"cursor-pointer text-foreground underline decoration-neutral-300 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500 text-sm\",\n  {\n    variants: {\n      variant: {\n        default: \"text-center\",\n        \"card-footer\": \"mt-2 text-center\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n    },\n  },\n);\nexport type TextLinkBlockVariants = VariantProps<typeof textLinkBlockVariants>;\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

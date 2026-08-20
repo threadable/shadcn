@@ -1,0 +1,18 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "utils",
+  "description": "Shared class, identifier and responsive helpers used by Threadable components",
+  "dependencies": [
+    "@vueuse/core",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "registry/threadable/lib/utils.ts",
+      "content": "import { useMediaQuery } from \"@vueuse/core\";\nimport type { ClassValue } from \"clsx\";\nimport { clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\n/** Merge Tailwind class values using the same behaviour as the source app. */\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs));\n}\n\n/** Generate stable-enough DOM ids for the component's labelled controls. */\nexport function guidGenerator() {\n  const S4 = () =>\n    (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);\n\n  return (\n    S4() +\n    S4() +\n    \"-\" +\n    S4() +\n    \"-\" +\n    S4() +\n    \"-\" +\n    S4() +\n    \"-\" +\n    S4() +\n    S4() +\n    S4()\n  );\n}\n\nexport const defaultPageSize = 10;\nexport const defaultPageSizes = [10, 20, 30, 40, 50];\n\nexport const MOBILE_BREAKPOINT = \"(max-width: 768px)\";\n\nexport function useIsMobile() {\n  return useMediaQuery(MOBILE_BREAKPOINT, { ssrWidth: 1280 });\n}\n",
+      "type": "registry:lib"
+    }
+  ],
+  "type": "registry:lib"
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "datatable-search",
+  "description": "Search field companion for the Threadable data table",
+  "dependencies": [
+    "@lucide/vue"
+  ],
+  "registryDependencies": [
+    "@threadable/field",
+    "@threadable/input",
+    "@threadable/input-group",
+    "@threadable/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/threadable/ui/datatable-search/DatatableSearch.vue",
+      "content": "<script setup lang=\"ts\">\nimport { computed } from \"vue\";\nimport { SearchIcon } from \"@lucide/vue\";\nimport {\n  InputGroup,\n  InputGroupAddon,\n} from \"@/registry/threadable/ui/input-group\";\nimport { cn, guidGenerator } from \"@/registry/threadable/lib/utils\";\nimport { Field } from \"@/registry/threadable/ui/field\";\nimport type { HTMLAttributes } from \"vue\";\nimport { Input } from \"@/registry/threadable/ui/input\";\n\ninterface Props {\n  class?: HTMLAttributes[\"class\"];\n  placeholder?: string;\n  id?: string;\n  description?: string;\n}\n\nconst props = withDefaults(defineProps<Props>(), {\n  placeholder: \"Search\",\n});\n\nconst generatedId = \"datatable-search-\" + guidGenerator();\nconst searchId = computed(() => props.id || generatedId);\n\nconst model = defineModel<string>(\"modelValue\");\n</script>\n\n<template>\n  <Field\n    :id=\"searchId\"\n    :description=\"description\"\n    :class=\"cn('w-full md:w-62.5', props.class)\"\n    :showGap=\"false\"\n  >\n    <InputGroup class=\"border-primary bg-white!\">\n      <Input\n        :id=\"searchId\"\n        data-slot=\"input-group-control\"\n        class=\"flex-1 rounded-none border-0 bg-transparent text-sm shadow-none focus-visible:ring-0 dark:bg-transparent\"\n        v-model=\"model\"\n        :placeholder=\"placeholder\"\n        data-test=\"table-search-input\"\n        maxlength=\"255\"\n      />\n      <InputGroupAddon>\n        <SearchIcon aria-hidden=\"true\" class=\"text-black\" />\n      </InputGroupAddon>\n    </InputGroup>\n  </Field>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/datatable-search/index.ts",
+      "content": "export { default as DataTableSearch } from \"./DatatableSearch.vue\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "confirm-dialog-block",
+  "description": "Threadable confirmation dialog wrapper",
+  "registryDependencies": [
+    "@threadable/alert-dialog"
+  ],
+  "files": [
+    {
+      "path": "registry/threadable/ui/confirm-dialog-block/ConfirmDialogBlock.vue",
+      "content": "<script setup lang=\"ts\">\nimport {\n  AlertDialog,\n  AlertDialogAction,\n  AlertDialogCancel,\n  AlertDialogContent,\n  AlertDialogDescription,\n  AlertDialogFooter,\n  AlertDialogHeader,\n  AlertDialogTitle,\n} from \"@/registry/threadable/ui/alert-dialog\";\n\nwithDefaults(\n  defineProps<{\n    open: boolean;\n    title?: string;\n    description: string;\n    descriptionClass?: string;\n    cancelLabel?: string;\n    actionLabel?: string;\n    actionVariant?: \"default\" | \"destructive\";\n    dataTest?: string;\n  }>(),\n  {\n    title: \"Are you sure?\",\n    cancelLabel: \"Cancel\",\n    actionLabel: \"Continue\",\n    actionVariant: \"default\",\n  },\n);\n\nconst emit = defineEmits<{\n  (e: \"confirm\"): void;\n  (e: \"cancel\"): void;\n}>();\n</script>\n\n<template>\n  <AlertDialog :open=\"open\" :data-test=\"dataTest\" @update:open=\"emit('cancel')\">\n    <AlertDialogContent class=\"w-full\">\n      <AlertDialogHeader>\n        <AlertDialogTitle>{{ title }}</AlertDialogTitle>\n      </AlertDialogHeader>\n\n      <AlertDialogDescription\n        :class=\"['text-primary', descriptionClass]\"\n        :data-test=\"dataTest ? `${dataTest}-desc` : undefined\"\n      >\n        {{ description }}\n      </AlertDialogDescription>\n\n      <AlertDialogFooter>\n        <AlertDialogCancel\n          class=\"cursor-pointer border-primary! bg-white! text-primary\"\n          :data-test=\"dataTest ? `${dataTest}-cancel` : undefined\"\n          @click=\"emit('cancel')\"\n        >\n          {{ cancelLabel }}\n        </AlertDialogCancel>\n\n        <AlertDialogAction\n          class=\"cursor-pointer\"\n          :data-test=\"dataTest ? `${dataTest}-confirm` : undefined\"\n          :class=\"\n            actionVariant === 'destructive'\n              ? 'bg-destructive hover:bg-red-400'\n              : ''\n          \"\n          @click=\"emit('confirm')\"\n        >\n          {{ actionLabel }}\n        </AlertDialogAction>\n      </AlertDialogFooter>\n    </AlertDialogContent>\n  </AlertDialog>\n</template>\n",
+      "type": "registry:block"
+    },
+    {
+      "path": "registry/threadable/ui/confirm-dialog-block/index.ts",
+      "content": "export { default as ConfirmDialogBlock } from \"./ConfirmDialogBlock.vue\";\n",
+      "type": "registry:block"
+    }
+  ],
+  "type": "registry:block"
+}

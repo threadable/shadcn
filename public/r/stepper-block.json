@@ -1,0 +1,24 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "stepper-block",
+  "description": "Threadable stepper display wrapper",
+  "dependencies": [
+    "@lucide/vue"
+  ],
+  "registryDependencies": [
+    "@threadable/stepper"
+  ],
+  "files": [
+    {
+      "path": "registry/threadable/ui/stepper-block/StepperBlock.vue",
+      "content": "<script setup lang=\"ts\">\nimport { Check } from \"@lucide/vue\";\nimport {\n  Stepper,\n  StepperItem,\n  StepperTrigger,\n  StepperIndicator,\n  StepperSeparator,\n  StepperTitle,\n} from \"@/registry/threadable/ui/stepper\";\n\ninterface Step {\n  value: number;\n  title: string;\n}\n\ninterface Props {\n  steps: Step[];\n  currentStep: number;\n}\n\ndefineProps<Props>();\n</script>\n\n<template>\n  <Stepper :model-value=\"currentStep\" class=\"flex w-full items-center\">\n    <StepperItem\n      v-for=\"(step, index) in steps\"\n      :key=\"step.value\"\n      :step=\"step.value\"\n      :class=\"index === steps.length - 1 ? 'flex-none!' : ''\"\n    >\n      <StepperTrigger class=\"flex items-center gap-2\">\n        <StepperIndicator\n          :class=\"index === currentStep - 1 ? 'border-orange! bg-orange!' : ''\"\n        >\n          <Check v-if=\"currentStep > step.value\" class=\"h-4 w-4\" />\n          <span v-else>{{ step.value }}</span>\n        </StepperIndicator>\n        <StepperTitle as=\"span\" class=\"hidden md:block\">\n          {{ step.title }}\n        </StepperTitle>\n      </StepperTrigger>\n      <StepperSeparator v-if=\"index < steps.length - 1\" />\n    </StepperItem>\n  </Stepper>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/stepper-block/index.ts",
+      "content": "export { default as StepperBlock } from \"./StepperBlock.vue\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

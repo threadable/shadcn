@@ -1,0 +1,134 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@source "../../registry";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-orange: var(--orange);
+  --color-gray: var(--gray);
+  --color-primary-white: var(--primary-white);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
+
+:root {
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(0 0% 3.9%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(0 0% 3.9%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(0 0% 3.9%);
+  --primary: oklch(0.3553 0.071271 230.581);
+  --primary-foreground: hsl(0 0% 98%);
+  --secondary: hsl(0 0% 92.1%);
+  --secondary-foreground: hsl(0 0% 9%);
+  --muted: hsl(0 0% 96.1%);
+  --muted-foreground: hsl(0 0% 35%);
+  --accent: hsl(0 0% 96.1%);
+  --accent-foreground: hsl(0 0% 9%);
+  --destructive: hsl(359 87% 36%);
+  --destructive-foreground: hsl(0 0% 98%);
+  --success: oklch(0.449 0.147 147.102);
+  --orange: oklch(0.5938 0.1822 46.04);
+  --gray: oklch(0.3778 0.0223 265.8);
+  --primary-white: oklch(1 0 0);
+  --border: hsl(0 0% 82%);
+  --input: hsl(0 0% 78%);
+  --ring: hsl(0 0% 3.9%);
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: hsl(0 0% 8%);
+  --foreground: hsl(0 0% 96%);
+  --card: hsl(0 0% 11%);
+  --card-foreground: hsl(0 0% 96%);
+  --popover: hsl(0 0% 11%);
+  --popover-foreground: hsl(0 0% 96%);
+  --primary: oklch(0.75 0.09 230.581);
+  --primary-foreground: hsl(0 0% 8%);
+  --secondary: hsl(0 0% 20%);
+  --secondary-foreground: hsl(0 0% 96%);
+  --muted: hsl(0 0% 18%);
+  --muted-foreground: hsl(0 0% 78%);
+  --accent: hsl(0 0% 20%);
+  --accent-foreground: hsl(0 0% 96%);
+  --destructive: hsl(359 87% 62%);
+  --destructive-foreground: hsl(0 0% 8%);
+  --success: oklch(0.7 0.147 147.102);
+  --orange: oklch(0.78 0.1822 46.04);
+  --gray: oklch(0.72 0.0223 265.8);
+  --primary-white: hsl(0 0% 12%);
+  --border: hsl(0 0% 30%);
+  --input: hsl(0 0% 32%);
+  --ring: hsl(0 0% 90%);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    min-width: 320px;
+  }
+}
+
+.select-trigger svg {
+  @apply text-black! opacity-100!;
+}
+
+.dark .select-trigger svg {
+  @apply text-white!;
+}
+
+[data-testid^="registry-component-"] {
+  @apply relative rounded-lg border border-border/70 bg-background/50 p-4 pt-10;
+}
+
+[data-testid^="registry-component-"]::before {
+  content: attr(data-component);
+  @apply pointer-events-none absolute top-3 left-4 font-mono text-xs font-semibold uppercase tracking-wide text-muted-foreground;
+}
+
+.reduced-motion,
+.reduced-motion *,
+.reduced-motion *::before,
+.reduced-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  scroll-behavior: auto !important;
+  transition-duration: 0.01ms !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "textarea-block",
+  "description": "Threadable labelled textarea field wrapper",
+  "dependencies": [
+    "reka-ui"
+  ],
+  "registryDependencies": [
+    "@threadable/field",
+    "@threadable/textarea",
+    "@threadable/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/threadable/ui/textarea-block/TextareaBlock.vue",
+      "content": "<script setup lang=\"ts\">\nimport { computed } from \"vue\";\nimport type { HTMLAttributes } from \"vue\";\nimport { cn, guidGenerator } from \"@/registry/threadable/lib/utils\";\nimport { Field } from \"@/registry/threadable/ui/field\";\nimport type { PrimitiveProps } from \"reka-ui\";\nimport { Textarea } from \"@/registry/threadable/ui/textarea\";\n\ninterface Props extends PrimitiveProps {\n  class?: HTMLAttributes[\"class\"];\n  error?: string | undefined;\n  label?: string;\n  description?: string;\n  name: string;\n  placeholder?: string;\n  id?: string;\n  dataTest?: string;\n  processing?: boolean;\n  disabled?: boolean;\n  showError?: boolean;\n  maxLength?: number;\n  rows?: number;\n  required?: boolean;\n}\n\nconst props = withDefaults(defineProps<Props>(), {\n  disabled: false,\n  showError: true,\n  rows: 3,\n});\n\nconst generatedId = \"textarea-\" + guidGenerator();\nconst textareaId = computed(() => props.id || generatedId);\nconst labelId = computed(() => `${textareaId.value}-label`);\nconst descriptionId = computed(() =>\n  props.description ? `${textareaId.value}-description` : undefined,\n);\nconst errorId = computed(() =>\n  props.showError && props.error ? `${textareaId.value}-error` : undefined,\n);\nconst describedBy = computed(\n  () =>\n    [descriptionId.value, errorId.value].filter(Boolean).join(\" \") || undefined,\n);\n\nconst model = defineModel<string | number | undefined>(\"modelValue\");\n</script>\n\n<template>\n  <Field\n    :id=\"textareaId\"\n    :label=\"label\"\n    :error=\"error\"\n    :description=\"description\"\n    :label-id=\"labelId\"\n    :description-id=\"descriptionId\"\n    :error-id=\"errorId\"\n    :class=\"cn('grid gap-1', props.class)\"\n    :showError=\"showError\"\n    :required=\"required\"\n  >\n    <Textarea\n      v-model=\"model\"\n      :id=\"textareaId\"\n      :name=\"name\"\n      :tabindex=\"0\"\n      :placeholder=\"placeholder\"\n      :disabled=\"disabled || processing\"\n      :required=\"required\"\n      :data-test=\"dataTest || 'textarea-block-' + name\"\n      :rows=\"rows\"\n      :aria-labelledby=\"label ? labelId : undefined\"\n      :aria-placeholder=\"placeholder\"\n      :aria-describedby=\"describedBy\"\n      :aria-errormessage=\"errorId\"\n      class=\"flex field-sizing-content min-h-16 w-full rounded-md border border-primary bg-white! px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:text-black/50 disabled:opacity-100 aria-invalid:border-destructive aria-invalid:ring-destructive/20 md:text-sm dark:bg-input/30 dark:aria-invalid:ring-destructive/40\"\n      :aria-invalid=\"error ? 'true' : 'false'\"\n      :aria-required=\"required ? 'true' : undefined\"\n      :maxlength=\"maxLength || undefined\"\n    />\n    <slot name=\"description\" />\n  </Field>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/textarea-block/index.ts",
+      "content": "export { default as TextareaBlock } from \"./TextareaBlock.vue\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

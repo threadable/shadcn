@@ -1,0 +1,31 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "dropdown-menu-block",
+  "description": "Threadable dropdown menu item wrapper",
+  "dependencies": [
+    "@lucide/vue"
+  ],
+  "registryDependencies": [
+    "@threadable/button",
+    "@threadable/dropdown-menu",
+    "@threadable/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/threadable/ui/dropdown-menu-block/DropdownMenuBlock.vue",
+      "content": "<script setup lang=\"ts\">\nimport { computed, useSlots, Comment, Fragment, type VNode } from \"vue\";\nimport { ChevronDown } from \"@lucide/vue\";\nimport { Button, type ButtonVariants } from \"@/registry/threadable/ui/button\";\nimport {\n  DropdownMenu,\n  DropdownMenuContent,\n  DropdownMenuTrigger,\n} from \"@/registry/threadable/ui/dropdown-menu\";\n\ninterface Props {\n  label: string;\n  variant?: ButtonVariants[\"variant\"];\n  align?: \"start\" | \"center\" | \"end\";\n  dataTest?: string;\n}\n\nwithDefaults(defineProps<Props>(), {\n  variant: \"default\",\n  align: \"center\",\n});\n\nconst slots = useSlots();\n\nconst hasItems = computed(() => {\n  const vnodes = slots.default?.() ?? [];\n  return vnodes.some((node) => {\n    if (node.type === Comment) return false;\n    if (node.type === Fragment) {\n      return (node.children as VNode[])?.some(\n        (child) => child.type !== Comment,\n      );\n    }\n    return true;\n  });\n});\n</script>\n\n<template>\n  <DropdownMenu>\n    <DropdownMenuTrigger asChild>\n      <Button\n        :variant=\"variant\"\n        :data-test=\"dataTest\"\n        :disabled=\"!hasItems\"\n        class=\"w-full gap-2 !rounded-b-md data-[state=closed]:!rounded-t-md data-[state=open]:!rounded-t-none\"\n      >\n        {{ label }}\n        <ChevronDown class=\"size-4\" />\n      </Button>\n    </DropdownMenuTrigger>\n    <DropdownMenuContent\n      v-if=\"hasItems\"\n      :align=\"align\"\n      :side-offset=\"0\"\n      class=\"w-[var(--reka-dropdown-menu-trigger-width)] !translate-y-0 !rounded-none !rounded-t-md !border-0 !p-0\"\n    >\n      <slot />\n    </DropdownMenuContent>\n  </DropdownMenu>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/dropdown-menu-block/DropdownMenuItemBlock.vue",
+      "content": "<script setup lang=\"ts\">\nimport { cn } from \"@/registry/threadable/lib/utils\";\nimport { DropdownMenuItem } from \"@/registry/threadable/ui/dropdown-menu\";\nimport type { HTMLAttributes } from \"vue\";\n\ninterface Props {\n  disabled?: boolean;\n  class?: HTMLAttributes[\"class\"];\n  dataTest?: string;\n}\n\nconst props = withDefaults(defineProps<Props>(), {\n  disabled: false,\n});\n</script>\n\n<template>\n  <DropdownMenuItem\n    :disabled=\"disabled\"\n    :data-test=\"dataTest\"\n    :class=\"\n      cn(\n        '!h-10 cursor-pointer !rounded-none bg-black/5 !px-2 !py-1.5 hover:!bg-black/8 focus:!bg-black/8',\n        props.class,\n      )\n    \"\n  >\n    <slot />\n  </DropdownMenuItem>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/dropdown-menu-block/index.ts",
+      "content": "export { default as DropdownMenuBlock } from \"./DropdownMenuBlock.vue\";\nexport { default as DropdownMenuItemBlock } from \"./DropdownMenuItemBlock.vue\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

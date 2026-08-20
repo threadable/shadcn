@@ -1,0 +1,32 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "checkbox-block",
+  "description": "Threadable checkbox field and checkbox group wrappers",
+  "dependencies": [
+    "reka-ui"
+  ],
+  "registryDependencies": [
+    "@threadable/checkbox",
+    "@threadable/field",
+    "@threadable/label",
+    "@threadable/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/threadable/ui/checkbox-block/CheckboxBlock.vue",
+      "content": "<script setup lang=\"ts\">\nimport { computed } from \"vue\";\nimport type { PrimitiveProps } from \"reka-ui\";\nimport { guidGenerator } from \"@/registry/threadable/lib/utils\";\nimport { cn } from \"@/registry/threadable/lib/utils\";\nimport { Label } from \"@/registry/threadable/ui/label\";\nimport { Checkbox } from \"@/registry/threadable/ui/checkbox\";\nimport FieldError from \"@/registry/threadable/ui/base-field/FieldError.vue\";\n\ninterface Props extends PrimitiveProps {\n  error?: string | undefined;\n  description?: string;\n  name?: string;\n  id?: string;\n  label?: string;\n  value?: string | number;\n  dataTest?: string;\n  disabled?: boolean;\n  showError?: boolean;\n  itemLabel: string;\n  itemValue: string | number;\n  checkboxPosition?: \"start\" | \"end\";\n  required?: boolean;\n}\n\nconst props = withDefaults(defineProps<Props>(), {\n  disabled: false,\n  showError: true,\n  checkboxPosition: \"start\",\n});\n\nconst generatedId = \"checkbox-block-\" + guidGenerator();\nconst checkboxId = computed(() => props.id || generatedId);\n\nconst model = defineModel<any | null>(\"modelValue\");\n</script>\n\n<template>\n  <div class=\"grid gap-1\">\n    <div\n      :class=\"\n        cn('flex min-w-0 items-center gap-3', {\n          'flex-row-reverse justify-between': checkboxPosition === 'end',\n        })\n      \"\n    >\n      <Checkbox\n        role=\"checkbox\"\n        v-model=\"model\"\n        :id=\"checkboxId\"\n        :value=\"itemValue\"\n        :disabled=\"disabled\"\n        :required=\"required\"\n        :aria-required=\"required ? 'true' : undefined\"\n        class=\"cursor-pointer border border-primary\"\n        :data-test=\"dataTest\"\n      />\n      <Label :for=\"checkboxId\" class=\"block flex-1 cursor-pointer truncate\">\n        {{ itemLabel }}\n        <span v-if=\"required\" class=\"text-muted-foreground\"> (required) </span>\n      </Label>\n    </div>\n\n    <FieldError\n      v-if=\"showError\"\n      :errors=\"[error]\"\n      class=\"min-h-5 text-xs md:text-sm\"\n      :aria-errormessage=\"error\"\n    />\n  </div>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/checkbox-block/CheckboxGroupBlock.vue",
+      "content": "<script setup lang=\"ts\">\nimport { computed } from \"vue\";\nimport { guidGenerator } from \"@/registry/threadable/lib/utils\";\nimport { Field } from \"@/registry/threadable/ui/field\";\nimport type { PrimitiveProps } from \"reka-ui\";\nimport CheckboxBlock from \"./CheckboxBlock.vue\";\n\ninterface Props extends PrimitiveProps {\n  items: any[];\n  error?: string | undefined;\n  label?: string;\n  description?: string;\n  name?: string;\n  id?: string;\n  dataTest?: string;\n  processing?: boolean;\n  disabled?: boolean;\n  showError?: boolean;\n  showGap?: boolean;\n  itemKey?: string | number;\n  itemLabel?: string | number;\n  itemValue?: string | number;\n  ariaLabel?: string;\n  itemDataTestPrefix?: string;\n  checkboxPosition?: \"start\" | \"end\";\n  required?: boolean;\n}\n\nconst props = withDefaults(defineProps<Props>(), {\n  disabled: false,\n  showError: true,\n  itemKey: \"uuid\",\n  itemLabel: \"label\",\n  itemValue: \"uuid\",\n  checkboxPosition: \"start\",\n});\n\nconst generatedId = \"checkbox-group-\" + guidGenerator();\nconst groupId = computed(() => props.id || generatedId);\n\nconst model = defineModel<any[]>(\"modelValue\", { default: () => [] });\n\nfunction isSelected(itemValue: string | number): boolean {\n  return model.value.includes(itemValue);\n}\n\nfunction toggleItem(\n  itemValue: string | number,\n  checked: boolean | \"indeterminate\",\n): void {\n  const nextSelectedValues = new Set(model.value);\n\n  if (checked === true) {\n    nextSelectedValues.add(itemValue);\n  } else {\n    nextSelectedValues.delete(itemValue);\n  }\n\n  model.value = [...nextSelectedValues];\n}\n</script>\n\n<template>\n  <Field\n    :id=\"groupId\"\n    :label=\"label\"\n    :error=\"error\"\n    :description=\"description\"\n    :showError=\"showError\"\n    :show-gap=\"showGap\"\n    :required=\"required\"\n  >\n    <div class=\"grid gap-6\">\n      <CheckboxBlock\n        v-for=\"item in items\"\n        :key=\"item[itemKey]\"\n        :id=\"`${groupId}-${item[itemKey]}`\"\n        :model-value=\"isSelected(item[itemValue])\"\n        :item-value=\"item[itemValue]\"\n        :item-label=\"item[itemLabel]\"\n        :disabled=\"disabled || processing\"\n        :show-error=\"false\"\n        :checkbox-position=\"checkboxPosition\"\n        :data-test=\"\n          itemDataTestPrefix\n            ? `${itemDataTestPrefix}-${item[itemKey]}`\n            : undefined\n        \"\n        @update:model-value=\"toggleItem(item[itemValue], $event)\"\n      />\n    </div>\n  </Field>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/checkbox-block/index.ts",
+      "content": "export { default as CheckboxBlock } from \"./CheckboxBlock.vue\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

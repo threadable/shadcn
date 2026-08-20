@@ -1,0 +1,13 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "use-typeahead-keyboard",
+  "description": "Keyboard navigation state helper for the Threadable typeahead input",
+  "files": [
+    {
+      "path": "registry/threadable/composables/useTypeaheadKeyboard.ts",
+      "content": "import { ref } from \"vue\";\n\ntype Direction = \"next\" | \"prev\";\n\nexport function useTypeaheadKeyboard() {\n  const activeIndexes = ref<Record<string, number>>({});\n\n  function reset(key: string): void {\n    delete activeIndexes.value[key];\n  }\n\n  function currentIndex(key: string): number {\n    return activeIndexes.value[key] ?? -1;\n  }\n\n  function setForLength(key: string, length: number): void {\n    activeIndexes.value[key] = length > 0 ? 0 : -1;\n  }\n\n  function move(key: string, direction: Direction, length: number): number {\n    if (length <= 0) {\n      return -1;\n    }\n\n    const index = currentIndex(key);\n\n    if (direction === \"next\") {\n      const nextIndex = index >= length - 1 ? 0 : index + 1;\n      activeIndexes.value[key] = nextIndex;\n      return nextIndex;\n    }\n\n    const previousIndex = index <= 0 ? length - 1 : index - 1;\n    activeIndexes.value[key] = previousIndex;\n\n    return previousIndex;\n  }\n\n  function selectedOrFirst<T>(key: string, items: T[]): T | undefined {\n    if (items.length === 0) {\n      return undefined;\n    }\n\n    return items[currentIndex(key)] ?? items[0];\n  }\n\n  return {\n    currentIndex,\n    move,\n    reset,\n    selectedOrFirst,\n    setForLength,\n  };\n}\n",
+      "type": "registry:hook"
+    }
+  ],
+  "type": "registry:hook"
+}

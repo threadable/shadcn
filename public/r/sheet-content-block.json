@@ -1,0 +1,26 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "sheet-content-block",
+  "description": "Threadable sheet content with customized overlay behaviour",
+  "dependencies": [
+    "@vueuse/core",
+    "reka-ui"
+  ],
+  "registryDependencies": [
+    "@threadable/sheet",
+    "@threadable/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/threadable/ui/sheet-content-block/SheetContentBlock.vue",
+      "content": "<script setup lang=\"ts\">\nimport { cn } from \"@/registry/threadable/lib/utils\";\nimport { reactiveOmit } from \"@vueuse/core\";\nimport type { DialogContentEmits, DialogContentProps } from \"reka-ui\";\nimport { DialogContent, DialogPortal, useForwardPropsEmits } from \"reka-ui\";\nimport type { HTMLAttributes } from \"vue\";\nimport SheetOverlay from \"@/registry/threadable/ui/sheet/SheetOverlay.vue\";\n\ninterface Props extends DialogContentProps {\n  class?: HTMLAttributes[\"class\"];\n  overlayClass?: HTMLAttributes[\"class\"];\n  side?: \"top\" | \"right\" | \"bottom\" | \"left\";\n}\n\ndefineOptions({\n  inheritAttrs: false,\n});\n\nconst props = withDefaults(defineProps<Props>(), {\n  side: \"right\",\n});\n\nconst emits = defineEmits<DialogContentEmits>();\n\nconst delegatedProps = reactiveOmit(props, \"class\", \"overlayClass\", \"side\");\n\nconst forwarded = useForwardPropsEmits(delegatedProps, emits);\n</script>\n\n<template>\n  <DialogPortal>\n    <SheetOverlay :class=\"overlayClass\" />\n\n    <DialogContent\n      data-slot=\"sheet-content\"\n      :class=\"\n        cn(\n          'fixed z-50 flex flex-col gap-4 bg-background shadow-lg transition ease-in-out data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:animate-in data-[state=open]:duration-500',\n          side === 'right' &&\n            'inset-y-0 right-0 h-full w-3/4 border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm',\n          side === 'left' &&\n            'inset-y-0 left-0 h-full w-3/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm',\n          side === 'top' &&\n            'inset-x-0 top-0 h-auto border-b data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top',\n          side === 'bottom' &&\n            'inset-x-0 bottom-0 h-auto border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom',\n          props.class,\n        )\n      \"\n      v-bind=\"{ ...forwarded, ...$attrs }\"\n    >\n      <slot />\n    </DialogContent>\n  </DialogPortal>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/sheet-content-block/index.ts",
+      "content": "export { default as SheetContentBlock } from \"./SheetContentBlock.vue\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

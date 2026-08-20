@@ -1,0 +1,272 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: "20.19.0"
+  PNPM_VERSION: "9.6.0"
+
+jobs:
+  registry-validation:
+    name: Registry validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --prefer-offline
+
+      - name: Check registry source files
+        run: pnpm exec vitest run tests/unit/registry.test.ts
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Build registry
+        run: pnpm registry:build
+
+      - name: Upload generated registry
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: generated-registry
+          path: public/r
+          if-no-files-found: error
+          retention-days: 7
+
+  unit-tests:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --prefer-offline
+
+      - name: Run Vitest
+        run: pnpm test:unit
+
+  accessibility-tests:
+    name: Accessibility tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --prefer-offline
+
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run keyboard interaction tests
+        run: pnpm test:browser
+
+      - name: Run axe tests
+        run: pnpm test:axe
+
+      - name: Upload Playwright reports
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-reports
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  consumer-installation:
+    name: Consumer installation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install registry dependencies
+        run: pnpm install --frozen-lockfile --prefer-offline
+
+      - name: Build registry
+        run: pnpm registry:build
+
+      - name: Install every public registry item and build consumer
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          consumer_directory="${RUNNER_TEMP}/threadable-consumer"
+          cp -R tests/fixtures/consumer "$consumer_directory"
+          pnpm --dir "$consumer_directory" install --no-frozen-lockfile
+
+          python3 -m http.server 4174 --bind 127.0.0.1 --directory public \
+            >"${RUNNER_TEMP}/threadable-registry-server.log" 2>&1 &
+          registry_server_pid=$!
+
+          cleanup() {
+            kill "$registry_server_pid" 2>/dev/null || true
+            wait "$registry_server_pid" 2>/dev/null || true
+          }
+          trap cleanup EXIT INT TERM
+
+          registry_ready=false
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4174/r/registry.json >/dev/null; then
+              registry_ready=true
+              break
+            fi
+            sleep 1
+          done
+
+          if [[ "$registry_ready" != true ]]; then
+            cat "${RUNNER_TEMP}/threadable-registry-server.log"
+            exit 1
+          fi
+
+          node scripts/ci/install-registry-items.mjs "$consumer_directory"
+          pnpm --dir "$consumer_directory" typecheck
+          pnpm --dir "$consumer_directory" build
+
+  laravel-integration:
+    name: Laravel integration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Set up PHP and Composer
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          tools: composer:v2
+          coverage: none
+
+      - name: Cache Composer packages
+        uses: actions/cache@v5
+        with:
+          path: ~/.composer/cache/files
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install registry dependencies
+        run: pnpm install --frozen-lockfile --prefer-offline
+
+      - name: Generate Laravel Vue consumer and build it
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          laravel_directory="${RUNNER_TEMP}/threadable-laravel-consumer"
+          composer create-project laravel/laravel "$laravel_directory" \
+            --prefer-dist --no-interaction --no-progress
+
+          pnpm --dir "$laravel_directory" install --no-frozen-lockfile
+          pnpm --dir "$laravel_directory" add \
+            vue@^3.5.41 \
+            @inertiajs/core@^3.0.3 \
+            @inertiajs/vue3@^3.0.3
+          pnpm --dir "$laravel_directory" add --save-dev \
+            @tailwindcss/vite@^4.3.3 \
+            @types/node@^26.2.0 \
+            @vitejs/plugin-vue@^6.0.8 \
+            tailwindcss@^4.3.3 \
+            typescript@^5.9.3 \
+            vue-tsc@^3.3.10
+
+          node scripts/ci/prepare-laravel-consumer.mjs "$laravel_directory"
+
+          python3 -m http.server 4174 --bind 127.0.0.1 --directory public \
+            >"${RUNNER_TEMP}/threadable-laravel-registry-server.log" 2>&1 &
+          registry_server_pid=$!
+
+          cleanup() {
+            kill "$registry_server_pid" 2>/dev/null || true
+            wait "$registry_server_pid" 2>/dev/null || true
+          }
+          trap cleanup EXIT INT TERM
+
+          registry_ready=false
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4174/r/registry.json >/dev/null; then
+              registry_ready=true
+              break
+            fi
+            sleep 1
+          done
+
+          if [[ "$registry_ready" != true ]]; then
+            cat "${RUNNER_TEMP}/threadable-laravel-registry-server.log"
+            exit 1
+          fi
+
+          node scripts/ci/install-registry-items.mjs \
+            "$laravel_directory" threadable-theme utils button input-block
+          pnpm --dir "$laravel_directory" exec vue-tsc --noEmit
+          pnpm --dir "$laravel_directory" run build

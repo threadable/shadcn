@@ -1,0 +1,54 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "stepper",
+  "description": "Accessible stepper primitives",
+  "dependencies": [
+    "reka-ui"
+  ],
+  "registryDependencies": [
+    "@threadable/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/threadable/ui/stepper/Stepper.vue",
+      "content": "<script setup lang=\"ts\">\nimport {\n  StepperRoot,\n  type StepperRootEmits,\n  type StepperRootProps,\n  useForwardPropsEmits,\n} from \"reka-ui\";\n\nconst props = defineProps<StepperRootProps>();\nconst emits = defineEmits<StepperRootEmits>();\n\nconst forwarded = useForwardPropsEmits(props, emits);\n</script>\n\n<template>\n  <StepperRoot data-slot=\"stepper\" v-bind=\"forwarded\">\n    <slot />\n  </StepperRoot>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/stepper/StepperDescription.vue",
+      "content": "<script setup lang=\"ts\">\nimport { StepperDescription, type StepperDescriptionProps } from \"reka-ui\";\nimport { cn } from \"@/registry/threadable/lib/utils\";\nimport { computed } from \"vue\";\n\nconst props = defineProps<\n  StepperDescriptionProps & {\n    class?: string;\n  }\n>();\n\nconst delegatedProps = computed(() => {\n  const { class: _, ...delegated } = props;\n  return delegated;\n});\n</script>\n\n<template>\n  <StepperDescription\n    data-slot=\"stepper-description\"\n    v-bind=\"delegatedProps\"\n    :class=\"cn('text-xs text-muted-foreground', props.class)\"\n  >\n    <slot />\n  </StepperDescription>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/stepper/StepperIndicator.vue",
+      "content": "<script setup lang=\"ts\">\nimport { StepperIndicator, type StepperIndicatorProps } from \"reka-ui\";\nimport { cn } from \"@/registry/threadable/lib/utils\";\nimport { computed } from \"vue\";\n\nconst props = defineProps<\n  StepperIndicatorProps & {\n    class?: string;\n  }\n>();\n\nconst delegatedProps = computed(() => {\n  const { class: _, ...delegated } = props;\n  return delegated;\n});\n</script>\n\n<template>\n  <StepperIndicator\n    data-slot=\"stepper-indicator\"\n    v-bind=\"delegatedProps\"\n    :class=\"\n      cn(\n        'flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 text-sm font-semibold',\n        'group-data-[state=active]:border-primary group-data-[state=active]:bg-primary group-data-[state=active]:text-primary-foreground',\n        'group-data-[state=completed]:border-primary group-data-[state=completed]:bg-primary group-data-[state=completed]:text-primary-foreground',\n        'group-data-[state=inactive]:border-muted-foreground/30 group-data-[state=inactive]:text-muted-foreground',\n        props.class,\n      )\n    \"\n  >\n    <slot />\n  </StepperIndicator>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/stepper/StepperItem.vue",
+      "content": "<script setup lang=\"ts\">\nimport { StepperItem, type StepperItemProps } from \"reka-ui\";\nimport { cn } from \"@/registry/threadable/lib/utils\";\nimport { computed } from \"vue\";\n\nconst props = defineProps<\n  StepperItemProps & {\n    class?: string;\n  }\n>();\n\nconst delegatedProps = computed(() => {\n  const { class: _, ...delegated } = props;\n  return delegated;\n});\n</script>\n\n<template>\n  <StepperItem\n    data-slot=\"stepper-item\"\n    v-bind=\"delegatedProps\"\n    :class=\"\n      cn(\n        'group flex flex-1 items-center gap-2 data-[disabled]:pointer-events-none',\n        props.class,\n      )\n    \"\n  >\n    <slot />\n  </StepperItem>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/stepper/StepperSeparator.vue",
+      "content": "<script setup lang=\"ts\">\nimport { StepperSeparator, type StepperSeparatorProps } from \"reka-ui\";\nimport { cn } from \"@/registry/threadable/lib/utils\";\nimport { computed } from \"vue\";\n\nconst props = defineProps<\n  StepperSeparatorProps & {\n    class?: string;\n  }\n>();\n\nconst delegatedProps = computed(() => {\n  const { class: _, ...delegated } = props;\n  return delegated;\n});\n</script>\n\n<template>\n  <StepperSeparator\n    data-slot=\"stepper-separator\"\n    v-bind=\"delegatedProps\"\n    :class=\"\n      cn(\n        'mx-2 h-0.5 flex-1 rounded-full bg-muted-foreground/30 group-data-[state=completed]:bg-primary',\n        props.class,\n      )\n    \"\n  />\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/stepper/StepperTitle.vue",
+      "content": "<script setup lang=\"ts\">\nimport { StepperTitle, type StepperTitleProps } from \"reka-ui\";\nimport { cn } from \"@/registry/threadable/lib/utils\";\nimport { computed } from \"vue\";\n\nconst props = defineProps<\n  StepperTitleProps & {\n    class?: string;\n  }\n>();\n\nconst delegatedProps = computed(() => {\n  const { class: _, ...delegated } = props;\n  return delegated;\n});\n</script>\n\n<template>\n  <StepperTitle\n    data-slot=\"stepper-title\"\n    v-bind=\"delegatedProps\"\n    :class=\"\n      cn(\n        'text-sm font-medium',\n        'group-data-[state=active]:text-foreground',\n        'group-data-[state=completed]:text-foreground',\n        'group-data-[state=inactive]:text-muted-foreground',\n        props.class,\n      )\n    \"\n  >\n    <slot />\n  </StepperTitle>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/stepper/StepperTrigger.vue",
+      "content": "<script setup lang=\"ts\">\nimport { StepperTrigger, type StepperTriggerProps } from \"reka-ui\";\nimport { cn } from \"@/registry/threadable/lib/utils\";\nimport { computed } from \"vue\";\n\nconst props = defineProps<\n  StepperTriggerProps & {\n    class?: string;\n  }\n>();\n\nconst delegatedProps = computed(() => {\n  const { class: _, ...delegated } = props;\n  return delegated;\n});\n</script>\n\n<template>\n  <StepperTrigger\n    data-slot=\"stepper-trigger\"\n    v-bind=\"delegatedProps\"\n    :class=\"\n      cn(\n        'inline-flex items-center gap-3 rounded-md text-sm font-medium',\n        props.class,\n      )\n    \"\n  >\n    <slot />\n  </StepperTrigger>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/stepper/index.ts",
+      "content": "export { default as Stepper } from \"./Stepper.vue\";\nexport { default as StepperItem } from \"./StepperItem.vue\";\nexport { default as StepperTrigger } from \"./StepperTrigger.vue\";\nexport { default as StepperDescription } from \"./StepperDescription.vue\";\nexport { default as StepperIndicator } from \"./StepperIndicator.vue\";\nexport { default as StepperSeparator } from \"./StepperSeparator.vue\";\nexport { default as StepperTitle } from \"./StepperTitle.vue\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "date-picker",
+  "description": "Date picker composition using Calendar and Popover",
+  "dependencies": [
+    "@internationalized/date",
+    "@lucide/vue"
+  ],
+  "registryDependencies": [
+    "@threadable/button",
+    "@threadable/calendar",
+    "@threadable/popover",
+    "@threadable/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/threadable/ui/date-picker/DatePicker.vue",
+      "content": "<script setup lang=\"ts\">\nimport type { DateValue } from \"@internationalized/date\";\nimport type { HTMLAttributes } from \"vue\";\nimport {\n  DateFormatter,\n  getLocalTimeZone,\n  today,\n} from \"@internationalized/date\";\nimport { CalendarIcon } from \"@lucide/vue\";\nimport { computed, ref } from \"vue\";\n\nimport { cn } from \"@/registry/threadable/lib/utils\";\nimport { Button } from \"@/registry/threadable/ui/button\";\nimport { Calendar } from \"@/registry/threadable/ui/calendar\";\nimport {\n  Popover,\n  PopoverContent,\n  PopoverTrigger,\n} from \"@/registry/threadable/ui/popover\";\n\nconst props = withDefaults(\n  defineProps<{\n    modelValue?: DateValue;\n    placeholder?: string;\n    disabled?: boolean;\n    ariaLabel?: string;\n    class?: HTMLAttributes[\"class\"];\n  }>(),\n  {\n    placeholder: \"Pick a date\",\n    disabled: false,\n  },\n);\n\nconst emit = defineEmits<{\n  \"update:modelValue\": [value: DateValue | undefined];\n}>();\n\nconst open = ref(false);\nconst date = computed({\n  get: () => props.modelValue,\n  set: (value: DateValue | undefined) => emit(\"update:modelValue\", value),\n});\nconst defaultPlaceholder = today(getLocalTimeZone());\nconst formatter = new DateFormatter(\"en-US\", { dateStyle: \"long\" });\nconst triggerLabel = computed(\n  () =>\n    props.ariaLabel ??\n    (date.value\n      ? formatter.format(date.value.toDate(getLocalTimeZone()))\n      : props.placeholder),\n);\n\nconst handleUpdate = (value: DateValue | undefined) => {\n  date.value = value;\n  open.value = false;\n};\n</script>\n\n<template>\n  <Popover v-model:open=\"open\">\n    <PopoverTrigger as-child>\n      <Button\n        type=\"button\"\n        variant=\"outline\"\n        :disabled=\"disabled\"\n        :aria-label=\"triggerLabel\"\n        :class=\"\n          cn(\n            'w-[240px] justify-start text-left font-normal',\n            !date && 'text-muted-foreground',\n            props.class,\n          )\n        \"\n      >\n        <CalendarIcon aria-hidden=\"true\" />\n        <span>{{\n          date ? formatter.format(date.toDate(getLocalTimeZone())) : placeholder\n        }}</span>\n      </Button>\n    </PopoverTrigger>\n    <PopoverContent class=\"w-auto p-0\" align=\"start\">\n      <Calendar\n        :model-value=\"date\"\n        :default-placeholder=\"defaultPlaceholder\"\n        layout=\"month-and-year\"\n        initial-focus\n        @update:model-value=\"handleUpdate\"\n      />\n    </PopoverContent>\n  </Popover>\n</template>\n",
+      "type": "registry:block"
+    },
+    {
+      "path": "registry/threadable/ui/date-picker/index.ts",
+      "content": "export { default as DatePicker } from \"./DatePicker.vue\";\n",
+      "type": "registry:block"
+    }
+  ],
+  "type": "registry:block"
+}

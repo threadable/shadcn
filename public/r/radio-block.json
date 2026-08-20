@@ -1,0 +1,32 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "radio-block",
+  "description": "Threadable labelled radio group and item wrappers",
+  "dependencies": [
+    "reka-ui"
+  ],
+  "registryDependencies": [
+    "@threadable/field",
+    "@threadable/label",
+    "@threadable/radio-group",
+    "@threadable/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/threadable/ui/radio-block/RadioGroupBlock.vue",
+      "content": "<script setup lang=\"ts\">\nimport { computed } from \"vue\";\nimport { guidGenerator } from \"@/registry/threadable/lib/utils\";\nimport { RadioGroup } from \"@/registry/threadable/ui/radio-group\";\nimport { Field } from \"@/registry/threadable/ui/field\";\nimport type { PrimitiveProps } from \"reka-ui\";\nimport RadioGroupBlockItem from \"./RadioGroupBlockItem.vue\";\n\ninterface Props extends PrimitiveProps {\n  items: any[];\n  error?: string | undefined;\n  label?: string;\n  description?: string;\n  name?: string;\n  id?: string;\n  dataTest?: string;\n  processing?: boolean;\n  disabled?: boolean;\n  showError?: boolean;\n  itemKey?: string | number;\n  itemLabel?: string | number;\n  itemValue?: string | number;\n  itemAriaLabel?: string | number;\n  ariaLabel?: string;\n  required?: boolean;\n}\n\nconst props = withDefaults(defineProps<Props>(), {\n  type: \"text\",\n  disabled: false,\n  showError: true,\n  itemKey: \"uuid\",\n  itemLabel: \"label\",\n  itemValue: \"uuid\",\n  itemAriaLabel: \"ariaLabel\",\n});\n\nconst generatedId = \"radio-group-\" + guidGenerator();\nconst groupId = computed(() => props.id || generatedId);\n\nconst model = defineModel<any | null>(\"modelValue\");\n</script>\n\n<template>\n  <Field\n    :id=\"groupId\"\n    :label=\"label\"\n    :error=\"error\"\n    :description=\"description\"\n    :showError=\"showError\"\n    :required=\"required\"\n  >\n    <RadioGroup\n      v-model=\"model\"\n      class=\"grid gap-2\"\n      :required=\"required\"\n      :aria-required=\"required ? 'true' : undefined\"\n    >\n      <RadioGroupBlockItem\n        v-for=\"item in items\"\n        :key=\"item[itemKey]\"\n        :id=\"`${groupId}-${item[itemKey]}`\"\n        :item-value=\"item[itemValue]\"\n        :item-label=\"item[itemLabel]\"\n        :item-aria-label=\"item[itemAriaLabel] ?? item[itemLabel]\"\n        @select=\"model = $event\"\n      />\n    </RadioGroup>\n  </Field>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/radio-block/RadioGroupBlockItem.vue",
+      "content": "<script setup lang=\"ts\">\nimport { computed } from \"vue\";\nimport { RadioGroupItem } from \"@/registry/threadable/ui/radio-group\";\nimport type { PrimitiveProps } from \"reka-ui\";\nimport { guidGenerator } from \"@/registry/threadable/lib/utils\";\nimport { Label } from \"@/registry/threadable/ui/label\";\n\ninterface Props extends PrimitiveProps {\n  error?: string | undefined;\n  description?: string;\n  name?: string;\n  id?: string;\n  label?: string;\n  value?: string | number;\n  dataTest?: string;\n  processing?: boolean;\n  disabled?: boolean;\n  showError?: boolean;\n  itemLabel: string | number;\n  itemAriaLabel?: string | number;\n  itemValue: string | number;\n  verticalAlign?: \"items-start\" | \"items-center\" | \"items-end\";\n}\n\nconst props = withDefaults(defineProps<Props>(), {\n  disabled: false,\n  showError: true,\n  verticalAlign: \"items-start\",\n});\nconst emit = defineEmits<{\n  select: [value: string | number];\n}>();\n\nconst generatedId = \"radio-group-item-\" + guidGenerator();\nconst itemId = computed(() => props.id || generatedId);\nconst accessibleLabel = computed(\n  () => props.itemAriaLabel?.toString() ?? props.itemLabel.toString(),\n);\nconst hasCustomAccessibleLabel = computed(\n  () => accessibleLabel.value !== props.itemLabel.toString(),\n);\n\nconst selectItem = () => {\n  if (props.disabled || props.processing) {\n    return;\n  }\n\n  emit(\"select\", props.itemValue);\n};\n</script>\n\n<template>\n  <div class=\"flex space-x-2\" :class=\"verticalAlign\">\n    <RadioGroupItem\n      :id=\"itemId\"\n      :value=\"props.itemValue\"\n      :aria-label=\"hasCustomAccessibleLabel ? accessibleLabel : undefined\"\n      :disabled=\"disabled || processing\"\n      class=\"cursor-pointer\"\n    ></RadioGroupItem>\n    <Label :for=\"itemId\" class=\"cursor-pointer break-all\" @click=\"selectItem\">\n      <template v-if=\"hasCustomAccessibleLabel\">\n        <span class=\"sr-only\">{{ accessibleLabel }}</span>\n        <span aria-hidden=\"true\">{{ props.itemLabel }}</span>\n      </template>\n      <template v-else>\n        {{ props.itemLabel }}\n      </template>\n    </Label>\n  </div>\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/radio-block/index.ts",
+      "content": "export { default as RadioGroupBlock } from \"./RadioGroupBlock.vue\";\nexport { default as RadioGroupBlockItem } from \"./RadioGroupBlockItem.vue\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "input",
+  "description": "Input primitive",
+  "dependencies": [
+    "@vueuse/core"
+  ],
+  "registryDependencies": [
+    "@threadable/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/threadable/ui/input/Input.vue",
+      "content": "<script setup lang=\"ts\">\nimport type { HTMLAttributes } from \"vue\";\nimport { useVModel } from \"@vueuse/core\";\nimport { cn } from \"@/registry/threadable/lib/utils\";\n\nconst props = defineProps<{\n  defaultValue?: string | number;\n  modelValue?: string | number;\n  class?: HTMLAttributes[\"class\"];\n}>();\n\nconst emits = defineEmits<{\n  (e: \"update:modelValue\", payload: string | number): void;\n}>();\n\nconst modelValue = useVModel(props, \"modelValue\", emits, {\n  passive: true,\n  defaultValue: props.defaultValue,\n});\n</script>\n\n<template>\n  <input\n    v-model=\"modelValue\"\n    data-slot=\"input\"\n    :class=\"\n      cn(\n        'h-9 w-full min-w-0 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none selection:bg-primary selection:text-primary-foreground file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm dark:bg-input/30',\n        'focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50',\n        props.class,\n        'user-invalid:border-destructive user-invalid:ring-destructive/20 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:user-invalid:ring-destructive/40 dark:aria-invalid:ring-destructive/40',\n      )\n    \"\n  />\n</template>\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "registry/threadable/ui/input/index.ts",
+      "content": "export { default as Input } from \"./Input.vue\";\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

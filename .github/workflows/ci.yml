@@ -270,3 +270,90 @@ jobs:
             "$laravel_directory" threadable-theme utils button input-block
           pnpm --dir "$laravel_directory" exec vue-tsc --noEmit
           pnpm --dir "$laravel_directory" run build
+
+  pages-deploy:
+    name: Deploy registry to GitHub Pages
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      needs.registry-validation.result == 'success' &&
+      needs.unit-tests.result == 'success' &&
+      needs.accessibility-tests.result == 'success' &&
+      needs.consumer-installation.result == 'success' &&
+      needs.laravel-integration.result == 'success'
+    needs:
+      - registry-validation
+      - unit-tests
+      - accessibility-tests
+      - consumer-installation
+      - laravel-integration
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: github-pages
+      cancel-in-progress: true
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Download generated registry
+        uses: actions/download-artifact@v8
+        with:
+          name: generated-registry
+          path: generated-registry
+
+      - name: Assemble Pages site
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p pages/r
+          cp -R generated-registry/. pages/r/
+          test -s pages/r/registry.json
+          test -s pages/r/button.json
+          touch pages/.nojekyll
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v6
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: pages
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
+
+  pages-smoke-test:
+    name: Smoke test deployed registry
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: pages-deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Request and validate button registry item
+        env:
+          REGISTRY_BASE_URL: ${{ needs.pages-deploy.outputs.page_url }}
+          REGISTRY_JSON: ${{ runner.temp }}/threadable-button.json
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected_base_url="https://threadable.github.io/shadcn"
+          registry_base_url="${REGISTRY_BASE_URL%/}"
+          test "$registry_base_url" = "$expected_base_url"
+
+          curl --fail --silent --show-error --location \
+            --retry 12 --retry-delay 5 --retry-all-errors \
+            "$registry_base_url/r/button.json" \
+            --output "$REGISTRY_JSON"
+
+          node --input-type=module -e '
+            import { readFileSync } from "node:fs";
+            const item = JSON.parse(readFileSync(process.env.REGISTRY_JSON, "utf8"));
+            if (item.name !== "button" || item.type !== "registry:ui") {
+              throw new Error("The deployed button registry item is invalid.");
+            }
+          '

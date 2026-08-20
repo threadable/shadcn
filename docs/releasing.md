@@ -36,7 +36,13 @@ Pull requests must not publish or deploy and must not require repository secrets
 
 ## Hosted registry
 
-This repository currently documents the public GitHub installation path. If a hosted `@threadable` endpoint is introduced, publish the generated files from the release tag, verify the namespace mapping and test:
+The default-branch CI workflow publishes the generated registry to GitHub Pages after all validation jobs succeed. Enable Pages in repository `Settings` → `Pages` by selecting `GitHub Actions` as the build and deployment source. The deployment is available at:
+
+```text
+https://threadable.github.io/shadcn/r/{name}.json
+```
+
+Verify the hosted namespace mapping and test:
 
 ```sh
 pnpm dlx shadcn-vue@latest add @threadable/button

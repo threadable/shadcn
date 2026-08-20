@@ -8,7 +8,7 @@ The source is based on shadcn-vue conventions, but this repository is not a fork
 
 [![CI](https://github.com/threadable/shadcn/actions/workflows/ci.yml/badge.svg)](https://github.com/threadable/shadcn/actions/workflows/ci.yml)
 
-Pull requests and pushes to `main` run registry validation, Vitest, Playwright and axe checks, a complete consumer installation, and a clean Laravel Vue integration build. Pull-request runs validate only and upload test reports when appropriate; they do not publish or deploy.
+Pull requests and pushes to `main` run registry validation, Vitest, Playwright and axe checks, a complete consumer installation, and a clean Laravel Vue integration build. Pull-request runs validate only and upload test reports when appropriate; successful pushes to `main` additionally deploy the generated registry to GitHub Pages and smoke-test the hosted output.
 
 ## Supported setup
 
@@ -41,13 +41,26 @@ The consuming project's `components.json` must have an alias configuration compa
 
 ### Hosted `@threadable` registry
 
-There is no hosted registry endpoint configured for this repository at present. If a compatible host is configured, add its namespace to `components.json` and use:
+The generated registry is deployed to GitHub Pages from successful pushes to the default branch:
+`https://threadable.github.io/shadcn/r/{name}.json`.
+
+Add this registry namespace to the consuming application's `components.json`:
+
+```json
+{
+  "registries": {
+    "@threadable": "https://threadable.github.io/shadcn/r/{name}.json"
+  }
+}
+```
+
+Then install an item with the official shadcn-vue CLI:
 
 ```sh
 pnpm dlx shadcn-vue@latest add @threadable/button
 ```
 
-The host must serve the generated `public/r/<name>.json` files and the namespace must point to a URL pattern such as `https://registry.example.com/r/{name}.json`. The GitHub installation above is the currently supported public installation path.
+The deployment requires repository Pages settings to be enabled: open `Settings` → `Pages`, select `GitHub Actions` as the build and deployment source, and allow Actions to run for the repository. The workflow performs the first deployment only after every validation job succeeds on `main`; it also smoke-tests the deployed `button` item as JSON. No repository settings are changed by this project workflow.
 
 ### List items and pin a tag
 

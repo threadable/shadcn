@@ -17,7 +17,7 @@ The supported consumer baseline is:
 - Laravel with Inertia and the Vue adapter.
 - Vue 3 and TypeScript.
 - Tailwind CSS v4 with the Threadable theme item or equivalent tokens.
-- Node 20.19 or newer and pnpm 9.6 or newer for this repository's development workflow.
+- Node 24.15 or newer and pnpm 9.6 or newer for this repository's development workflow.
 
 Some items are framework-neutral Vue primitives. Items with `button-link-block`, `sheet-block` or `text-link-block` in their name use Inertia and require `@inertiajs/vue3` (and, for link types, `@inertiajs/core`).
 

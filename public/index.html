@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Threadable shadcn-vue registry</title>
+    <meta
+      name="description"
+      content="Threadable's accessible shadcn-vue component registry."
+    />
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        line-height: 1.5;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: #f8fafc;
+        color: #0f172a;
+      }
+
+      main {
+        width: min(42rem, calc(100% - 3rem));
+        padding: 3rem 0;
+      }
+
+      a {
+        color: #2563eb;
+      }
+
+      code {
+        padding: 0.15rem 0.35rem;
+        border-radius: 0.25rem;
+        background: #e2e8f0;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #0f172a;
+          color: #e2e8f0;
+        }
+
+        code {
+          background: #1e293b;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Threadable shadcn-vue registry</h1>
+      <p>
+        An accessible shadcn-vue registry for Laravel, Inertia, Vue 3,
+        TypeScript and Tailwind CSS v4.
+      </p>
+      <p>
+        <a href="./r/registry.json">View the registry index</a>
+        ·
+        <a href="https://github.com/threadable/shadcn">View the source</a>
+      </p>
+      <p>
+        Configure <code>@threadable</code> in your project's
+        <code>components.json</code> to install components with the shadcn-vue
+        CLI.
+      </p>
+    </main>
+  </body>
+</html>

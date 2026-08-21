@@ -47,6 +47,24 @@ jobs:
       - name: Build registry
         run: pnpm registry:build
 
+      - name: Prepare GitHub Pages source
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p pages-site/r
+          cp -R public/r/. pages-site/r/
+          cp public/index.html pages-site/index.html
+          test -s pages-site/index.html
+          test -s pages-site/r/registry.json
+
+      - name: Upload GitHub Pages source
+        uses: actions/upload-artifact@v7
+        with:
+          name: github-pages-source
+          path: pages-site
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Upload generated registry
         if: always()
         uses: actions/upload-artifact@v7
@@ -300,18 +318,17 @@ jobs:
     outputs:
       page_url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Download generated registry
+      - name: Download GitHub Pages source
         uses: actions/download-artifact@v8
         with:
-          name: generated-registry
-          path: generated-registry
+          name: github-pages-source
+          path: pages
 
-      - name: Assemble Pages site
+      - name: Validate Pages site
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p pages/r
-          cp -R generated-registry/. pages/r/
+          test -s pages/index.html
           test -s pages/r/registry.json
           test -s pages/r/button.json
           touch pages/.nojekyll

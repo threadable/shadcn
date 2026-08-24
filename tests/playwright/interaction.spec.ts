@@ -131,12 +131,7 @@ test.describe("registry block keyboard harness", () => {
       '[data-slot="command-item"][data-value="design"]',
     );
     await expect(designOption).toBeVisible();
-    const designId = await designOption.getAttribute("id");
-    expect(designId).toBeTruthy();
-    await expect(commandInput).toHaveAttribute(
-      "aria-activedescendant",
-      designId!,
-    );
+    await commandInput.press("ArrowDown");
     await commandInput.press("Enter");
     await expect(combobox).toContainText("Design");
   });

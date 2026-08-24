@@ -118,13 +118,16 @@ test.describe("registry block keyboard harness", () => {
     await expect(engineeringOption).toBeVisible();
     await engineeringOption.press("Enter");
     await expect(select).toContainText("Engineering");
+    await expect(engineeringOption).toBeHidden();
 
     const combobox = page.locator('[data-test="demo-combobox"]');
     await combobox.focus();
+    await expect(combobox).toBeFocused();
     await page.keyboard.press("Enter");
     await expect(combobox).toHaveAttribute("aria-expanded", "true");
     const commandInput = page.locator('[data-slot="command-input"]');
     await expect(commandInput).toBeFocused();
+    await expect(commandInput).toBeVisible();
     await commandInput.pressSequentially("Design");
     await expect(commandInput).toHaveValue("Design");
     const designOption = page.locator(

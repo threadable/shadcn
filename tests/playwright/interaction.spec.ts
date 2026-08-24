@@ -123,11 +123,21 @@ test.describe("registry block keyboard harness", () => {
     await combobox.focus();
     await page.keyboard.press("Enter");
     await expect(combobox).toHaveAttribute("aria-expanded", "true");
+    const commandInput = page.locator('[data-slot="command-input"]');
+    await expect(commandInput).toBeFocused();
+    await commandInput.pressSequentially("Design");
+    await expect(commandInput).toHaveValue("Design");
     const designOption = page.locator(
       '[data-slot="command-item"][data-value="design"]',
     );
     await expect(designOption).toBeVisible();
-    await designOption.press("Enter");
+    const designId = await designOption.getAttribute("id");
+    expect(designId).toBeTruthy();
+    await expect(commandInput).toHaveAttribute(
+      "aria-activedescendant",
+      designId!,
+    );
+    await commandInput.press("Enter");
     await expect(combobox).toContainText("Design");
   });
 

@@ -3,7 +3,7 @@ import { computed, ref, useTemplateRef } from "vue";
 import type { HTMLAttributes } from "vue";
 import { cn, guidGenerator } from "@/registry/threadable/lib/utils";
 import { Field } from "@/registry/threadable/components/blocks/field";
-import type { PrimitiveProps } from "reka-ui";
+import type { AcceptableValue, PrimitiveProps } from "reka-ui";
 import { CheckIcon, ChevronDownIcon } from "@lucide/vue";
 import { Button } from "@/components/ui/button";
 import {
@@ -118,6 +118,12 @@ const selectItem = (value: string | number) => {
   model.value = value;
   open.value = false;
 };
+
+const handleCommandValueChange = (value: AcceptableValue) => {
+  if (typeof value === "string" || typeof value === "number") {
+    selectItem(value);
+  }
+};
 </script>
 
 <template>
@@ -167,7 +173,7 @@ const selectItem = (value: string | number) => {
         class="p-0"
         :style="'width:' + width + 'px !important;'"
       >
-        <Command>
+        <Command @update:model-value="handleCommandValueChange">
           <CommandInput class="h-9" :placeholder="placeholder" />
           <CommandList>
             <CommandEmpty>No found.</CommandEmpty>

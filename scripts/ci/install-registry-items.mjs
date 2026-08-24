@@ -35,31 +35,31 @@ for (const name of names) {
     process.stderr.write(`Unknown public registry item: ${name}\n`);
     process.exit(64);
   }
+}
 
-  process.stdout.write(`Installing @threadable/${name}\n`);
-  const result = spawnSync(
-    executable,
-    [
-      "exec",
-      "shadcn-vue",
-      "add",
-      "--cwd",
-      consumerDirectory,
-      "--yes",
-      "--overwrite",
-      `@threadable/${name}`,
-    ],
-    {
-      cwd: repositoryRoot,
-      env: { ...process.env, CI: process.env.CI ?? "true" },
-      stdio: "inherit",
-    },
-  );
+process.stdout.write(`Installing ${names.length} public Threadable blocks\n`);
+const result = spawnSync(
+  executable,
+  [
+    "exec",
+    "shadcn-vue",
+    "add",
+    "--cwd",
+    consumerDirectory,
+    "--yes",
+    "--overwrite",
+    ...names.map((name) => `@threadable/${name}`),
+  ],
+  {
+    cwd: repositoryRoot,
+    env: { ...process.env, CI: process.env.CI ?? "true" },
+    stdio: "inherit",
+  },
+);
 
-  if (result.error) {
-    throw result.error;
-  }
-  if (result.status !== 0) {
-    process.exit(result.status ?? 1);
-  }
+if (result.error) {
+  throw result.error;
+}
+if (result.status !== 0) {
+  process.exit(result.status ?? 1);
 }

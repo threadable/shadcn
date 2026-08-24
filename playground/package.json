@@ -1,0 +1,11 @@
+{
+  "name": "@threadable/shadcn-playground",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@9.6.0",
+  "dependencies": {
+    "@lucide/vue": "^1.33.0",
+    "@vueuse/core": "^14.4.0",
+    "reka-ui": "^2.10.3"
+  }
+}

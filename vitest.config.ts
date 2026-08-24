@@ -5,15 +5,33 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   plugins: [vue()],
   resolve: {
-    alias: {
-      "@": fileURLToPath(new URL(".", import.meta.url)),
-    },
+    alias: [
+      {
+        find: "@/registry/threadable/lib",
+        replacement: fileURLToPath(
+          new URL("./registry/threadable/components", import.meta.url),
+        ),
+      },
+      {
+        find: "@/components",
+        replacement: fileURLToPath(
+          new URL("./playground/src/components", import.meta.url),
+        ),
+      },
+      {
+        find: "@/lib",
+        replacement: fileURLToPath(
+          new URL("./playground/src/lib", import.meta.url),
+        ),
+      },
+      {
+        find: "@",
+        replacement: fileURLToPath(new URL(".", import.meta.url)),
+      },
+    ],
   },
   test: {
     environment: "jsdom",
-    globals: true,
     include: ["tests/**/*.test.ts"],
-    setupFiles: ["tests/setup.ts"],
-    css: true,
   },
 });

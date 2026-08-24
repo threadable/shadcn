@@ -18,7 +18,7 @@ test.describe("registry playground axe checks", () => {
   }) => {
     await page.goto("/");
     await page.getByTestId("demo-dialog-trigger").click();
-    await expect(page.getByRole("dialog")).toBeVisible();
+    await expect(page.getByRole("alertdialog")).toBeVisible();
     const results = await new AxeBuilder({ page })
       .exclude('span[aria-hidden="true"][tabindex="0"]')
       .analyze();

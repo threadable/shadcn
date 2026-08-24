@@ -2,7 +2,7 @@
   "name": "@threadable/shadcn",
   "version": "0.1.0",
   "private": true,
-  "description": "Threadable's accessible shadcn-vue component registry for Laravel, Inertia and Vue",
+  "description": "Threadable's accessible shadcn-vue block registry for Laravel, Inertia and Vue",
   "license": "MIT",
   "type": "module",
   "packageManager": "pnpm@9.6.0",
@@ -14,7 +14,7 @@
     "url": "https://github.com/threadable/shadcn.git"
   },
   "scripts": {
-    "registry:build": "shadcn-vue build registry.json --output public/r",
+    "registry:build": "pnpm registry:clean && shadcn-vue build registry.json --output public/r",
     "registry:clean": "rimraf public/r",
     "typecheck": "vue-tsc --noEmit",
     "lint": "eslint . && prettier --check .",
@@ -28,6 +28,7 @@
     "playground:dev": "vite --host 127.0.0.1 --port 4173",
     "playground:build": "vite build --config vite.config.ts",
     "playground:preview": "vite preview --config vite.config.ts --host 127.0.0.1 --port 4173",
+    "upstream:sync": "pnpm exec shadcn-vue add --cwd playground --yes --overwrite @shadcn/button @shadcn/checkbox @shadcn/select @shadcn/label @shadcn/skeleton @shadcn/separator @shadcn/sheet @shadcn/stepper @shadcn/command @shadcn/popover @shadcn/dropdown-menu @shadcn/radio-group @shadcn/textarea @shadcn/alert-dialog @shadcn/input",
     "check": "pnpm registry:build && pnpm typecheck && pnpm lint && pnpm test && pnpm test:a11y && pnpm test:integration && pnpm playground:build && pnpm test:browser && pnpm test:axe"
   },
   "devDependencies": {
@@ -35,19 +36,15 @@
     "@eslint/js": "^10.0.1",
     "@inertiajs/core": "^3.0.3",
     "@inertiajs/vue3": "^3.0.3",
-    "@internationalized/date": "^3.12.3",
     "@lucide/vue": "^1.18.0",
     "@playwright/test": "^1.62.1",
     "@tailwindcss/vite": "^4.3.3",
-    "@tanstack/vue-table": "^8.21.3",
     "@types/node": "^26.2.0",
-    "@unovis/vue": "^1.6.7",
     "@vitejs/plugin-vue": "^6.0.8",
     "@vue/test-utils": "^2.4.11",
     "@vueuse/core": "^14.4.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "embla-carousel-vue": "^8.6.0",
     "eslint": "^10.8.1",
     "eslint-plugin-vue": "^10.10.0",
     "jsdom": "^30.0.1",
@@ -60,12 +57,9 @@
     "tw-animate-css": "^1.4.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.67.0",
-    "vee-validate": "^4.15.1",
     "vite": "^8.2.2",
     "vitest": "^4.1.11",
     "vue": "^3.5.41",
-    "vue-input-otp": "^0.4.0",
-    "vue-sonner": "^2.0.9",
     "vue-tsc": "^3.3.10"
   }
 }

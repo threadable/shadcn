@@ -12,7 +12,11 @@
     "verbatimModuleSyntax": true,
     "types": ["node", "vitest/globals"],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@/components/*": ["./playground/src/components/*"],
+      "@/lib/*": ["./playground/src/lib/*"],
+      "@/registry/threadable/lib/*": ["./registry/threadable/components/*"],
+      "@/registry/*": ["./registry/*"]
     }
   },
   "include": [

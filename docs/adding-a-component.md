@@ -1,91 +1,65 @@
-# Adding a component
+# Adding a block
 
-This repository distributes source files through the official shadcn-vue registry format. `registry/` is authoritative; `public/r/` is generated. Do not create a replacement CLI and do not edit generated JSON by hand.
+This registry publishes reusable `registry:block` items through the official shadcn-vue format. `registry/` and `registry.json` are authoritative; `public/r/` is generated. Do not edit generated JSON or create a replacement CLI.
 
-## 1. Define the public boundary
+## Define the boundary
 
-Decide whether the addition is:
+Add a block only when it is a reusable, genuinely multi-component feature or a reusable field/action/layout pattern. Keep pages, business logic, API clients, authentication state, translations, secrets, environment files and application data out of the registry. Inertia dependencies are acceptable only when the block's public API genuinely requires Inertia, and the catalogue must call that out.
 
-- `registry:ui` for a primitive or reusable UI wrapper.
-- `registry:lib` for shared, component-used utilities.
-- `registry:hook` for a shared composable.
-- `registry:block` for a genuinely multi-component feature.
-- `registry:style` for reusable CSS variables and rules.
+Upstream shadcn-vue primitives are external registry dependencies. They belong in the development-only playground fixture, not in `registry/threadable/components/blocks` or the public catalogue.
 
-Keep application pages, business logic, API clients, auth/preferences state, secrets, environment files and application data out of the registry. Inertia dependencies are acceptable only for components whose public API genuinely requires Inertia, and must be called out in the component documentation.
+## Add source files
 
-## 2. Add source files
+Create the stable kebab-case directory under `registry/threadable/components/blocks/<name>/`. Preserve the source file names, props, events, slots and exports. Keep implementation-only files inside the owning block and list them in that block's registry item; they are not separate public installation targets.
 
-Create the stable kebab-case item directory under the appropriate `registry/threadable` path. Preserve the source component's folder and file names unless the registry format requires a collision-safe rename. If a rename is required, record the old and new paths in the relevant change notes.
-
-Use these import rules:
+Threadable-owned imports use the block namespace:
 
 ```ts
-import { Button } from "@/registry/threadable/ui/button";
+import { Field } from "@/registry/threadable/components/blocks/field";
 import { cn } from "@/registry/threadable/lib/utils";
-import { useTypeaheadKeyboard } from "@/registry/threadable/composables/useTypeaheadKeyboard";
 ```
 
-Never leave consumer-only component aliases, application absolute paths or relative imports that escape the owning registry item unexpectedly.
+Imports for external shadcn-vue primitives use the consumer's normal aliases, for example `@/components/ui/button`. Do not import from a removed source-project path or create a relative import that escapes the owning block unexpectedly.
 
-Low-level implementation files that are not intended for direct installation must be bundled into the public item that owns their API. Do not add a separate registry item for them. This is how the public `field`, `label`, `pagination` and `select` items provide their internal primitive files without exposing separate installation targets.
+## Register the block
 
-Preserve props, events, slots, exports, focus behaviour, labels, descriptions, error associations, disabled states and reduced-motion behaviour. A customised source component must not be silently replaced with a newly generated upstream shadcn-vue file.
+Add every owned source file to `registry.json` with `type: "registry:block"`. Use `registry:component` for Vue and TypeScript files and `registry:lib` for shared utilities included in the item. Omit targets for component and library files so the official CLI resolves them through the consumer's configured `components` and `lib` aliases. Use explicit targets only for file types that require them, such as pages or standalone files.
 
-## 3. Register the item
-
-Add every owned file to `registry.json` and infer dependencies from actual runtime imports. List public registry dependencies with the syntax supported by the installed shadcn-vue CLI, for example:
+List npm packages from actual imports. List upstream primitives as bare registry dependencies and Threadable blocks as hosted URLs when a public dependency is needed:
 
 ```json
 {
-  "name": "example-control",
-  "type": "registry:ui",
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "example-block",
+  "type": "registry:block",
+  "registryDependencies": [
+    "@shadcn/button",
+    "https://threadable.github.io/shadcn/r/field.json"
+  ],
   "files": [
     {
-      "path": "registry/threadable/ui/example-control/ExampleControl.vue",
-      "type": "registry:ui"
-    },
-    {
-      "path": "registry/threadable/ui/example-control/index.ts",
-      "type": "registry:ui"
+      "path": "registry/threadable/components/blocks/example-block/ExampleBlock.vue",
+      "type": "registry:component"
     }
-  ],
-  "dependencies": ["reka-ui"],
-  "registryDependencies": ["@threadable/utils"]
+  ]
 }
 ```
 
-Use stable kebab-case names. Do not add an item merely to make an application-specific import pass. If a builder health check is needed, keep it internal and out of the documented public catalogue.
+The current public endpoint must be available before a hosted block dependency is released. For local consumer checks, use the repository's local-registry mirror setup in CI rather than changing production metadata to a local URL.
 
-## 4. Document the component
+## Document and test
 
-Add a section to [`docs/components.md`](./components.md) covering:
+Add a section to [`docs/components.md`](./components.md) covering import and basic usage, required labels or accessible text, keyboard behaviour, important props/events, npm and registry dependencies, differences from upstream and known accessibility considerations.
 
-- Import path and a minimal usage example.
-- Required visible labels, descriptions, error text or other accessible names.
-- Keyboard behaviour and focus movement.
-- Important props, v-model bindings, events and slots.
-- npm and registry dependencies.
-- Differences from upstream shadcn-vue or an explicit statement that the item is Threadable-only.
-- Known accessibility considerations and consumer responsibilities.
+Add one isolated playground tile in the appropriate type file. It must own its props and model bindings. Add unit/accessibility coverage and real browser sequences for interactive behaviour: names, label associations, ARIA changes, keyboard activation, tab order, focus movement, trapping/restoration, Escape dismissal, disabled behaviour, error relationships and reduced motion as applicable.
 
-Keep [`docs/components.md`](./components.md) and the registry metadata aligned when files, exports, imports or dependencies change.
-
-## 5. Add tests and playground coverage
-
-Add an isolated playground card with its own props and model bindings. Include representative default, disabled, focused, invalid, long-content, light/dark and mobile states where applicable.
-
-For interactive components, add unit/accessibility coverage and real browser coverage. Test names, label associations, ARIA state changes, keyboard activation, tab order, focus movement, focus trapping/restoration, Escape dismissal, disabled behaviour, error associations and reduced motion as relevant. Use the actual component interaction rather than only checking a static attribute.
-
-## 6. Build and validate
-
-Run:
+## Validate
 
 ```sh
 pnpm registry:build
 pnpm typecheck
 pnpm lint
-pnpm test
+pnpm test:unit
 pnpm test:a11y
 pnpm test:integration
 pnpm playground:build
@@ -94,8 +68,8 @@ pnpm test:axe
 pnpm check
 ```
 
-Inspect every changed `public/r/*.json` file. Confirm that all source files and dependencies are represented, no absolute source paths or application-specific code were generated, and the item installs in the consumer fixture. Do not claim WCAG conformance from passing automated tests.
+Inspect every generated item. Confirm every declared file exists, dependencies are complete and minimal, imports are safe for consumers, and no absolute local paths or application-specific code are present. Passing axe or automated tests alone does not establish WCAG conformance.
 
-## 7. Review and release notes
+## Breaking changes
 
-Document breaking changes in [`CHANGELOG.md`](../CHANGELOG.md). A prop, event, slot, export, file-path, dependency or accessibility-behaviour change can require a major release. Explain migrations before asking for review.
+Record prop, event, slot, export, file-path, dependency and accessibility-behaviour breaks in [`CHANGELOG.md`](../CHANGELOG.md), with a migration path. Use the release guidance in [`docs/releasing.md`](./releasing.md).

@@ -169,10 +169,12 @@ jobs:
           set -euo pipefail
 
           consumer_directory="${RUNNER_TEMP}/threadable-consumer"
+          registry_site="${RUNNER_TEMP}/threadable-registry-site"
           cp -R tests/fixtures/consumer "$consumer_directory"
           pnpm --dir "$consumer_directory" install --no-frozen-lockfile
+          node scripts/ci/prepare-local-registry.mjs "$registry_site"
 
-          python3 -m http.server 4174 --bind 127.0.0.1 --directory public \
+          python3 -m http.server 4174 --bind 127.0.0.1 --directory "$registry_site" \
             >"${RUNNER_TEMP}/threadable-registry-server.log" 2>&1 &
           registry_server_pid=$!
 
@@ -242,6 +244,7 @@ jobs:
           set -euo pipefail
 
           laravel_directory="${RUNNER_TEMP}/threadable-laravel-consumer"
+          registry_site="${RUNNER_TEMP}/threadable-laravel-registry-site"
           composer create-project laravel/laravel "$laravel_directory" \
             --prefer-dist --no-interaction --no-progress
 
@@ -249,7 +252,8 @@ jobs:
           pnpm --dir "$laravel_directory" add \
             vue@^3.5.41 \
             @inertiajs/core@^3.0.3 \
-            @inertiajs/vue3@^3.0.3
+            @inertiajs/vue3@^3.0.3 \
+            lucide-vue-next@^1.0.0
           pnpm --dir "$laravel_directory" add --save-dev \
             @tailwindcss/vite@^4.3.3 \
             @types/node@^26.2.0 \
@@ -259,8 +263,9 @@ jobs:
             vue-tsc@^3.3.10
 
           node scripts/ci/prepare-laravel-consumer.mjs "$laravel_directory"
+          node scripts/ci/prepare-local-registry.mjs "$registry_site"
 
-          python3 -m http.server 4174 --bind 127.0.0.1 --directory public \
+          python3 -m http.server 4174 --bind 127.0.0.1 --directory "$registry_site" \
             >"${RUNNER_TEMP}/threadable-laravel-registry-server.log" 2>&1 &
           registry_server_pid=$!
 
@@ -285,7 +290,7 @@ jobs:
           fi
 
           node scripts/ci/install-registry-items.mjs \
-            "$laravel_directory" threadable-theme utils button input-block
+            "$laravel_directory" button-block input-block sheet-block
           pnpm --dir "$laravel_directory" exec vue-tsc --noEmit
           pnpm --dir "$laravel_directory" run build
 
@@ -330,7 +335,7 @@ jobs:
           set -euo pipefail
           test -s pages/index.html
           test -s pages/r/registry.json
-          test -s pages/r/button.json
+          test -s pages/r/button-block.json
           touch pages/.nojekyll
 
       - name: Configure GitHub Pages
@@ -351,7 +356,7 @@ jobs:
     needs: pages-deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Request and validate button registry item
+      - name: Request and validate block registry item
         env:
           REGISTRY_BASE_URL: ${{ needs.pages-deploy.outputs.page_url }}
           REGISTRY_JSON: ${{ runner.temp }}/threadable-button.json
@@ -364,13 +369,13 @@ jobs:
 
           curl --fail --silent --show-error --location \
             --retry 12 --retry-delay 5 --retry-all-errors \
-            "$registry_base_url/r/button.json" \
+            "$registry_base_url/r/button-block.json" \
             --output "$REGISTRY_JSON"
 
           node --input-type=module -e '
             import { readFileSync } from "node:fs";
             const item = JSON.parse(readFileSync(process.env.REGISTRY_JSON, "utf8"));
-            if (item.name !== "button" || item.type !== "registry:ui") {
-              throw new Error("The deployed button registry item is invalid.");
+            if (item.name !== "button-block" || item.type !== "registry:block") {
+              throw new Error("The deployed block registry item is invalid.");
             }
           '

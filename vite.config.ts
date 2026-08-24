@@ -7,9 +7,30 @@ export default defineConfig({
   root: "playground",
   plugins: [vue(), tailwindcss()],
   resolve: {
-    alias: {
-      "@": fileURLToPath(new URL(".", import.meta.url)),
-    },
+    alias: [
+      {
+        find: "@/registry/threadable/lib",
+        replacement: fileURLToPath(
+          new URL("./registry/threadable/components", import.meta.url),
+        ),
+      },
+      {
+        find: "@/components",
+        replacement: fileURLToPath(
+          new URL("./playground/src/components", import.meta.url),
+        ),
+      },
+      {
+        find: "@/lib",
+        replacement: fileURLToPath(
+          new URL("./playground/src/lib", import.meta.url),
+        ),
+      },
+      {
+        find: "@",
+        replacement: fileURLToPath(new URL(".", import.meta.url)),
+      },
+    ],
   },
   server: {
     host: "127.0.0.1",

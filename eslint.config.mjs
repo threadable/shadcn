@@ -58,6 +58,13 @@ export default tseslint.config(
     },
   },
   {
+    files: ["playground/src/components/ui/**/*.vue"],
+    rules: {
+      // These files are maintained by the official shadcn-vue CLI.
+      "vue/require-default-prop": "off",
+    },
+  },
+  {
     files: ["tests/fixtures/**/*.vue"],
     rules: {
       "vue/singleline-html-element-content-newline": "off",

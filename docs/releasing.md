@@ -1,51 +1,38 @@
 # Releasing
 
-Releases of Threadable's registry are immutable Git tags in `vMAJOR.MINOR.PATCH` form. Consumers can install a generated item from a tag, for example:
-
-```sh
-pnpm dlx shadcn-vue@latest add https://raw.githubusercontent.com/threadable/shadcn/v0.1.0/public/r/button.json
-```
+Registry releases use immutable `vMAJOR.MINOR.PATCH` tags. Generated registry files are built from `registry.json` and `registry/`; never edit them by hand.
 
 ## Versioning
 
-- Major: breaking props, events, slots, exports, file paths, registry dependency changes that require consumer work, or intentional accessibility-behaviour changes that need migration.
-- Minor: new public items, backwards-compatible props/events/slots, new optional variants and compatible accessibility improvements.
-- Patch: bug fixes, dependency fixes, documentation and non-breaking styling corrections.
+- Major: breaking props, events, slots, exports, file paths, registry dependencies or accessibility behaviour that requires consumer migration.
+- Minor: new blocks, compatible API additions and backwards-compatible accessibility improvements.
+- Patch: fixes, dependency corrections, documentation and non-breaking styling changes.
 
-When in doubt, prefer the version that gives consumers a safe migration boundary. A public item is an API even when it is copied into the consumer repository.
+## Checklist
 
-## Release checklist
+1. Confirm the change is merged to the default branch and review the public block catalogue.
+2. Update [`CHANGELOG.md`](../CHANGELOG.md) with API, dependency, accessibility and migration notes.
+3. Update the package version if release metadata changes.
+4. Run `pnpm install --frozen-lockfile` and `pnpm check`.
+5. Inspect every generated `public/r/*.json` item for missing files, absolute paths, unsafe code and dependency drift.
+6. Create an annotated immutable tag such as `v0.2.0` only after CI is green.
+7. Verify the tagged GitHub installation and hosted Pages item.
 
-1. Confirm the change is merged to the default branch and the working tree contains no unrelated edits.
-2. Update [`CHANGELOG.md`](../CHANGELOG.md) with the item-level API, dependency, accessibility and migration notes.
-3. Update `package.json`'s version when the repository release metadata changes.
-4. Verify `registry.json`, source files and component documentation agree. Ensure generated output is not manually edited.
-5. Run the full check with the supported Node and pnpm versions:
+Pull requests validate only; they do not publish or deploy and do not require secrets. The default-branch workflow deploys Pages only after registry validation, unit tests, browser/axe tests, consumer installation and Laravel integration succeed.
 
-   ```sh
-   pnpm install --frozen-lockfile
-   pnpm check
-   ```
+## GitHub Pages
 
-6. Inspect every generated `public/r/*.json` file for missing files, absolute paths, application-specific code, wrong dependencies and unintended API changes.
-7. Run a clean public consumer installation and the Laravel integration checks when the release changes source or dependencies.
-8. Create the annotated tag, such as `v0.2.0`, only after CI is green.
-9. Push the tag through the normal maintainer workflow and verify that the tagged `public/r` files are accessible.
-
-Pull requests must not publish or deploy and must not require repository secrets. A release should be performed by an authorised maintainer from the protected default branch.
-
-## Hosted registry
-
-The default-branch CI workflow publishes the generated registry to GitHub Pages after all validation jobs succeed. Enable Pages in repository `Settings` → `Pages` by selecting `GitHub Actions` as the build and deployment source. The deployment is available at:
+A maintainer must enable `Settings` → `Pages` → `GitHub Actions`. The hosted registry is:
 
 ```text
 https://threadable.github.io/shadcn/r/{name}.json
 ```
 
-Verify the hosted namespace mapping and test:
+Smoke-test a deployed block with:
 
 ```sh
-pnpm dlx shadcn-vue@latest add @threadable/button
+curl --fail https://threadable.github.io/shadcn/r/registry.json
+pnpm dlx shadcn-vue@latest add @threadable/button-block
 ```
 
-The hosted endpoint must be versionable or otherwise provide an explicit rollback path. Do not silently repoint an existing tag to different generated source.
+Keep a versioned rollback path. Never repoint an existing release tag to different generated source.

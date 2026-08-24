@@ -4,18 +4,26 @@ import { describe, expect, it } from "vitest";
 
 import registry from "../../registry.json";
 
+type RegistryFile = {
+  path: string;
+  type: string;
+  target?: string;
+};
+
 type RegistryItem = {
   name: string;
   type: string;
   description: string;
-  files?: Array<{ path: string; type: string }>;
+  registryDependencies?: string[];
+  files?: RegistryFile[];
 };
 
 const root = resolve(import.meta.dirname, "../..");
 const items = registry.items as RegistryItem[];
+const itemNames = new Set(items.map((item) => item.name));
 
 describe("registry metadata", () => {
-  it("contains the Threadable registry identity", () => {
+  it("contains the Threadable block registry identity", () => {
     expect(registry.$schema).toBe(
       "https://shadcn-vue.com/schema/registry.json",
     );
@@ -24,26 +32,43 @@ describe("registry metadata", () => {
     expect(Array.isArray(registry.items)).toBe(true);
   });
 
-  it("uses unique names and points every file at an existing source path", () => {
+  it("declares only public block items with existing source files", () => {
     const names = items.map((item) => item.name);
 
     expect(new Set(names).size).toBe(names.length);
 
     for (const item of items) {
-      expect(item.name).not.toMatch(/^\//);
+      expect(item.name).toMatch(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+      expect(item.type).toBe("registry:block");
       expect(item.description).toBeTruthy();
-
-      if (item.type === "registry:style") {
-        expect(item.files ?? []).toHaveLength(0);
-        continue;
-      }
-
       expect(item.files?.length).toBeGreaterThan(0);
 
       for (const file of item.files ?? []) {
-        expect(file.path.startsWith("registry/")).toBe(true);
+        expect(file.path.startsWith("registry/threadable/")).toBe(true);
+        expect(file.type).toMatch(/^registry:(component|lib)$/);
+        expect(file.target).toBeUndefined();
         expect(existsSync(resolve(root, file.path))).toBe(true);
         expect(readFileSync(resolve(root, file.path), "utf8")).toBeDefined();
+      }
+    }
+  });
+
+  it("resolves every Threadable registry dependency to a public block", () => {
+    for (const item of items) {
+      for (const dependency of item.registryDependencies ?? []) {
+        if (dependency.startsWith("https://threadable.github.io/shadcn/r/")) {
+          const name = dependency
+            .split("/")
+            .pop()
+            ?.replace(/\.json$/, "");
+          expect(name).toBeTruthy();
+          expect(itemNames.has(name as string)).toBe(true);
+          continue;
+        }
+
+        expect(dependency).toMatch(
+          /^(?:[a-z0-9]+(?:-[a-z0-9]+)*|@[a-z0-9-]+\/[a-z0-9]+(?:-[a-z0-9]+)*)$/,
+        );
       }
     }
   });

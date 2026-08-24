@@ -34,13 +34,14 @@ write(
   `${JSON.stringify(
     {
       $schema: "https://shadcn-vue.com/schema.json",
-      style: "vega",
+      style: "new-york",
       tailwind: {
         css: "resources/css/app.css",
         baseColor: "neutral",
         cssVariables: true,
       },
       typescript: true,
+      iconLibrary: "lucide",
       aliases: {
         components: "@/components",
         utils: "@/lib/utils",

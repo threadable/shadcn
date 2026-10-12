@@ -13,6 +13,7 @@ import {
 withDefaults(
   defineProps<{
     open: boolean;
+    processing?: boolean;
     title?: string;
     description: string;
     descriptionClass?: string;
@@ -26,6 +27,7 @@ withDefaults(
     cancelLabel: "Cancel",
     actionLabel: "Continue",
     actionVariant: "default",
+    processing: false,
   },
 );
 
@@ -60,6 +62,7 @@ const emit = defineEmits<{
 
         <AlertDialogAction
           class="cursor-pointer"
+          :disabled="processing"
           :data-test="dataTest ? `${dataTest}-confirm` : undefined"
           :class="
             actionVariant === 'destructive'

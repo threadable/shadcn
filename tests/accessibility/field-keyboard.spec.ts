@@ -136,3 +136,28 @@ test("range calendar selects endpoints and traps focus in its mobile dialog", as
     page.locator('[data-test="demo-range-calendar-disabled"]'),
   ).toBeDisabled();
 });
+
+test("processing confirmation disables its action and skips it in the tab order", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.getByTestId("demo-confirm-processing").check();
+  const trigger = page.getByTestId("demo-dialog-trigger");
+  await trigger.press("Enter");
+  const dialog = page.getByRole("alertdialog");
+  const action = dialog.getByRole("button", { name: "Delete", exact: true });
+  const cancel = dialog.getByRole("button", { name: "Cancel", exact: true });
+  await expect(action).toBeDisabled();
+  await expect(cancel).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(cancel).toBeFocused();
+  await page.keyboard.press("Escape");
+  await expect(trigger).toBeFocused();
+  await page.getByTestId("demo-confirm-processing").uncheck();
+  await trigger.press("Enter");
+  await expect(action).toBeEnabled();
+  await cancel.press("Tab");
+  await expect(action).toBeFocused();
+  await page.keyboard.press("Enter");
+  await expect(dialog).toBeHidden();
+});

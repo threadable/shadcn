@@ -149,7 +149,7 @@ The import examples use the installed registry path `@/components/blocks/<name>`
 - Import and usage: `import { ConfirmDialogBlock } from "@/components/blocks/confirm-dialog-block"`; use it with `open`, `title`, `description`, `@confirm` and `@cancel`.
 - Accessible text: provide a specific title, useful description, and action/cancel labels that explain consequences.
 - Keyboard: focus enters the alert dialog, Tab is trapped, Escape/cancel closes where allowed, and focus is restored to the trigger.
-- Important props/events: `open`, `title`, `description`, `confirmLabel`, `cancelLabel`, `dataTest`; emits `confirm` and `cancel`.
+- Important props/events: `open`, `title`, `description`, `actionLabel`, `cancelLabel`, `dataTest`, `processing` (default `false`); emits `confirm` and `cancel`. Set `processing` to disable the action button while a request is running.
 - Dependencies: registry `@shadcn/alert-dialog`.
 - Difference from upstream: a task-oriented confirmation API on top of the consumer's alert-dialog primitive.
 - Accessibility: destructive actions need explicit labels; do not remove the title to make the design visually simpler.

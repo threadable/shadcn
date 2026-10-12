@@ -6,6 +6,8 @@ Changes to the public registry are recorded here. Registry tags use `vMAJOR.MINO
 
 ### Added
 
+- `ConfirmDialogBlock` supports a `processing` boolean prop that disables its action button.
+
 - Public `calendar-block` and `range-calendar-block` items with explicit Apply/Clear actions, date bounds, text props, mobile range dialog, and keyboard/accessibility coverage.
 
 - Public `password-block`, `phone-input-block` and `postcode-block` items, with playground demos and keyboard/accessibility coverage.

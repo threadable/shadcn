@@ -152,7 +152,7 @@
     {
       "name": "confirm-dialog-block",
       "type": "registry:block",
-      "description": "An accessible confirmation dialog block for destructive or consequential actions.",
+      "description": "An accessible confirmation dialog block for destructive or consequential actions, with a processing state that disables confirmation.",
       "registryDependencies": ["@shadcn/alert-dialog"],
       "dependencies": [],
       "files": [

@@ -14,7 +14,7 @@ describe("registry playground", () => {
     expect(
       wrapper.get('[data-test="demo-button-disabled"]').attributes("disabled"),
     ).toBeDefined();
-    expect(wrapper.findAll('[data-testid^="registry-block-"]').length).toBe(21);
+    expect(wrapper.findAll('[data-testid^="registry-block-"]').length).toBe(23);
   });
 
   it("preserves labelled invalid form relationships", () => {
@@ -34,7 +34,7 @@ describe("registry playground", () => {
     const wrapper = mount(App);
     const tiles = wrapper.findAll('[data-testid^="registry-block-"]');
 
-    expect(tiles).toHaveLength(21);
+    expect(tiles).toHaveLength(23);
     for (const tile of tiles) {
       expect(tile.attributes("data-block")).toBe(
         tile.attributes("data-testid")?.replace("registry-block-", ""),

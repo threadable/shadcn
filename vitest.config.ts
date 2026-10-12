@@ -5,7 +5,14 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   plugins: [vue()],
   resolve: {
-    dedupe: ["vue", "reka-ui", "@lucide/vue", "@vueuse/core", "@vueuse/shared"],
+    dedupe: [
+      "vue",
+      "reka-ui",
+      "@lucide/vue",
+      "@vueuse/core",
+      "@vueuse/shared",
+      "@internationalized/date",
+    ],
     alias: [
       {
         find: "@/registry/threadable/lib",

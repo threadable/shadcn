@@ -48,3 +48,91 @@ test("new fields support password keyboard toggling, country selection, and post
   await page.locator("#demo-postcode-country").selectOption("");
   await expect(postcode).toBeDisabled();
 });
+
+test("calendar drafts cancel with Escape, apply, clear and restore focus", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const trigger = page.locator('[data-test="demo-calendar"]');
+  await trigger.focus();
+  await trigger.press("Enter");
+  const dialog = page.getByRole("dialog", { name: "Appointment date" });
+  await expect(dialog).toBeVisible();
+  const start = dialog.locator('[data-value="2026-10-12"]').first();
+  await expect(start).toBeFocused();
+  await start.press("ArrowRight");
+  await page.keyboard.press("Enter");
+  await expect(page.getByTestId("calendar-model")).toHaveText("2026-10-12");
+  await page.keyboard.press("Escape");
+  await expect(trigger).toBeFocused();
+  await expect(trigger).toContainText("12-10-2026");
+  await trigger.press("Space");
+  await expect(start).toBeFocused();
+  await start.press("ArrowRight");
+  await page.keyboard.press("Space");
+  await dialog.getByRole("button", { name: "Apply", exact: true }).focus();
+  await page.keyboard.press("Enter");
+  await expect(page.getByTestId("calendar-model")).toHaveText("2026-10-13");
+  await expect(trigger).toBeFocused();
+  await trigger.press("Enter");
+  await dialog
+    .getByRole("button", { name: "Clear", exact: true })
+    .press("Enter");
+  await expect(page.getByTestId("calendar-model")).toHaveText("No date");
+  await expect(trigger).toBeFocused();
+  await expect(
+    page.locator('[data-test="demo-calendar-disabled"]'),
+  ).toBeDisabled();
+});
+
+test("range calendar selects endpoints and traps focus in its mobile dialog", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const trigger = page.locator('[data-test="demo-range-calendar"]');
+  await trigger.focus();
+  await trigger.press("Enter");
+  const overlay = page.getByRole("dialog", { name: "Travel dates" });
+  await expect(overlay).toBeVisible();
+  const start = overlay.locator('[data-value="2026-10-12"]').first();
+  await expect(start).toBeFocused();
+  await start.press("ArrowRight");
+  await page.keyboard.press("Enter");
+  await expect(
+    overlay.getByRole("button", { name: "Apply", exact: true }),
+  ).toBeDisabled();
+  await page.keyboard.press("ArrowRight");
+  await page.keyboard.press("ArrowRight");
+  await page.keyboard.press("Enter");
+  await overlay
+    .getByRole("button", { name: "Apply", exact: true })
+    .press("Enter");
+  await expect(page.getByTestId("range-calendar-model")).toHaveText(
+    "2026-10-13 / 2026-10-15",
+  );
+  await expect(trigger).toBeFocused();
+  await page.setViewportSize({ width: 375, height: 800 });
+  await trigger.press("Enter");
+  await expect(overlay).toBeVisible();
+  await overlay.getByRole("button", { name: "Clear", exact: true }).focus();
+  for (let index = 0; index < 5; index++) {
+    await page.keyboard.press("Tab");
+    expect(
+      await overlay.evaluate((element) =>
+        element.contains(document.activeElement),
+      ),
+    ).toBe(true);
+  }
+  await page.keyboard.press("Escape");
+  await expect(trigger).toBeFocused();
+  await trigger.press("Enter");
+  await overlay
+    .getByRole("button", { name: "Clear", exact: true })
+    .press("Enter");
+  await expect(page.getByTestId("range-calendar-model")).toHaveText(
+    "No start / No end",
+  );
+  await expect(
+    page.locator('[data-test="demo-range-calendar-disabled"]'),
+  ).toBeDisabled();
+});

@@ -591,6 +591,76 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "calendar-block",
+      "type": "registry:block",
+      "description": "A labelled date picker with a calendar dialog and explicit Apply and Clear actions.",
+      "registryDependencies": [
+        "@shadcn/calendar",
+        "@shadcn/button",
+        "@shadcn/dialog",
+        "https://threadable.github.io/shadcn/r/field.json"
+      ],
+      "dependencies": [
+        "@internationalized/date",
+        "@lucide/vue",
+        "clsx",
+        "reka-ui",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/threadable/components/blocks/calendar-block/CalendarBlock.vue",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/threadable/components/blocks/calendar-block/index.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/threadable/components/utils.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "range-calendar-block",
+      "type": "registry:block",
+      "description": "A labelled date range picker with a desktop popover and mobile dialog.",
+      "registryDependencies": [
+        "@shadcn/range-calendar",
+        "@shadcn/button",
+        "@shadcn/dialog",
+        "@shadcn/popover",
+        "https://threadable.github.io/shadcn/r/field.json"
+      ],
+      "dependencies": [
+        "@internationalized/date",
+        "@lucide/vue",
+        "@vueuse/core",
+        "clsx",
+        "reka-ui",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/threadable/components/blocks/range-calendar-block/RangeCalendarBlock.vue",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/threadable/components/blocks/range-calendar-block/RangeCalendarView.vue",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/threadable/components/blocks/range-calendar-block/index.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/threadable/components/utils.ts",
+          "type": "registry:lib"
+        }
+      ]
     }
   ]
 }

@@ -260,3 +260,41 @@ const postcode = ref("");
 - `invalidFormatMessage` supplies translated validation text; the English fallback includes `label` or `name`. The `error` prop takes priority. Other input props include `placeholder`, `required`, `disabled`, `processing` and `maxlength`, capped by the known country format.
 - Dependencies: npm `reka-ui`; registry hosted `/input-block`. `postcodeFormat.ts` and `formats.json` are internal files included with the block.
 - Difference from upstream: formats supported fixed patterns and checks country regexes. Country formats without supported masks remain unmasked. Format matching cannot confirm that a postcode exists; use server validation where needed and review the format dataset for your supported countries.
+
+## Calendar block
+
+```vue
+<script setup lang="ts">
+import { shallowRef } from "vue";
+import type { DateValue } from "@internationalized/date";
+import { CalendarBlock } from "@/components/blocks/calendar-block";
+const date = shallowRef<DateValue>();
+</script>
+<template>
+  <CalendarBlock v-model="date" name="date" label="Appointment date" />
+</template>
+```
+
+- A visible label names the trigger and dialog. Without a label, the placeholder names them. Enter or Space opens the dialog; arrow keys move through dates and Enter or Space selects. Apply commits the draft and emits `apply`; Escape cancels, restores the previous date and returns focus. Clear removes the date and emits `clear`. Disabled and processing states disable the trigger and actions.
+- Props include `minValue`, `maxValue`, `defaultValue`, `locale` (default `en-GB`), `dateFormat` (default `dd-MM-yyyy`), `layout`, `yearRange`, `required`, `error`, `description`, and text props `placeholder`, `clearLabel`, `applyLabel`. The model uses `DateValue`, not a JavaScript Date. Formats support `yyyy`, `yy`, `MM`, `M`, `dd`, `d`; they format calendar fields without timezone conversion.
+- Dependencies: npm `@internationalized/date`, `@lucide/vue`, `reka-ui`, `clsx`, `tailwind-merge`; registry `@shadcn/calendar`, `@shadcn/button`, `@shadcn/dialog` and hosted `/field`.
+- Difference from upstream: wraps the calendar in a labelled field and confirmation dialog. Supply translated text through props and pass `locale` for calendar labels. Submit and validate dates on the server; `required` adds a visible required marker to the label and does not provide native form validation.
+
+## Range calendar block
+
+```vue
+<script setup lang="ts">
+import { shallowRef } from "vue";
+import type { DateRange } from "reka-ui";
+import { RangeCalendarBlock } from "@/components/blocks/range-calendar-block";
+const range = shallowRef<DateRange>();
+</script>
+<template>
+  <RangeCalendarBlock v-model="range" name="dates" label="Travel dates" />
+</template>
+```
+
+- Select a start and end date with the keyboard before Apply is enabled. Escape cancels changes and restores trigger focus; Apply commits the range and emits `apply`, Clear resets the range and emits `clear`. Below 768px the desktop popover becomes a named dialog with trapped focus. Bounds, disabled and processing states are passed to the calendar.
+- Props include `defaultValue`, `minValue`, `maxValue`, `locale`, `dateFormat` (default `yyyy-MM-dd`), `triggerClass`, field validation props, and text props `placeholder`, `clearLabel`, `applyLabel`. The model is `DateRange | undefined`, whose endpoints use `DateValue`. `presets` and `description` slots are supported; `RangeCalendarView.vue` is an internal implementation file.
+- Dependencies: npm `@internationalized/date`, `@lucide/vue`, `@vueuse/core`, `reka-ui`, `clsx`, `tailwind-merge`; registry `@shadcn/range-calendar`, `@shadcn/button`, `@shadcn/dialog`, `@shadcn/popover` and hosted `/field`.
+- Difference from upstream: adds field validation, explicit confirmation and responsive overlays. Use a meaningful label and translated text props. Required state does not enforce native form submission rules; validate complete ranges on the server. Review calendar localization and focus in the consuming theme.

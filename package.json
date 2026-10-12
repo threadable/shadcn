@@ -28,7 +28,7 @@
     "playground:dev": "vite --host 127.0.0.1 --port 4173",
     "playground:build": "vite build --config vite.config.ts",
     "playground:preview": "vite preview --config vite.config.ts --host 127.0.0.1 --port 4173",
-    "upstream:sync": "pnpm exec shadcn-vue add --cwd playground --yes --overwrite @shadcn/button @shadcn/checkbox @shadcn/select @shadcn/label @shadcn/skeleton @shadcn/separator @shadcn/sheet @shadcn/stepper @shadcn/command @shadcn/popover @shadcn/dropdown-menu @shadcn/radio-group @shadcn/textarea @shadcn/alert-dialog @shadcn/input @shadcn/input-group",
+    "upstream:sync": "pnpm exec shadcn-vue add --cwd playground --yes --overwrite @shadcn/button @shadcn/checkbox @shadcn/select @shadcn/label @shadcn/skeleton @shadcn/separator @shadcn/sheet @shadcn/stepper @shadcn/command @shadcn/popover @shadcn/dropdown-menu @shadcn/radio-group @shadcn/textarea @shadcn/alert-dialog @shadcn/input @shadcn/input-group @shadcn/calendar @shadcn/range-calendar",
     "check": "pnpm registry:build && pnpm typecheck && pnpm lint && pnpm test && pnpm test:a11y && pnpm test:integration && pnpm playground:build && pnpm test:browser && pnpm test:axe"
   },
   "devDependencies": {
@@ -36,6 +36,7 @@
     "@eslint/js": "^10.0.1",
     "@inertiajs/core": "^3.0.3",
     "@inertiajs/vue3": "^3.0.3",
+    "@internationalized/date": "^3.12.4",
     "@lucide/vue": "^1.18.0",
     "@playwright/test": "^1.62.1",
     "@tailwindcss/vite": "^4.3.3",

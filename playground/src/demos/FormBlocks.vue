@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, shallowRef } from "vue";
+import { CalendarDate } from "@internationalized/date";
+import type { DateValue } from "@internationalized/date";
+import type { DateRange } from "reka-ui";
+import { CalendarBlock } from "@/registry/threadable/components/blocks/calendar-block";
+import { RangeCalendarBlock } from "@/registry/threadable/components/blocks/range-calendar-block";
 
 import { CheckboxBlock } from "@/registry/threadable/components/blocks/checkbox-block";
 import { ComboboxGroupBlock } from "@/registry/threadable/components/blocks/combobox-group-block";
@@ -19,6 +24,16 @@ const phone = ref("");
 const phoneCountry = ref("GB");
 const postcode = ref("");
 const postcodeCountry = ref("GB");
+
+const calendarDate = shallowRef<DateValue | undefined>(
+  new CalendarDate(2026, 10, 12),
+);
+const calendarRange = shallowRef<DateRange | undefined>({
+  start: new CalendarDate(2026, 10, 12),
+  end: new CalendarDate(2026, 10, 15),
+});
+const calendarMin = new CalendarDate(2026, 10, 1);
+const calendarMax = new CalendarDate(2026, 12, 31);
 
 const email = ref("");
 const notes = ref("");
@@ -316,6 +331,69 @@ const groupedItems = [
           label="Disabled postcode"
           disabled
           data-test="demo-postcode-disabled"
+        />
+      </article>
+      <article
+        data-testid="registry-block-calendar-block"
+        data-block="calendar-block"
+      >
+        <h3>Calendar block</h3>
+        <p class="demo-description">
+          Choose a date, apply it, or cancel with Escape.
+        </p>
+        <CalendarBlock
+          id="demo-calendar"
+          v-model="calendarDate"
+          name="date"
+          label="Appointment date"
+          description="Choose a date between October and December. Changes are saved only when you apply them."
+          :min-value="calendarMin"
+          :max-value="calendarMax"
+          error="Please confirm your appointment date"
+          required
+          data-test="demo-calendar"
+        />
+        <output data-testid="calendar-model">{{
+          calendarDate?.toString() || "No date"
+        }}</output>
+        <CalendarBlock
+          id="demo-calendar-disabled"
+          name="disabled-date"
+          label="Disabled date"
+          disabled
+          data-test="demo-calendar-disabled"
+        />
+      </article>
+      <article
+        data-testid="registry-block-range-calendar-block"
+        data-block="range-calendar-block"
+      >
+        <h3>Range calendar block</h3>
+        <p class="demo-description">
+          Select both dates before applying; mobile uses a dialog.
+        </p>
+        <RangeCalendarBlock
+          id="demo-range-calendar"
+          v-model="calendarRange"
+          name="date-range"
+          label="Travel dates"
+          description="Choose a start and end date. The full range will be confirmed when you select Apply."
+          :min-value="calendarMin"
+          :max-value="calendarMax"
+          error="Please confirm your travel dates"
+          required
+          data-test="demo-range-calendar"
+        />
+        <output data-testid="range-calendar-model"
+          >{{ calendarRange?.start?.toString() || "No start" }} /
+          {{ calendarRange?.end?.toString() || "No end" }}</output
+        >
+        <RangeCalendarBlock
+          id="demo-range-calendar-disabled"
+          name="disabled-range"
+          label="Disabled range"
+          disabled
+          data-test="demo-range-calendar-disabled"
         />
       </article>
     </div>

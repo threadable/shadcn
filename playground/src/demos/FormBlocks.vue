@@ -10,6 +10,16 @@ import { SelectBlock } from "@/registry/threadable/components/blocks/select-bloc
 import { SelectGroupBlock } from "@/registry/threadable/components/blocks/select-group-block";
 import { TextareaBlock } from "@/registry/threadable/components/blocks/textarea-block";
 
+import { PasswordBlock } from "@/registry/threadable/components/blocks/password-block";
+import { AppPhoneInput } from "@/registry/threadable/components/blocks/phone-input-block";
+import { PostcodeBlock } from "@/registry/threadable/components/blocks/postcode-block";
+
+const password = ref("example-password");
+const phone = ref("");
+const phoneCountry = ref("GB");
+const postcode = ref("");
+const postcodeCountry = ref("GB");
+
 const email = ref("");
 const notes = ref("");
 const accepted = ref(false);
@@ -204,6 +214,108 @@ const groupedItems = [
           description="Type to filter the grouped options."
           :groups="groupedItems"
           data-test="demo-combobox"
+        />
+      </article>
+      <article
+        data-testid="registry-block-password-block"
+        data-block="password-block"
+      >
+        <h3>Password block</h3>
+        <p class="demo-description">
+          Toggle visibility with the keyboard; errors stay associated with the
+          field.
+        </p>
+        <PasswordBlock
+          id="demo-password"
+          v-model="password"
+          name="password"
+          label="Password"
+          description="Use a long, unique password that you can store in a password manager."
+          error="Choose a stronger password"
+          required
+          data-test="demo-password"
+        />
+        <PasswordBlock
+          id="demo-password-disabled"
+          name="password-disabled"
+          label="Disabled password"
+          model-value="secret"
+          disabled
+          data-test="demo-password-disabled"
+        />
+      </article>
+      <article
+        data-testid="registry-block-phone-input-block"
+        data-block="phone-input-block"
+      >
+        <h3>Phone input block</h3>
+        <p class="demo-description">
+          Search countries, select one, and return focus to the phone field.
+        </p>
+        <AppPhoneInput
+          id="demo-phone"
+          v-model="phone"
+          v-model:country-code="phoneCountry"
+          name="phone"
+          label="Phone number"
+          description="Include the area code so we can reach you about your request."
+          error="Enter a valid phone number"
+          required
+          data-test="demo-phone"
+        />
+        <AppPhoneInput
+          id="demo-phone-disabled"
+          name="phone-disabled"
+          label="Disabled phone"
+          country-code="GB"
+          disabled
+          data-test="demo-phone-disabled"
+        />
+      </article>
+      <article
+        data-testid="registry-block-postcode-block"
+        data-block="postcode-block"
+      >
+        <h3>Postcode block</h3>
+        <p class="demo-description">
+          Country-specific formatting and validation after leaving the field.
+        </p>
+        <label for="demo-postcode-country">Postcode country</label>
+        <select
+          id="demo-postcode-country"
+          v-model="postcodeCountry"
+          class="demo-native-input"
+        >
+          <option value="GB">United Kingdom</option>
+          <option value="US">United States</option>
+          <option value="">No country</option>
+        </select>
+        <PostcodeBlock
+          id="demo-postcode"
+          v-model="postcode"
+          :country-code="postcodeCountry"
+          name="postcode"
+          label="Postcode"
+          description="Select the destination country before entering the postal code."
+          invalid-format-message="Enter a valid postcode for the selected country"
+          required
+          data-test="demo-postcode"
+        />
+        <PostcodeBlock
+          id="demo-postcode-invalid"
+          name="postcode-invalid"
+          label="Invalid postcode"
+          country-code="GB"
+          model-value="invalid"
+          error="This postcode could not be found"
+          data-test="demo-postcode-invalid"
+        />
+        <PostcodeBlock
+          id="demo-postcode-disabled"
+          name="postcode-disabled"
+          label="Disabled postcode"
+          disabled
+          data-test="demo-postcode-disabled"
         />
       </article>
     </div>

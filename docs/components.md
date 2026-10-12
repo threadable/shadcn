@@ -195,3 +195,68 @@ The import examples use the installed registry path `@/components/blocks/<name>`
 - Dependencies: registry `@shadcn/separator` and `@shadcn/skeleton`.
 - Difference from upstream: structured multi-row loading layout built from consumer primitives.
 - Accessibility: do not expose decorative skeleton shapes as meaningful text and provide a reduced-motion-friendly loading experience.
+
+## Password block
+
+```vue
+<script setup lang="ts">
+import { ref } from "vue";
+import { PasswordBlock } from "@/components/blocks/password-block";
+const password = ref("");
+</script>
+<template>
+  <PasswordBlock v-model="password" name="password" label="Password" required />
+</template>
+```
+
+- Provide a visible `label` or an accessible name. The visibility button exposes its pressed state and controls the input; Enter and Space toggle visibility. Disabled and processing states disable both controls.
+- Props include `error`, `description`, `required`, `autocomplete` (default `new-password`), `showPasswordLabel` and `hidePasswordLabel`. Supply translated labels through those props.
+- Dependencies: npm `@lucide/vue`, `clsx`, `reka-ui`, `tailwind-merge`; registry `@shadcn/input-group` and hosted `/field`.
+- Difference from upstream: combines the field's labels and validation relationships with a password visibility toggle. Review password-manager behaviour and focus visibility in the consuming theme.
+
+## Phone input block
+
+```vue
+<script setup lang="ts">
+import { ref } from "vue";
+import { AppPhoneInput } from "@/components/blocks/phone-input-block";
+const phone = ref("");
+const country = ref("GB");
+</script>
+<template>
+  <AppPhoneInput
+    v-model="phone"
+    v-model:country-code="country"
+    name="phone"
+    label="Phone number"
+  />
+</template>
+```
+
+- `label` and `name` are required. `countryCode` is a two-letter country code. The country selector includes the country name in its accessible label. Enter opens the selector, typing filters countries, arrow keys navigate, Enter selects and focuses the phone input, and Escape closes and restores focus.
+- Text props: `placeholder`, `selectCountryLabel`, `searchCountryPlaceholder`, `noCountryFoundText`, with English defaults. `countryLocale` defaults to `en`; `fetchCountry` defaults to false and opts into the upstream external country lookup. Supply an initial country explicitly for predictable behaviour.
+- Dependencies: npm `base-vue-phone-input`, `libphonenumber-js`, `@lucide/vue`, `clsx`, `reka-ui`, `tailwind-merge`; registry `@shadcn/button`, `@shadcn/command`, `@shadcn/input`, `@shadcn/popover` and hosted `/field`.
+- Difference from upstream: adds field validation semantics, searchable country selection and bundled flags. `FlagComponent` and `flags.ts` belong to this block; they are not separate public items. The flag module contains data URLs from the original PNGs. A consumer CSP must allow `data:` image sources for flags. Flags are decorative when the country name is provided separately. Phone formatting does not establish that a number is reachable; validate submitted values on the server.
+
+## Postcode block
+
+```vue
+<script setup lang="ts">
+import { ref } from "vue";
+import { PostcodeBlock } from "@/components/blocks/postcode-block";
+const postcode = ref("");
+</script>
+<template>
+  <PostcodeBlock
+    v-model="postcode"
+    country-code="GB"
+    name="postcode"
+    label="Postcode"
+  />
+</template>
+```
+
+- Supply a visible `label` or accessible name. The input is disabled without a country; `countryCode` is normalized to uppercase. Tab follows normal input navigation. Local format errors appear after focus leaves the field or an existing value becomes invalid after a country change.
+- `invalidFormatMessage` supplies translated validation text; the English fallback includes `label` or `name`. The `error` prop takes priority. Other input props include `placeholder`, `required`, `disabled`, `processing` and `maxlength`, capped by the known country format.
+- Dependencies: npm `reka-ui`; registry hosted `/input-block`. `postcodeFormat.ts` and `formats.json` are internal files included with the block.
+- Difference from upstream: formats supported fixed patterns and checks country regexes. Country formats without supported masks remain unmasked. Format matching cannot confirm that a postcode exists; use server validation where needed and review the format dataset for your supported countries.

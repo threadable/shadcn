@@ -1,1 +1,1 @@
-export { default as PostcodeBlock } from './PostcodeBlock.vue';
+export { default as PostcodeBlock } from "./PostcodeBlock.vue";

@@ -4,6 +4,10 @@ Changes to the public registry are recorded here. Registry tags use `vMAJOR.MINO
 
 ## [Unreleased]
 
+### Added
+
+- Public `password-block`, `phone-input-block` and `postcode-block` items, with playground demos and keyboard/accessibility coverage.
+
 ### Documentation
 
 - Continue documenting public block APIs, accessibility expectations and release procedures.

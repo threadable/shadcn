@@ -1,1 +1,1 @@
-export { default as PasswordBlock } from './PasswordBlock.vue';
+export { default as PasswordBlock } from "./PasswordBlock.vue";

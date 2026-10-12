@@ -5,7 +5,7 @@ import type { CountryCode } from 'libphonenumber-js';
 import type { PrimitiveProps } from 'reka-ui';
 import { computed, nextTick, ref } from 'vue';
 import type { HTMLAttributes } from 'vue';
-import { Field } from '@/components/blocks/field';
+import { Field } from '@/registry/threadable/components/blocks/field';
 import { Button } from '@/components/ui/button';
 import {
     Command,
@@ -21,7 +21,7 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from '@/components/ui/popover';
-import { cn, guidGenerator } from '@/lib/utils';
+import { cn, guidGenerator } from '@/registry/threadable/components/utils';
 import FlagComponent from './FlagComponent.vue';
 
 interface CountryOption {

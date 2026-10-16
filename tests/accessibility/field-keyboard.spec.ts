@@ -161,3 +161,43 @@ test("processing confirmation disables its action and skips it in the tab order"
   await page.keyboard.press("Enter");
   await expect(dialog).toBeHidden();
 });
+
+test("icon actions support keyboard activation, tooltips and disabled explanations", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const action = page.locator('[data-test="demo-action-button"]');
+  await action.scrollIntoViewIfNeeded();
+  await action.focus();
+  await page.keyboard.press("Shift+Tab");
+  await page.keyboard.press("Tab");
+  await expect(action).toBeFocused();
+  await expect(page.locator('[data-slot="tooltip-content"]')).toContainText(
+    "Edit item",
+  );
+  await page.keyboard.press("Escape");
+  await expect(page.locator('[data-slot="tooltip-content"]')).toBeHidden();
+  await page.keyboard.press("Enter");
+  await expect(page.getByTestId("action-button-status")).toHaveText(
+    "Edit activated",
+  );
+  await action.press("Space");
+  await expect(page.getByTestId("button-block-status")).toHaveText(
+    "No action yet",
+  );
+  const disabled = page.locator('[data-test="demo-action-disabled"]');
+  await expect(disabled).toBeDisabled();
+  const explanation = disabled.locator('xpath=ancestor::span[@tabindex="0"]');
+  await explanation.focus();
+  await expect(page.locator('[data-slot="tooltip-content"]')).toContainText(
+    "This item is locked",
+  );
+  await explanation.press("Enter");
+  await expect(disabled).toBeDisabled();
+  await page.keyboard.press("Escape");
+  await expect(page.locator('[data-slot="tooltip-content"]')).toBeHidden();
+  await page.getByTestId("demo-action-processing-toggle").check();
+  await expect(action).toBeDisabled();
+  await page.getByTestId("demo-action-processing-toggle").uncheck();
+  await expect(action).toBeEnabled();
+});

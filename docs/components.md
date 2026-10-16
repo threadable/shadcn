@@ -298,3 +298,26 @@ const range = shallowRef<DateRange>();
 - Props include `defaultValue`, `minValue`, `maxValue`, `locale`, `dateFormat` (default `yyyy-MM-dd`), `triggerClass`, field validation props, and text props `placeholder`, `clearLabel`, `applyLabel`. The model is `DateRange | undefined`, whose endpoints use `DateValue`. `presets` and `description` slots are supported; `RangeCalendarView.vue` is an internal implementation file.
 - Dependencies: npm `@internationalized/date`, `@lucide/vue`, `@vueuse/core`, `reka-ui`, `clsx`, `tailwind-merge`; registry `@shadcn/range-calendar`, `@shadcn/button`, `@shadcn/dialog`, `@shadcn/popover` and hosted `/field`.
 - Difference from upstream: adds field validation, explicit confirmation and responsive overlays. Use a meaningful label and translated text props. Required state does not enforce native form submission rules; validate complete ranges on the server. Review calendar localization and focus in the consuming theme.
+
+## Action button block
+
+```vue
+<script setup lang="ts">
+import { Pencil } from "@lucide/vue";
+import { ActionButtonBlock } from "@/components/blocks/action-button-block";
+const emit = defineEmits<{ edit: [] }>();
+</script>
+<template>
+  <ActionButtonBlock
+    :icon="Pencil"
+    label="Edit item"
+    data-test="edit-item"
+    @click="emit('edit')"
+  />
+</template>
+```
+
+- Required props: `label`, `icon` (a Vue component) and `dataTest`. The label names the button and its tooltip; icons are decorative. Variants: `neutral` (default), `info`, `warning`, `success`, `destructive`.
+- `disabled` and `processing` disable native activation; processing displays a spinner. `disabledMessage` explains a disabled action in the tooltip. A disabled/processing wrapper is keyboard-focusable so users can reach its explanation; it does not activate the button. Enter and Space activate an enabled button; Escape dismisses its tooltip. The block provides its own tooltip provider.
+- Dependencies: registry `@shadcn/button` and `@shadcn/tooltip`; npm `@lucide/vue` and `class-variance-authority`; Vue is a framework prerequisite. Use any icon component already available in the consuming application.
+- Difference from upstream: a compact icon action with semantic colours and accessible disabled explanations, built on the upstream button and tooltip primitives. Supply specific labels; colours and icons supplement the label. Review tooltip behaviour, disabled contrast and dark theme in your application. Emits `click` with the native mouse event.

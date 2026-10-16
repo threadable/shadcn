@@ -661,6 +661,23 @@
           "type": "registry:lib"
         }
       ]
+    },
+    {
+      "name": "action-button-block",
+      "type": "registry:block",
+      "description": "An accessible icon action button with semantic variants, tooltips and disabled/processing states.",
+      "registryDependencies": ["@shadcn/button", "@shadcn/tooltip"],
+      "dependencies": ["@lucide/vue", "class-variance-authority"],
+      "files": [
+        {
+          "path": "registry/threadable/components/blocks/action-button-block/ActionButtonBlock.vue",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/threadable/components/blocks/action-button-block/index.ts",
+          "type": "registry:component"
+        }
+      ]
     }
   ]
 }

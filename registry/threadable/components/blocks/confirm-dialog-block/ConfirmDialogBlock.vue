@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import { ButtonBlock } from "@/registry/threadable/components/blocks/button-block";
+import { Field } from "@/registry/threadable/components/blocks/field";
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -14,6 +15,7 @@ withDefaults(
   defineProps<{
     open: boolean;
     processing?: boolean;
+    error?: string;
     title?: string;
     description: string;
     descriptionClass?: string;
@@ -38,8 +40,16 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <AlertDialog :open="open" :data-test="dataTest" @update:open="emit('cancel')">
-    <AlertDialogContent class="w-full">
+  <AlertDialog
+    :open="open"
+    :data-test="dataTest"
+    @update:open="!processing && emit('cancel')"
+  >
+    <AlertDialogContent
+      class="w-full"
+      @escape-key-down="processing && $event.preventDefault()"
+      @pointer-down-outside="processing && $event.preventDefault()"
+    >
       <AlertDialogHeader>
         <AlertDialogTitle>{{ title }}</AlertDialogTitle>
       </AlertDialogHeader>
@@ -51,28 +61,34 @@ const emit = defineEmits<{
         {{ description }}
       </AlertDialogDescription>
 
+      <Field
+        v-if="error"
+        :error="error"
+        role="alert"
+        aria-live="assertive"
+        :data-test="dataTest ? `${dataTest}-error` : undefined"
+      />
+
       <AlertDialogFooter>
         <AlertDialogCancel
+          :disabled="processing"
           class="cursor-pointer border-primary! bg-white! text-primary"
           :data-test="dataTest ? `${dataTest}-cancel` : undefined"
-          @click="emit('cancel')"
+          @click="!processing && emit('cancel')"
         >
           {{ cancelLabel }}
         </AlertDialogCancel>
 
-        <AlertDialogAction
-          class="cursor-pointer"
-          :disabled="processing"
+        <ButtonBlock
+          class="w-fit"
+          type="button"
+          :variant="actionVariant"
+          :label="actionLabel"
+          :processing="processing"
+          :show-gap="false"
           :data-test="dataTest ? `${dataTest}-confirm` : undefined"
-          :class="
-            actionVariant === 'destructive'
-              ? 'bg-destructive hover:bg-red-400'
-              : ''
-          "
-          @click="emit('confirm')"
-        >
-          {{ actionLabel }}
-        </AlertDialogAction>
+          @click="!processing && emit('confirm')"
+        />
       </AlertDialogFooter>
     </AlertDialogContent>
   </AlertDialog>

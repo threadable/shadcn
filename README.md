@@ -43,7 +43,7 @@ The generated index is [`public/r/registry.json`](./public/r/registry.json), and
 
 Public blocks:
 
-`button-block` · `button-link-block` · `card-block` · `checkbox-block` · `combobox-group-block` · `confirm-dialog-block` · `dropdown-menu-block` · `field` · `input-block` · `radio-block` · `select-block` · `select-group-block` · `sheet-block` · `sheet-content-block` · `skeleton-block` · `stepper-block` · `text-link-block` · `textarea-block` · `password-block` · `phone-input-block` · `postcode-block` · `calendar-block` · `range-calendar-block`
+`button-block` · `button-link-block` · `card-block` · `checkbox-block` · `combobox-group-block` · `confirm-dialog-block` · `dropdown-menu-block` · `field` · `input-block` · `radio-block` · `select-block` · `select-group-block` · `sheet-block` · `sheet-content-block` · `skeleton-block` · `stepper-block` · `text-link-block` · `textarea-block` · `password-block` · `phone-input-block` · `postcode-block` · `calendar-block` · `range-calendar-block` · `action-button-block`
 
 To inspect the available names with standard tools:
 

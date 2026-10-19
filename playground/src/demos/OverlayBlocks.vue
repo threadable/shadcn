@@ -7,6 +7,7 @@ import { SheetBlock } from "@/registry/threadable/components/blocks/sheet-block"
 import { SheetContentBlock } from "@/registry/threadable/components/blocks/sheet-content-block";
 
 const confirmOpen = ref(false);
+const confirmProcessing = ref(false);
 const sheetOpen = ref(false);
 const customSheetOpen = ref(false);
 </script>
@@ -40,8 +41,17 @@ const customSheetOpen = ref(false);
         >
           Delete item
         </button>
+        <label class="demo-checkbox-label">
+          <input
+            v-model="confirmProcessing"
+            type="checkbox"
+            data-testid="demo-confirm-processing"
+          />
+          Confirmation is processing
+        </label>
         <ConfirmDialogBlock
           :open="confirmOpen"
+          :processing="confirmProcessing"
           title="Delete item?"
           description="This action cannot be undone."
           action-label="Delete"

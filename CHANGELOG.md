@@ -4,6 +4,20 @@ Changes to the public registry are recorded here. Registry tags use `vMAJOR.MINO
 
 ## [Unreleased]
 
+### Added
+
+- Public `action-button-block` item with semantic icon variants, tooltips, processing/disabled states and keyboard-accessible disabled reasons.
+
+- `ConfirmDialogBlock` supports a `processing` boolean prop that disables its action button.
+
+- Public `calendar-block` and `range-calendar-block` items with explicit Apply/Clear actions, date bounds, text props, mobile range dialog, and keyboard/accessibility coverage.
+
+- Public `password-block`, `phone-input-block` and `postcode-block` items, with playground demos and keyboard/accessibility coverage.
+
+### Changed
+
+- Calendar text now uses `placeholder`, `clearLabel` and `applyLabel` props instead of `$t` translation keys. Range calendar rendering uses the upstream shadcn-vue primitive. Draft selections remain private until Apply; Clear removes even an initial default value.
+
 ### Documentation
 
 - Continue documenting public block APIs, accessibility expectations and release procedures.

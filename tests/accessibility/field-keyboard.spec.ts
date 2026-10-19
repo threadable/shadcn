@@ -137,7 +137,7 @@ test("range calendar selects endpoints and traps focus in its mobile dialog", as
   ).toBeDisabled();
 });
 
-test("processing confirmation disables its action and skips it in the tab order", async ({
+test("processing confirmation disables both actions and prevents Escape dismissal", async ({
   page,
 }) => {
   await page.goto("/");
@@ -148,14 +148,17 @@ test("processing confirmation disables its action and skips it in the tab order"
   const action = dialog.getByRole("button", { name: "Delete", exact: true });
   const cancel = dialog.getByRole("button", { name: "Cancel", exact: true });
   await expect(action).toBeDisabled();
-  await expect(cancel).toBeFocused();
+  await expect(cancel).toBeDisabled();
+  await expect(dialog).toBeFocused();
   await page.keyboard.press("Tab");
-  await expect(cancel).toBeFocused();
+  await expect(dialog).toBeFocused();
   await page.keyboard.press("Escape");
-  await expect(trigger).toBeFocused();
-  await page.getByTestId("demo-confirm-processing").uncheck();
+  await expect(dialog).toBeVisible();
+
+  await page.reload();
   await trigger.press("Enter");
   await expect(action).toBeEnabled();
+  await expect(cancel).toBeEnabled();
   await cancel.press("Tab");
   await expect(action).toBeFocused();
   await page.keyboard.press("Enter");

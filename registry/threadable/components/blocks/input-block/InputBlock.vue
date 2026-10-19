@@ -1,28 +1,28 @@
 <script setup lang="ts">
-import type { PrimitiveProps } from 'reka-ui';
-import type { HTMLAttributes } from 'vue';
-import { computed } from 'vue';
-import { Field } from '@/registry/threadable/components/blocks/field';
-import { Input } from '@/components/ui/input';
-import { cn, guidGenerator } from '@/registry/threadable/lib/utils';
+import type { PrimitiveProps } from "reka-ui";
+import type { HTMLAttributes } from "vue";
+import { computed } from "vue";
+import { Field } from "@/registry/threadable/components/blocks/field";
+import { Input } from "@/components/ui/input";
+import { cn, guidGenerator } from "@/registry/threadable/lib/utils";
 
 interface Props extends PrimitiveProps {
-  class?: HTMLAttributes['class'];
+  class?: HTMLAttributes["class"];
   error?: string | undefined;
   label?: string;
   description?: string;
   name: string;
   placeholder?: string;
-  type?: 'text' | 'number' | 'email' | 'password' | 'tel';
+  type?: "text" | "number" | "email" | "password" | "tel";
   inputmode?:
-    | 'none'
-    | 'text'
-    | 'tel'
-    | 'url'
-    | 'email'
-    | 'numeric'
-    | 'decimal'
-    | 'search';
+    | "none"
+    | "text"
+    | "tel"
+    | "url"
+    | "email"
+    | "numeric"
+    | "decimal"
+    | "search";
   id?: string;
   dataTest?: string;
   processing?: boolean;
@@ -37,15 +37,15 @@ interface Props extends PrimitiveProps {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  type: 'text',
+  type: "text",
   disabled: false,
   showError: true,
   showGap: true,
   maxlength: 255,
-  autocomplete: 'off',
+  autocomplete: "off",
 });
 
-const generatedId = 'input-' + guidGenerator();
+const generatedId = "input-" + guidGenerator();
 const inputId = computed(() => props.id || generatedId);
 const labelId = computed(() => `${inputId.value}-label`);
 const descriptionId = computed(() =>
@@ -56,15 +56,14 @@ const errorId = computed(() =>
 );
 const describedBy = computed(
   () =>
-    [descriptionId.value, errorId.value].filter(Boolean).join(' ') ||
-    undefined,
+    [descriptionId.value, errorId.value].filter(Boolean).join(" ") || undefined,
 );
 
-const model = defineModel<any | null>('modelValue');
+const model = defineModel<any | null>("modelValue");
 
 function enforceMinMax(event: Event): void {
   if (
-    props.type !== 'number' ||
+    props.type !== "number" ||
     (props.min !== undefined &&
       props.max !== undefined &&
       props.min > props.max)
@@ -74,7 +73,7 @@ function enforceMinMax(event: Event): void {
 
   const input = event.target;
 
-  if (!(input instanceof HTMLInputElement) || input.value.trim() === '') {
+  if (!(input instanceof HTMLInputElement) || input.value.trim() === "") {
     return;
   }
 

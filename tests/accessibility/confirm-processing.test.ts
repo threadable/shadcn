@@ -22,11 +22,14 @@ describe("confirmation processing state", () => {
         '[data-test="confirm-cancel"]',
       )!;
       expect(action.disabled).toBe(true);
-      expect(cancel.disabled).toBe(false);
+      expect(cancel.disabled).toBe(true);
       action.click();
+      cancel.click();
       expect(wrapper.emitted("confirm")).toBeUndefined();
+      expect(wrapper.emitted("cancel")).toBeUndefined();
       await wrapper.setProps({ processing: false });
       expect(action.disabled).toBe(false);
+      expect(cancel.disabled).toBe(false);
       action.click();
       expect(wrapper.emitted("confirm")).toHaveLength(1);
     } finally {

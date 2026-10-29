@@ -80,7 +80,7 @@ const emit = defineEmits<{
         </AlertDialogCancel>
 
         <ButtonBlock
-          class="w-fit"
+          class="w-full md:w-fit"
           type="button"
           :variant="actionVariant"
           :label="actionLabel"

@@ -7,6 +7,14 @@ export default defineConfig({
   root: "playground",
   plugins: [vue(), tailwindcss()],
   resolve: {
+    dedupe: [
+      "vue",
+      "reka-ui",
+      "@lucide/vue",
+      "@vueuse/core",
+      "@vueuse/shared",
+      "@internationalized/date",
+    ],
     alias: [
       {
         find: "@/registry/threadable/lib",

@@ -1,0 +1,1731 @@
+[
+  {
+    "iso": "AF",
+    "country": "Afghanistan",
+    "sovereign": "AF",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "AX",
+    "country": "Åland",
+    "sovereign": "FI",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "AL",
+    "country": "Albania",
+    "sovereign": "AL",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "DZ",
+    "country": "Algeria",
+    "sovereign": "DZ",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "AS",
+    "country": "American Samoa",
+    "sovereign": "US",
+    "zip format": "96799",
+    "regex": "96799"
+  },
+  {
+    "iso": "AD",
+    "country": "Andorra",
+    "sovereign": "AD",
+    "zip format": "AD999",
+    "regex": "AD\\d{3}"
+  },
+  {
+    "iso": "AO",
+    "country": "Angola",
+    "sovereign": "AO",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "AI",
+    "country": "Anguilla",
+    "sovereign": "GB",
+    "zip format": "AI-2640",
+    "regex": "AI\\-\\d{4}"
+  },
+  {
+    "iso": "AG",
+    "country": "Antigua and Barbuda",
+    "sovereign": "AG",
+    "zip format": "–",
+    "regex": "–"
+  },
+  {
+    "iso": "AR",
+    "country": "Argentina",
+    "sovereign": "AR",
+    "zip format": "A9999 AAA",
+    "regex": "[A-Z]\\d{4}\\s[A-Z]{3}"
+  },
+  {
+    "iso": "AM",
+    "country": "Armenia",
+    "sovereign": "AM",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "AW",
+    "country": "Aruba",
+    "sovereign": "NL",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "AU",
+    "country": "Australia",
+    "sovereign": "AU",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "AT",
+    "country": "Austria",
+    "sovereign": "AT",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "AZ",
+    "country": "Azerbaijan",
+    "sovereign": "AZ",
+    "zip format": "AZ 9999",
+    "regex": "AZ\\s\\d{4}"
+  },
+  {
+    "iso": "BS",
+    "country": "Bahamas",
+    "sovereign": "BS",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "BH",
+    "country": "Bahrain",
+    "sovereign": "BH",
+    "zip format": "[9]999",
+    "regex": "\\d{3,4}"
+  },
+  {
+    "iso": "BD",
+    "country": "Bangladesh",
+    "sovereign": "BD",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "BB",
+    "country": "Barbados",
+    "sovereign": "BB",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "BY",
+    "country": "Belarus",
+    "sovereign": "BY",
+    "zip format": "299999",
+    "regex": "2\\d{5}"
+  },
+  {
+    "iso": "BE",
+    "country": "Belgium",
+    "sovereign": "BE",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "BZ",
+    "country": "Belize",
+    "sovereign": "BZ",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "BJ",
+    "country": "Benin",
+    "sovereign": "BJ",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "BM",
+    "country": "Bermuda",
+    "sovereign": "GB",
+    "zip format": "AA 99",
+    "regex": "[A-Z]{2}\\s[\\dA-Z]{2}"
+  },
+  {
+    "iso": "BT",
+    "country": "Bhutan",
+    "sovereign": "BT",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "BO",
+    "country": "Bolivia",
+    "sovereign": "BO",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "BA",
+    "country": "Bosnia and Herzegovina",
+    "sovereign": "BA",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "BW",
+    "country": "Botswana",
+    "sovereign": "BW",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "BV",
+    "country": "Bouvet Island",
+    "sovereign": "NO",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "BR",
+    "country": "Brazil",
+    "sovereign": "BR",
+    "zip format": "99999-999",
+    "regex": "\\d{5}\\-\\d{3}"
+  },
+  {
+    "iso": "IO",
+    "country": "British Indian Ocean Territory",
+    "sovereign": "GB",
+    "zip format": "BBND 1ZZ",
+    "regex": "BBND 1ZZ"
+  },
+  {
+    "iso": "VG",
+    "country": "British Virgin Islands",
+    "sovereign": "GB",
+    "zip format": "VG9999",
+    "regex": "VG\\d{4}"
+  },
+  {
+    "iso": "BN",
+    "country": "Brunei Darussalam",
+    "sovereign": "BN",
+    "zip format": "AA9999",
+    "regex": "[A-Z]{2}\\d{4}"
+  },
+  {
+    "iso": "BG",
+    "country": "Bulgaria",
+    "sovereign": "BG",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "BF",
+    "country": "Burkina Faso",
+    "sovereign": "BF",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "BI",
+    "country": "Burundi",
+    "sovereign": "BI",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "KH",
+    "country": "Cambodia",
+    "sovereign": "KH",
+    "zip format": "999999",
+    "regex": "\\d{6}"
+  },
+  {
+    "iso": "CM",
+    "country": "Cameroon",
+    "sovereign": "CM",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "CA",
+    "country": "Canada",
+    "sovereign": "CA",
+    "zip format": "A9A 9A9",
+    "regex": "[A-Z]\\d[A-Z]\\s\\d[A-Z]\\d"
+  },
+  {
+    "iso": "CV",
+    "country": "Cape Verde",
+    "sovereign": "CV",
+    "zip format": "9999-999",
+    "regex": "\\d{4}-\\d{3}"
+  },
+  {
+    "iso": "KY",
+    "country": "Cayman Islands",
+    "sovereign": "GB",
+    "zip format": "KY9-9999",
+    "regex": "KY\\d\\-\\d{4}"
+  },
+  {
+    "iso": "CF",
+    "country": "Central African Republic",
+    "sovereign": "CF",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "TD",
+    "country": "Chad",
+    "sovereign": "TD",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "CL",
+    "country": "Chile",
+    "sovereign": "CL",
+    "zip format": "9999999",
+    "regex": "\\d{7}"
+  },
+  {
+    "iso": "CN",
+    "country": "China",
+    "sovereign": "CN",
+    "zip format": "999999",
+    "regex": "\\d{6}"
+  },
+  {
+    "iso": "CX",
+    "country": "Christmas Island",
+    "sovereign": "AU",
+    "zip format": "6798",
+    "regex": "6798"
+  },
+  {
+    "iso": "CC",
+    "country": "Cocos (Keeling) Islands",
+    "sovereign": "AU",
+    "zip format": "6799",
+    "regex": "6799"
+  },
+  {
+    "iso": "CO",
+    "country": "Colombia",
+    "sovereign": "CO",
+    "zip format": "999999",
+    "regex": "\\d{6}"
+  },
+  {
+    "iso": "KM",
+    "country": "Comoros",
+    "sovereign": "KM",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "CG",
+    "country": "Congo-Brazzaville",
+    "sovereign": "CG",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "CD",
+    "country": "Congo, Democratic Republic",
+    "sovereign": "CD",
+    "zip format": "9999999",
+    "regex": "\\d{7}"
+  },
+  {
+    "iso": "CK",
+    "country": "Cook Islands",
+    "sovereign": "NZ",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "CR",
+    "country": "Costa Rica",
+    "sovereign": "CR",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "CI",
+    "country": "Côte d'Ivoire",
+    "sovereign": "CI",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "HR",
+    "country": "Croatia",
+    "sovereign": "HR",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "CU",
+    "country": "Cuba",
+    "sovereign": "CU",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "CW",
+    "country": "Curaçao",
+    "sovereign": "NL",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "CY",
+    "country": "Cyprus",
+    "sovereign": "CY",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "CZ",
+    "country": "Czechia",
+    "sovereign": "CZ",
+    "zip format": "999 99",
+    "regex": "\\d{3}\\s\\d{2}"
+  },
+  {
+    "iso": "DK",
+    "country": "Denmark",
+    "sovereign": "DK",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "DJ",
+    "country": "Djibouti",
+    "sovereign": "DJ",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "DM",
+    "country": "Dominica",
+    "sovereign": "DM",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "DO",
+    "country": "Dominican Republic",
+    "sovereign": "DO",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "EC",
+    "country": "Ecuador",
+    "sovereign": "EC",
+    "zip format": "999999",
+    "regex": "\\d{6}"
+  },
+  {
+    "iso": "EG",
+    "country": "Egypt",
+    "sovereign": "EG",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "SV",
+    "country": "El Salvador",
+    "sovereign": "SV",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "GQ",
+    "country": "Equatorial Guinea",
+    "sovereign": "GQ",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "ER",
+    "country": "Eritrea",
+    "sovereign": "ER",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "EE",
+    "country": "Estonia",
+    "sovereign": "EE",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "SZ",
+    "country": "Eswatini",
+    "sovereign": "SZ",
+    "zip format": "A999",
+    "regex": "[A-Z]\\d{3}"
+  },
+  {
+    "iso": "ET",
+    "country": "Ethiopia",
+    "sovereign": "ET",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "FK",
+    "country": "Falkland Islands",
+    "sovereign": "GB",
+    "zip format": "FIQQ 1ZZ",
+    "regex": "FIQQ 1ZZ"
+  },
+  {
+    "iso": "FO",
+    "country": "Faroe Islands",
+    "sovereign": "DK",
+    "zip format": "999",
+    "regex": "\\d{3}"
+  },
+  {
+    "iso": "FJ",
+    "country": "Fiji",
+    "sovereign": "FJ",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "FI",
+    "country": "Finland",
+    "sovereign": "FI",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "FR",
+    "country": "France",
+    "sovereign": "FR",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "GF",
+    "country": "French Guiana",
+    "sovereign": "FR",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "PF",
+    "country": "French Polynesia",
+    "sovereign": "FR",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "TF",
+    "country": "French Southern Territories",
+    "sovereign": "FR",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "GA",
+    "country": "Gabon",
+    "sovereign": "GA",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "GM",
+    "country": "Gambia",
+    "sovereign": "GM",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "GE",
+    "country": "Georgia",
+    "sovereign": "GE",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "DE",
+    "country": "Germany",
+    "sovereign": "DE",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "GH",
+    "country": "Ghana",
+    "sovereign": "GH",
+    "zip format": "AA-99999-9999",
+    "regex": "[A-Z][A-Z0-9]\\-\\d{5}\\-\\d{4}"
+  },
+  {
+    "iso": "GI",
+    "country": "Gibraltar",
+    "sovereign": "GB",
+    "zip format": "GX11 1AA",
+    "regex": "GX11 1AA"
+  },
+  {
+    "iso": "GR",
+    "country": "Greece",
+    "sovereign": "GR",
+    "zip format": "999 99",
+    "regex": "\\d{3}\\s\\d{2}"
+  },
+  {
+    "iso": "GL",
+    "country": "Greenland",
+    "sovereign": "DK",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "GD",
+    "country": "Grenada",
+    "sovereign": "GD",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "GP",
+    "country": "Guadeloupe",
+    "sovereign": "FR",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "GU",
+    "country": "Guam",
+    "sovereign": "US",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "GT",
+    "country": "Guatemala",
+    "sovereign": "GT",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "GG",
+    "country": "Guernsey",
+    "sovereign": "GB",
+    "zip format": "GY99 9AA",
+    "regex": "GY\\d{1,2}\\s\\d[A-Z]{2}"
+  },
+  {
+    "iso": "GN",
+    "country": "Guinea",
+    "sovereign": "GN",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "GW",
+    "country": "Guinea-Bissau",
+    "sovereign": "GW",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "GY",
+    "country": "Guyana",
+    "sovereign": "GY",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "HT",
+    "country": "Haiti",
+    "sovereign": "HT",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "HM",
+    "country": "Heard and McDonald Islands",
+    "sovereign": "AU",
+    "zip format": "7151",
+    "regex": "7151"
+  },
+  {
+    "iso": "HN",
+    "country": "Honduras",
+    "sovereign": "HN",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "HK",
+    "country": "Hong Kong",
+    "sovereign": "CN",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "HU",
+    "country": "Hungary",
+    "sovereign": "HU",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "IS",
+    "country": "Iceland",
+    "sovereign": "IS",
+    "zip format": "999",
+    "regex": "\\d{3}"
+  },
+  {
+    "iso": "IN",
+    "country": "India",
+    "sovereign": "IN",
+    "zip format": "999999",
+    "regex": "\\d{6}"
+  },
+  {
+    "iso": "ID",
+    "country": "Indonesia",
+    "sovereign": "ID",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "IR",
+    "country": "Iran",
+    "sovereign": "IR",
+    "zip format": "9999999999",
+    "regex": "\\d{10}"
+  },
+  {
+    "iso": "IQ",
+    "country": "Iraq",
+    "sovereign": "IQ",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "IE",
+    "country": "Ireland",
+    "sovereign": "IE",
+    "zip format": "A99 AAAA",
+    "regex": "[A-Z](\\d{2}|6W)\\s[A-Z0-9]{4}"
+  },
+  {
+    "iso": "IM",
+    "country": "Isle of Man",
+    "sovereign": "GB",
+    "zip format": "IM99 9AA",
+    "regex": "IM\\d{1,2}\\s\\d[A-Z]{2}"
+  },
+  {
+    "iso": "IL",
+    "country": "Israel",
+    "sovereign": "IL",
+    "zip format": "99999 99",
+    "regex": "\\d{5}\\s\\d{2}"
+  },
+  {
+    "iso": "IT",
+    "country": "Italy",
+    "sovereign": "IT",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "JM",
+    "country": "Jamaica",
+    "sovereign": "JM",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "JP",
+    "country": "Japan",
+    "sovereign": "JP",
+    "zip format": "999-9999",
+    "regex": "\\d{3}\\-\\d{4}"
+  },
+  {
+    "iso": "JE",
+    "country": "Jersey",
+    "sovereign": "GB",
+    "zip format": "JE9 9AA",
+    "regex": "JE\\d\\s\\d[A-Z]{2}"
+  },
+  {
+    "iso": "JO",
+    "country": "Jordan",
+    "sovereign": "JO",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "KZ",
+    "country": "Kazakhstan",
+    "sovereign": "KZ",
+    "zip format": "A99A9A9",
+    "regex": "[A-Z]\\d{2}[A-Z]\\d[A-Z]\\d"
+  },
+  {
+    "iso": "KE",
+    "country": "Kenya",
+    "sovereign": "KE",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "KI",
+    "country": "Kiribati",
+    "sovereign": "KI",
+    "zip format": "KI0999",
+    "regex": "KI0\\d{3}"
+  },
+  {
+    "iso": "XK",
+    "country": "Kosovo",
+    "sovereign": "XK",
+    "zip format": "99999",
+    "regex": ""
+  },
+  {
+    "iso": "KW",
+    "country": "Kuwait",
+    "sovereign": "KW",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "KG",
+    "country": "Kyrgyzstan",
+    "sovereign": "KG",
+    "zip format": "999999",
+    "regex": "\\d{6}"
+  },
+  {
+    "iso": "LA",
+    "country": "Laos",
+    "sovereign": "LA",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "LV",
+    "country": "Latvia",
+    "sovereign": "LV",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "LB",
+    "country": "Lebanon",
+    "sovereign": "LB",
+    "zip format": "9999 9999",
+    "regex": "\\d{4}\\s\\d{4}"
+  },
+  {
+    "iso": "LS",
+    "country": "Lesotho",
+    "sovereign": "LS",
+    "zip format": "999",
+    "regex": "\\d{3}"
+  },
+  {
+    "iso": "LR",
+    "country": "Liberia",
+    "sovereign": "LR",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "LY",
+    "country": "Libya",
+    "sovereign": "LY",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "LI",
+    "country": "Liechtenstein",
+    "sovereign": "LI",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "LT",
+    "country": "Lithuania",
+    "sovereign": "LT",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "LU",
+    "country": "Luxembourg",
+    "sovereign": "LU",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "MO",
+    "country": "Macau",
+    "sovereign": "CN",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "MG",
+    "country": "Madagascar",
+    "sovereign": "MG",
+    "zip format": "999",
+    "regex": "\\d{3}"
+  },
+  {
+    "iso": "MW",
+    "country": "Malawi",
+    "sovereign": "MW",
+    "zip format": "999999",
+    "regex": "\\d{6}"
+  },
+  {
+    "iso": "MY",
+    "country": "Malaysia",
+    "sovereign": "MY",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "MV",
+    "country": "Maldives",
+    "sovereign": "MV",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "ML",
+    "country": "Mali",
+    "sovereign": "ML",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "MT",
+    "country": "Malta",
+    "sovereign": "MT",
+    "zip format": "AAA 9999",
+    "regex": "[A-Z]{2,3}\\s\\d{2,4}"
+  },
+  {
+    "iso": "MH",
+    "country": "Marshall Islands",
+    "sovereign": "US",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "MQ",
+    "country": "Martinique",
+    "sovereign": "FR",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "MR",
+    "country": "Mauritania",
+    "sovereign": "MR",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "MU",
+    "country": "Mauritius",
+    "sovereign": "MU",
+    "zip format": "99999",
+    "regex": "[\\dR]\\d{3,4}"
+  },
+  {
+    "iso": "YT",
+    "country": "Mayotte",
+    "sovereign": "FR",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "MX",
+    "country": "Mexico",
+    "sovereign": "MX",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "FM",
+    "country": "Micronesia",
+    "sovereign": "US",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "UM",
+    "country": "Minor Outlying Islands",
+    "sovereign": "US",
+    "zip format": "96898",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "MD",
+    "country": "Moldova",
+    "sovereign": "MD",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "MC",
+    "country": "Monaco",
+    "sovereign": "MC",
+    "zip format": "98000",
+    "regex": "9800\\d"
+  },
+  {
+    "iso": "MN",
+    "country": "Mongolia",
+    "sovereign": "MN",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "ME",
+    "country": "Montenegro",
+    "sovereign": "ME",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "MS",
+    "country": "Montserrat",
+    "sovereign": "GB",
+    "zip format": "MSR9999",
+    "regex": "MSR\\d{4}"
+  },
+  {
+    "iso": "MA",
+    "country": "Morocco",
+    "sovereign": "MA",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "MZ",
+    "country": "Mozambique",
+    "sovereign": "MZ",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "MM",
+    "country": "Myanmar",
+    "sovereign": "MM",
+    "zip format": "9999999",
+    "regex": "\\d{7}"
+  },
+  {
+    "iso": "NA",
+    "country": "Namibia",
+    "sovereign": "NA",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "NR",
+    "country": "Nauru",
+    "sovereign": "NR",
+    "zip format": "NRU 68",
+    "regex": "NRU 68"
+  },
+  {
+    "iso": "NP",
+    "country": "Nepal",
+    "sovereign": "NP",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "NL",
+    "country": "Netherlands",
+    "sovereign": "NL",
+    "zip format": "9999 AA",
+    "regex": "\\d{4}\\s[A-Z]{2}"
+  },
+  {
+    "iso": "NC",
+    "country": "New Caledonia",
+    "sovereign": "FR",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "NZ",
+    "country": "New Zealand",
+    "sovereign": "NZ",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "NI",
+    "country": "Nicaragua",
+    "sovereign": "NI",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "NE",
+    "country": "Niger",
+    "sovereign": "NE",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "NG",
+    "country": "Nigeria",
+    "sovereign": "NG",
+    "zip format": "999999",
+    "regex": "\\d{6}"
+  },
+  {
+    "iso": "NU",
+    "country": "Niue",
+    "sovereign": "NZ",
+    "zip format": "9974",
+    "regex": "9974"
+  },
+  {
+    "iso": "NF",
+    "country": "Norfolk Island",
+    "sovereign": "AU",
+    "zip format": "2899",
+    "regex": "28\\d{2}"
+  },
+  {
+    "iso": "KP",
+    "country": "North Korea",
+    "sovereign": "KP",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "MP",
+    "country": "Northern Mariana Islands",
+    "sovereign": "US",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "NO",
+    "country": "Norway",
+    "sovereign": "NO",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "OM",
+    "country": "Oman",
+    "sovereign": "OM",
+    "zip format": "999",
+    "regex": "\\d{3}"
+  },
+  {
+    "iso": "PK",
+    "country": "Pakistan",
+    "sovereign": "PK",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "PW",
+    "country": "Palau",
+    "sovereign": "US",
+    "zip format": "96999",
+    "regex": "969\\d{2}"
+  },
+  {
+    "iso": "PS",
+    "country": "Palestine",
+    "sovereign": "PS",
+    "zip format": "P999 9999",
+    "regex": "P\\d{3}\\s\\d{4}"
+  },
+  {
+    "iso": "PA",
+    "country": "Panama",
+    "sovereign": "PA",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "PG",
+    "country": "Papua New Guinea",
+    "sovereign": "PG",
+    "zip format": "999",
+    "regex": "\\d{3}"
+  },
+  {
+    "iso": "PY",
+    "country": "Paraguay",
+    "sovereign": "PY",
+    "zip format": "999999",
+    "regex": "\\d{6}"
+  },
+  {
+    "iso": "PE",
+    "country": "Peru",
+    "sovereign": "PE",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "PH",
+    "country": "Philippines",
+    "sovereign": "PH",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "PN",
+    "country": "Pitcairn Islands",
+    "sovereign": "GB",
+    "zip format": "PCRN 1ZZ",
+    "regex": "PCRN 1ZZ"
+  },
+  {
+    "iso": "PL",
+    "country": "Poland",
+    "sovereign": "PL",
+    "zip format": "99-999",
+    "regex": "\\d{2}\\-\\d{3}"
+  },
+  {
+    "iso": "PT",
+    "country": "Portugal",
+    "sovereign": "PT",
+    "zip format": "9999-999",
+    "regex": "\\d{4}\\-\\d{3}"
+  },
+  {
+    "iso": "PR",
+    "country": "Puerto Rico",
+    "sovereign": "US",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "QA",
+    "country": "Qatar",
+    "sovereign": "QA",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "MK",
+    "country": "Republic of North Macedonia",
+    "sovereign": "MK",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "RE",
+    "country": "Réunion",
+    "sovereign": "FR",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "RO",
+    "country": "Romania",
+    "sovereign": "RO",
+    "zip format": "999999",
+    "regex": "\\d{6}"
+  },
+  {
+    "iso": "RU",
+    "country": "Russia",
+    "sovereign": "RU",
+    "zip format": "999999",
+    "regex": "\\d{6}"
+  },
+  {
+    "iso": "RW",
+    "country": "Rwanda",
+    "sovereign": "RW",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "BL",
+    "country": "Saint Barthélemy",
+    "sovereign": "FR",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "SH",
+    "country": "Saint Helena, Ascension and Tristan da Cunha",
+    "sovereign": "GB",
+    "zip format": "AAAA 1ZZ",
+    "regex": "[A-Z]{4}\\s1ZZ"
+  },
+  {
+    "iso": "KN",
+    "country": "Saint Kitts and Nevis",
+    "sovereign": "KN",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "LC",
+    "country": "Saint Lucia",
+    "sovereign": "LC",
+    "zip format": "LC99 999",
+    "regex": "LC\\d{2}\\s\\d{3}"
+  },
+  {
+    "iso": "MF",
+    "country": "Saint Martin",
+    "sovereign": "FR",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "PM",
+    "country": "Saint Pierre and Miquelon",
+    "sovereign": "FR",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "VC",
+    "country": "Saint Vincent and the Grenadines",
+    "sovereign": "VC",
+    "zip format": "VC9999",
+    "regex": "VC\\d{4}"
+  },
+  {
+    "iso": "WS",
+    "country": "Samoa",
+    "sovereign": "WS",
+    "zip format": "WS9999",
+    "regex": "WS\\d{4}"
+  },
+  {
+    "iso": "SM",
+    "country": "San Marino",
+    "sovereign": "SM",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "ST",
+    "country": "São Tomé and Príncipe",
+    "sovereign": "ST",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "SA",
+    "country": "Saudi Arabia",
+    "sovereign": "SA",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "SN",
+    "country": "Senegal",
+    "sovereign": "SN",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "RS",
+    "country": "Serbia",
+    "sovereign": "RS",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "SC",
+    "country": "Seychelles",
+    "sovereign": "SC",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "SL",
+    "country": "Sierra Leone",
+    "sovereign": "SL",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "SG",
+    "country": "Singapore",
+    "sovereign": "SG",
+    "zip format": "999999",
+    "regex": "\\d{6}"
+  },
+  {
+    "iso": "SX",
+    "country": "Sint Maarten",
+    "sovereign": "NL",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "SK",
+    "country": "Slovakia",
+    "sovereign": "SK",
+    "zip format": "999 99",
+    "regex": "\\d{3}\\s\\d{2}"
+  },
+  {
+    "iso": "SI",
+    "country": "Slovenia",
+    "sovereign": "SI",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "SB",
+    "country": "Solomon Islands",
+    "sovereign": "SB",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "SO",
+    "country": "Somalia",
+    "sovereign": "SO",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "ZA",
+    "country": "South Africa",
+    "sovereign": "ZA",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "GS",
+    "country": "South Georgia and Sandwich",
+    "sovereign": "GB",
+    "zip format": "SIQQ 1ZZ",
+    "regex": "SIQQ 1ZZ"
+  },
+  {
+    "iso": "KR",
+    "country": "South Korea",
+    "sovereign": "KR",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "SS",
+    "country": "South Sudan",
+    "sovereign": "SS",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "ES",
+    "country": "Spain",
+    "sovereign": "ES",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "LK",
+    "country": "Sri Lanka",
+    "sovereign": "LK",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "SD",
+    "country": "Sudan",
+    "sovereign": "SD",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "SR",
+    "country": "Suriname",
+    "sovereign": "SR",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "SJ",
+    "country": "Svalbard and Jan Mayen",
+    "sovereign": "NO",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "SE",
+    "country": "Sweden",
+    "sovereign": "SE",
+    "zip format": "999 99",
+    "regex": "\\d{3}\\s\\d{2}"
+  },
+  {
+    "iso": "CH",
+    "country": "Switzerland",
+    "sovereign": "CH",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "SY",
+    "country": "Syria",
+    "sovereign": "SY",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "TW",
+    "country": "Taiwan",
+    "sovereign": "CN",
+    "zip format": "999999",
+    "regex": "\\d{6}"
+  },
+  {
+    "iso": "TJ",
+    "country": "Tajikistan",
+    "sovereign": "TJ",
+    "zip format": "999999",
+    "regex": "\\d{6}"
+  },
+  {
+    "iso": "TZ",
+    "country": "Tanzania",
+    "sovereign": "TZ",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "TH",
+    "country": "Thailand",
+    "sovereign": "TH",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "TL",
+    "country": "Timor-Leste",
+    "sovereign": "TL",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "TG",
+    "country": "Togo",
+    "sovereign": "TG",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "TK",
+    "country": "Tokelau",
+    "sovereign": "NZ",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "TO",
+    "country": "Tonga",
+    "sovereign": "TO",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "TT",
+    "country": "Trinidad and Tobago",
+    "sovereign": "TT",
+    "zip format": "999999",
+    "regex": "\\d{6}"
+  },
+  {
+    "iso": "TN",
+    "country": "Tunisia",
+    "sovereign": "TN",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "TR",
+    "country": "Türkiye",
+    "sovereign": "TR",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "TM",
+    "country": "Turkmenistan",
+    "sovereign": "TM",
+    "zip format": "999999",
+    "regex": "\\d{6}"
+  },
+  {
+    "iso": "TC",
+    "country": "Turks and Caicos Islands",
+    "sovereign": "GB",
+    "zip format": "TKCA 1ZZ",
+    "regex": "TKCA 1ZZ"
+  },
+  {
+    "iso": "TV",
+    "country": "Tuvalu",
+    "sovereign": "TV",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "VI",
+    "country": "U.S. Virgin Islands",
+    "sovereign": "US",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "UG",
+    "country": "Uganda",
+    "sovereign": "UG",
+    "zip format": "99999",
+    "regex": ""
+  },
+  {
+    "iso": "UA",
+    "country": "Ukraine",
+    "sovereign": "UA",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "AE",
+    "country": "United Arab Emirates",
+    "sovereign": "AE",
+    "zip format": "–",
+    "regex": "–"
+  },
+  {
+    "iso": "GB",
+    "country": "United Kingdom",
+    "sovereign": "GB",
+    "zip format": "AA9 9AA",
+    "regex": "[A-Z]{1,2}[0-9][A-Z0-9]?\\s[0-9][A-Z]{2}"
+  },
+  {
+    "iso": "US",
+    "country": "United States",
+    "sovereign": "US",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "UY",
+    "country": "Uruguay",
+    "sovereign": "UY",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "UZ",
+    "country": "Uzbekistan",
+    "sovereign": "UZ",
+    "zip format": "999999",
+    "regex": "\\d{6}"
+  },
+  {
+    "iso": "VU",
+    "country": "Vanuatu",
+    "sovereign": "VU",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "VA",
+    "country": "Vatican",
+    "sovereign": "VA",
+    "zip format": "120",
+    "regex": "120"
+  },
+  {
+    "iso": "VE",
+    "country": "Venezuela",
+    "sovereign": "VE",
+    "zip format": "9999",
+    "regex": "\\d{4}"
+  },
+  {
+    "iso": "VN",
+    "country": "Vietnam",
+    "sovereign": "VN",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "WF",
+    "country": "Wallis and Futuna",
+    "sovereign": "FR",
+    "zip format": "99999",
+    "regex": "\\d{5}"
+  },
+  {
+    "iso": "YE",
+    "country": "Yemen",
+    "sovereign": "YE",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "ZM",
+    "country": "Zambia",
+    "sovereign": "ZM",
+    "zip format": "–",
+    "regex": ""
+  },
+  {
+    "iso": "ZW",
+    "country": "Zimbabwe",
+    "sovereign": "ZW",
+    "zip format": "–",
+    "regex": ""
+  }
+]

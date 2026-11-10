@@ -125,7 +125,7 @@ function enforceMinMax(event: Event): void {
       :aria-placeholder="placeholder"
       :aria-describedby="describedBy"
       :aria-errormessage="errorId"
-      class="w-full border-primary bg-white! focus-visible:border-primary focus-visible:ring-[2px] focus-visible:ring-primary/20! disabled:bg-gray-100! disabled:text-black/50 disabled:opacity-100"
+      class="w-full border-primary bg-white! text-sm! focus-visible:border-primary focus-visible:ring-[2px] focus-visible:ring-primary/20! disabled:bg-gray-100! disabled:text-black/50 disabled:opacity-100"
       :aria-invalid="error ? 'true' : 'false'"
       :aria-required="required ? 'true' : undefined"
       :maxlength="maxlength"

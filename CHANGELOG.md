@@ -6,6 +6,8 @@ Changes to the public registry are recorded here. Registry tags use `vMAJOR.MINO
 
 ### Added
 
+- `Field.errorContent` accepts a Vue component or VNode, including interactive error content forwarded through field-based blocks without slot adapters.
+
 - Public `action-button-block` item with semantic icon variants, tooltips, processing/disabled states and keyboard-accessible disabled reasons.
 
 - `ConfirmDialogBlock` supports a `processing` boolean prop that disables its action button.
@@ -15,6 +17,8 @@ Changes to the public registry are recorded here. Registry tags use `vMAJOR.MINO
 - Public `password-block`, `phone-input-block` and `postcode-block` items, with playground demos and keyboard/accessibility coverage.
 
 ### Changed
+
+- Field errors and `InputBlock` input text now use `text-sm` on mobile and desktop. Consumers relying on the previous mobile typography should review their form layouts.
 
 - Calendar text now uses `placeholder`, `clearLabel` and `applyLabel` props instead of `$t` translation keys. Range calendar rendering uses the upstream shadcn-vue primitive. Draft selections remain private until Apply; Clear removes even an initial default value.
 

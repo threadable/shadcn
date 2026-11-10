@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import type { HTMLAttributes } from "vue";
+import type { Component, HTMLAttributes, VNode } from "vue";
 import { cn } from "@/registry/threadable/lib/utils";
 import {
   Field,
@@ -14,6 +14,7 @@ import type { PrimitiveProps } from "reka-ui";
 interface Props extends PrimitiveProps {
   class?: HTMLAttributes["class"];
   error?: string | undefined;
+  errorContent?: Component | VNode;
   label?: string;
   description?: string | undefined;
   id?: string;
@@ -50,9 +51,14 @@ const fieldId = computed(() => props.id || generatedId);
         v-if="showError && error"
         :id="errorId"
         :errors="[error]"
-        class="text-xs md:text-sm"
+        class="text-sm"
         :aria-errormessage="error"
-      />
+      >
+        <component v-if="errorContent" :is="errorContent" />
+        <template v-else>
+          {{ error }}
+        </template>
+      </FieldError>
     </div>
   </Field>
 </template>

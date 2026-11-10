@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, shallowRef } from "vue";
+import { h, ref, shallowRef } from "vue";
 import { CalendarDate } from "@internationalized/date";
 import type { DateValue } from "@internationalized/date";
 import type { DateRange } from "reka-ui";
@@ -34,6 +34,19 @@ const calendarRange = shallowRef<DateRange | undefined>({
 });
 const calendarMin = new CalendarDate(2026, 10, 1);
 const calendarMax = new CalendarDate(2026, 12, 31);
+
+const customErrorContent = h("span", [
+  "This value is already in use. ",
+  h(
+    "a",
+    {
+      href: "mailto:support@example.com",
+      class: "underline",
+      "data-test": "demo-error-content-link",
+    },
+    "Contact support",
+  ),
+]);
 
 const email = ref("");
 const notes = ref("");
@@ -108,6 +121,14 @@ const groupedItems = [
           error="Email is required"
           data-test="demo-input"
           required
+        />
+        <InputBlock
+          id="demo-custom-error"
+          name="custom-error-email"
+          label="Email with support link"
+          error="This value is already in use. Contact support"
+          :error-content="customErrorContent"
+          data-test="demo-custom-error-input"
         />
         <InputBlock
           id="demo-input-disabled"

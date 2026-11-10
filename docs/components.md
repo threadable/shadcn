@@ -15,10 +15,38 @@ The import examples use the installed registry path `@/components/blocks/<name>`
 - Import and usage: `import { Field } from "@/components/blocks/field"`; compose `<Field id="email" label="Email address" error="Email is required"><Input id="email" /></Field>`.
 - Accessible text: provide a meaningful label; use `description` for instructions and `error` for actionable validation text. The control ID must match the field ID when composing manually.
 - Keyboard: the block is a semantic wrapper; its child control keeps native or primitive keyboard behaviour.
-- Important props/events: `id`, `@shadcn/label`, `description`, `error`, `required`, `disabled`, `class`; child controls and slots remain consumer-owned.
+- Important props/events: `id`, `@shadcn/label`, `description`, `error`, `errorContent`, `required`, `disabled`, `class`; child controls and slots remain consumer-owned.
 - Dependencies: npm `@vueuse/core`, `class-variance-authority`, `reka-ui`; registry `@shadcn/separator` and the block's internal field support files.
 - Difference from upstream: Threadable's field API centralises label, description, error and required-state relationships for the blocks in this registry.
 - Accessibility: do not omit the label or replace an error with colour alone. Automated tests do not replace screen-reader review.
+
+`errorContent` accepts a Vue component or VNode for a custom validation message, such as text containing a native `mailto:` link. Keep `error` set to the plain-text validation message: it controls the invalid state and whether the error is shown. Without `errorContent`, errors remain escaped text.
+
+Blocks rooted in `Field` (including `InputBlock` and `SelectBlock`) forward `error-content` through Vue's attribute inheritance without declaring a prop or forwarding a slot. Wrappers with a different root must forward attributes to their field. For example:
+
+```vue
+<script setup lang="ts">
+import { h } from "vue";
+import { InputBlock } from "@/components/blocks/input-block";
+
+const message = "This value is already in use. Contact support";
+const content = h("span", [
+  "This value is already in use. ",
+  h("a", { href: "mailto:support@example.com" }, "Contact support"),
+]);
+</script>
+
+<template>
+  <InputBlock
+    name="email"
+    label="Email"
+    :error="message"
+    :error-content="content"
+  />
+</template>
+```
+
+Field errors use `text-sm` at every viewport size. Focusable content must keep a meaningful name and remain associated with the control's error ID.
 
 ### `input-block`
 
@@ -27,7 +55,7 @@ The import examples use the installed registry path `@/components/blocks/<name>`
 - Keyboard: preserves native input editing, Tab order and browser validation.
 - Important props/events: `modelValue`, `id`, `@shadcn/label`, `description`, `error`, `disabled`, `required`, native input attributes and `update:modelValue`.
 - Dependencies: npm `reka-ui`; registry `@shadcn/input` and hosted `/field`.
-- Difference from upstream: adds labelled field composition and validation relationships around the upstream input primitive.
+- Difference from upstream: adds labelled field composition and validation relationships around the upstream input primitive. Input text uses `text-sm` at every viewport size.
 - Accessibility: never use placeholder text as the only label; verify `aria-invalid` and error association for invalid states.
 
 ### `textarea-block`

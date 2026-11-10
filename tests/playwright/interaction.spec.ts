@@ -63,6 +63,14 @@ test.describe("registry block keyboard harness", () => {
 
     await page.locator('[data-test="demo-input"]').focus();
     await page.keyboard.press("Tab");
+    await expect(
+      page.locator('[data-test="demo-custom-error-input"]'),
+    ).toBeFocused();
+    await page.keyboard.press("Tab");
+    await expect(
+      page.locator('[data-test="demo-error-content-link"]'),
+    ).toBeFocused();
+    await page.keyboard.press("Tab");
     await expect(page.locator(":focus")).toHaveAttribute(
       "data-test",
       "demo-textarea",

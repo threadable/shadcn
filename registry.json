@@ -152,7 +152,7 @@
     {
       "name": "confirm-dialog-block",
       "type": "registry:block",
-      "description": "An accessible confirmation dialog block for destructive or consequential actions.",
+      "description": "An accessible confirmation dialog block for destructive or consequential actions, with a processing state that disables confirmation.",
       "registryDependencies": ["@shadcn/alert-dialog"],
       "dependencies": [],
       "files": [
@@ -496,6 +496,186 @@
         {
           "path": "registry/threadable/components/utils.ts",
           "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "password-block",
+      "type": "registry:block",
+      "description": "A labelled password field with an accessible visibility toggle.",
+      "registryDependencies": [
+        "@shadcn/input-group",
+        "https://threadable.github.io/shadcn/r/field.json"
+      ],
+      "dependencies": ["@lucide/vue", "clsx", "reka-ui", "tailwind-merge"],
+      "files": [
+        {
+          "path": "registry/threadable/components/blocks/password-block/PasswordBlock.vue",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/threadable/components/blocks/password-block/index.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/threadable/components/utils.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "phone-input-block",
+      "type": "registry:block",
+      "description": "A labelled international phone field with searchable country selection and bundled flags.",
+      "registryDependencies": [
+        "@shadcn/button",
+        "@shadcn/command",
+        "@shadcn/input",
+        "@shadcn/popover",
+        "https://threadable.github.io/shadcn/r/field.json"
+      ],
+      "dependencies": [
+        "@lucide/vue",
+        "base-vue-phone-input",
+        "libphonenumber-js",
+        "clsx",
+        "reka-ui",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/threadable/components/blocks/phone-input-block/PhoneInputBlock.vue",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/threadable/components/blocks/phone-input-block/FlagComponent.vue",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/threadable/components/blocks/phone-input-block/flags.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/threadable/components/blocks/phone-input-block/index.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/threadable/components/utils.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "postcode-block",
+      "type": "registry:block",
+      "description": "A country-aware postcode field with formatting and validation.",
+      "registryDependencies": [
+        "https://threadable.github.io/shadcn/r/input-block.json"
+      ],
+      "dependencies": ["reka-ui"],
+      "files": [
+        {
+          "path": "registry/threadable/components/blocks/postcode-block/PostcodeBlock.vue",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/threadable/components/blocks/postcode-block/postcodeFormat.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/threadable/components/blocks/postcode-block/formats.json",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/threadable/components/blocks/postcode-block/index.ts",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "calendar-block",
+      "type": "registry:block",
+      "description": "A labelled date picker with a calendar dialog and explicit Apply and Clear actions.",
+      "registryDependencies": [
+        "@shadcn/calendar",
+        "@shadcn/button",
+        "@shadcn/dialog",
+        "https://threadable.github.io/shadcn/r/field.json"
+      ],
+      "dependencies": [
+        "@internationalized/date",
+        "@lucide/vue",
+        "clsx",
+        "reka-ui",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/threadable/components/blocks/calendar-block/CalendarBlock.vue",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/threadable/components/blocks/calendar-block/index.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/threadable/components/utils.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "range-calendar-block",
+      "type": "registry:block",
+      "description": "A labelled date range picker with a desktop popover and mobile dialog.",
+      "registryDependencies": [
+        "@shadcn/range-calendar",
+        "@shadcn/button",
+        "@shadcn/dialog",
+        "@shadcn/popover",
+        "https://threadable.github.io/shadcn/r/field.json"
+      ],
+      "dependencies": [
+        "@internationalized/date",
+        "@lucide/vue",
+        "@vueuse/core",
+        "clsx",
+        "reka-ui",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "registry/threadable/components/blocks/range-calendar-block/RangeCalendarBlock.vue",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/threadable/components/blocks/range-calendar-block/RangeCalendarView.vue",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/threadable/components/blocks/range-calendar-block/index.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/threadable/components/utils.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "action-button-block",
+      "type": "registry:block",
+      "description": "An accessible icon action button with semantic variants, tooltips and disabled/processing states.",
+      "registryDependencies": ["@shadcn/button", "@shadcn/tooltip"],
+      "dependencies": ["@lucide/vue", "class-variance-authority"],
+      "files": [
+        {
+          "path": "registry/threadable/components/blocks/action-button-block/ActionButtonBlock.vue",
+          "type": "registry:component"
+        },
+        {
+          "path": "registry/threadable/components/blocks/action-button-block/index.ts",
+          "type": "registry:component"
         }
       ]
     }

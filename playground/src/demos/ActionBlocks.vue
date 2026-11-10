@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { Pencil, Info, AlertTriangle, Check, Trash } from "@lucide/vue";
+import { ActionButtonBlock } from "@/registry/threadable/components/blocks/action-button-block";
 
 import { ButtonBlock } from "@/registry/threadable/components/blocks/button-block";
 import { ButtonLinkBlock } from "@/registry/threadable/components/blocks/button-link-block";
@@ -14,6 +16,8 @@ import {
 import { StepperBlock } from "@/registry/threadable/components/blocks/stepper-block";
 import { TextLinkBlock } from "@/registry/threadable/components/blocks/text-link-block";
 
+const actionButtonStatus = ref("No icon action yet");
+const actionProcessing = ref(false);
 const buttonStatus = ref("No action yet");
 const dropdownStatus = ref("No menu action yet");
 
@@ -148,6 +152,73 @@ const steps = [
         >
           Read accessibility guidance
         </TextLinkBlock>
+      </article>
+      <article
+        data-testid="registry-block-action-button-block"
+        data-block="action-button-block"
+      >
+        <h3>Action button block</h3>
+        <p class="demo-description">
+          Icon actions have accessible labels; disabled reasons remain reachable
+          by keyboard.
+        </p>
+        <div class="flex flex-wrap gap-2">
+          <ActionButtonBlock
+            :icon="Pencil"
+            label="Edit item"
+            data-test="demo-action-button"
+            :processing="actionProcessing"
+            @click="actionButtonStatus = 'Edit activated'"
+          />
+          <ActionButtonBlock
+            :icon="Info"
+            label="View details"
+            variant="info"
+            data-test="demo-action-info"
+          />
+          <ActionButtonBlock
+            :icon="AlertTriangle"
+            label="Review warning"
+            variant="warning"
+            data-test="demo-action-warning"
+          />
+          <ActionButtonBlock
+            :icon="Check"
+            label="Approve item"
+            variant="success"
+            data-test="demo-action-success"
+          />
+          <ActionButtonBlock
+            :icon="Trash"
+            label="Delete item"
+            variant="destructive"
+            data-test="demo-action-destructive"
+          />
+          <ActionButtonBlock
+            :icon="Trash"
+            label="Delete locked item"
+            variant="destructive"
+            data-test="demo-action-disabled"
+            disabled
+            disabled-message="This item is locked by another editor. Ask them to finish editing before deleting it."
+          />
+          <ActionButtonBlock
+            :icon="Pencil"
+            label="Saving item"
+            data-test="demo-action-processing"
+            processing
+          />
+        </div>
+        <label class="demo-checkbox-label"
+          ><input
+            v-model="actionProcessing"
+            type="checkbox"
+            data-testid="demo-action-processing-toggle"
+          />Action is processing</label
+        >
+        <p role="status" class="demo-status" data-testid="action-button-status">
+          {{ actionButtonStatus }}
+        </p>
       </article>
     </div>
   </section>

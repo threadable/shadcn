@@ -1,0 +1,26 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "action-button-block",
+  "description": "An accessible icon action button with semantic variants, tooltips and disabled/processing states.",
+  "dependencies": [
+    "@lucide/vue",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "@shadcn/button",
+    "@shadcn/tooltip"
+  ],
+  "files": [
+    {
+      "path": "registry/threadable/components/blocks/action-button-block/ActionButtonBlock.vue",
+      "content": "<script setup lang=\"ts\">\nimport type { Component } from \"vue\";\nimport { computed } from \"vue\";\nimport { Button } from \"@/components/ui/button\";\nimport { LoaderCircle } from \"@lucide/vue\";\nimport {\n  Tooltip,\n  TooltipProvider,\n  TooltipContent,\n  TooltipTrigger,\n} from \"@/components/ui/tooltip\";\nimport { actionButtonVariants } from \".\";\nimport type { ActionButtonVariant } from \".\";\n\ninterface Props {\n  label: string;\n  icon: Component;\n  dataTest: string;\n  variant?: ActionButtonVariant;\n  disabled?: boolean;\n  processing?: boolean;\n  disabledMessage?: string;\n}\n\nconst props = withDefaults(defineProps<Props>(), {\n  variant: \"neutral\",\n  disabled: false,\n  processing: false,\n});\n\nconst emit = defineEmits<{\n  click: [event: MouseEvent];\n}>();\n\nconst isUnavailable = computed(() => props.disabled || props.processing);\n\nconst buttonClass = computed(() =>\n  actionButtonVariants({ variant: props.variant }),\n);\n\nconst tooltipMessage = computed(() =>\n  props.disabled && props.disabledMessage\n    ? `${props.label}. ${props.disabledMessage}`\n    : props.label,\n);\n</script>\n\n<template>\n  <TooltipProvider>\n    <Tooltip>\n      <TooltipTrigger v-if=\"isUnavailable\" as-child>\n        <span\n          class=\"inline-flex rounded-md focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none\"\n          tabindex=\"0\"\n          role=\"group\"\n          :aria-label=\"tooltipMessage\"\n          :aria-busy=\"processing ? 'true' : undefined\"\n        >\n          <Button\n            type=\"button\"\n            variant=\"outline\"\n            size=\"sm\"\n            :class=\"buttonClass\"\n            :aria-label=\"label\"\n            :data-test=\"dataTest\"\n            disabled\n          >\n            <LoaderCircle\n              v-if=\"processing\"\n              class=\"size-4 animate-spin\"\n              aria-hidden=\"true\"\n            />\n            <component :is=\"icon\" class=\"size-4\" aria-hidden=\"true\" />\n            <span class=\"sr-only\">{{ label }}</span>\n          </Button>\n        </span>\n      </TooltipTrigger>\n      <TooltipTrigger v-else as-child>\n        <Button\n          type=\"button\"\n          variant=\"outline\"\n          size=\"sm\"\n          :class=\"buttonClass\"\n          :aria-label=\"label\"\n          :data-test=\"dataTest\"\n          @click=\"emit('click', $event)\"\n        >\n          <component :is=\"icon\" class=\"size-4\" aria-hidden=\"true\" />\n          <span class=\"sr-only\">{{ label }}</span>\n        </Button>\n      </TooltipTrigger>\n      <TooltipContent side=\"bottom\">\n        {{ tooltipMessage }}\n      </TooltipContent>\n    </Tooltip>\n  </TooltipProvider>\n</template>\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "registry/threadable/components/blocks/action-button-block/index.ts",
+      "content": "import type { VariantProps } from \"class-variance-authority\";\nimport { cva } from \"class-variance-authority\";\n\nexport { default as ActionButtonBlock } from \"./ActionButtonBlock.vue\";\n\nexport const actionButtonVariants = cva(\"w-auto px-2\", {\n  variants: {\n    variant: {\n      neutral:\n        \"border-slate-600 text-slate-700 hover:bg-slate-700 hover:text-white dark:text-slate-300\",\n      info: \"border-blue-600 text-blue-700 hover:bg-blue-700 hover:text-white dark:text-blue-300\",\n      warning:\n        \"border-amber-600 text-amber-700 hover:bg-amber-800 hover:text-white dark:text-amber-300\",\n      success:\n        \"border-green-600 text-green-700 hover:bg-green-700 hover:text-white dark:text-green-300\",\n      destructive:\n        \"border-red-600 text-red-700 hover:bg-red-700 hover:text-white dark:text-red-300\",\n    },\n  },\n  defaultVariants: {\n    variant: \"neutral\",\n  },\n});\n\nexport type ActionButtonVariants = VariantProps<typeof actionButtonVariants>;\nexport type ActionButtonVariant = NonNullable<ActionButtonVariants[\"variant\"]>;\n",
+      "type": "registry:component"
+    }
+  ],
+  "type": "registry:block"
+}

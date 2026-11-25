@@ -110,10 +110,11 @@ Field errors use `text-sm` at every viewport size. Focusable content must keep a
 
 ### `combobox-group-block`
 
-- Import and usage: `import { ComboboxGroupBlock } from "@/components/blocks/combobox-group-block"`; use `<ComboboxGroupBlock v-model="team" label="Team" :groups="groups" />`.
+- Import and usage: `import { ComboboxGroupBlock } from "@/components/blocks/combobox-group-block"`; use `<ComboboxGroupBlock v-model="team" name="team" label="Team" :groups="groups" />` for one selection.
+- Multiple selection: use `<ComboboxGroupBlock v-model="teams" name="teams" label="Teams" :groups="groups" multiple />` with an array model. Each selected value is submitted under `teams[]`. The picker stays open while users add or remove options.
 - Accessible text: provide a label, useful search text, meaningful option names and an informative empty state.
 - Keyboard: Enter/Space opens; Arrow keys move; Enter selects; Escape closes; focus remains in the combobox interaction as the list changes.
-- Important props/events: `modelValue`, `groups`, `@shadcn/label`, `description`, `error`, `disabled`, `placeholder` and `update:modelValue`.
+- Important props/events: `modelValue`, `groups`, `label`, `description`, `error`, `disabled`, `placeholder`, `searchPlaceholder`, `emptyText`, `multiple` and `update:modelValue`.
 - Dependencies: npm `@lucide/vue`, `@vueuse/core`, `reka-ui`; registry `@shadcn/button`, `@shadcn/command`, `@shadcn/popover` and hosted `/field`.
 - Difference from upstream: provides grouped data mapping, selected-label handling and field validation around upstream command/popover primitives.
 - Accessibility: preserve active-option announcements, stable IDs and a visible label; test long lists and no results.

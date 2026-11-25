@@ -1,5 +1,43 @@
 import { expect, test } from "@playwright/test";
 
+test("searchable multi-select toggles options and submits the selected values", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const trigger = page.getByRole("button", { name: /Allowed teams/ });
+  await trigger.focus();
+  await trigger.press("Enter");
+  const search = page.getByLabel("Filter teams");
+  const list = page.getByRole("listbox", { name: "Allowed teams" });
+  await expect(search).toBeFocused();
+  await expect(list).toHaveAttribute("aria-multiselectable", "true");
+
+  await search.fill("design");
+  await expect(list.getByRole("option", { name: "Engineering" })).toHaveCount(
+    0,
+  );
+  await search.press("ArrowDown");
+  await search.press("Enter");
+  await expect(trigger).toHaveAttribute("aria-expanded", "true");
+  await expect(list.getByRole("option", { name: "Design" })).toHaveAttribute(
+    "aria-selected",
+    "true",
+  );
+
+  await search.fill("engineering");
+  await list.getByRole("option", { name: "Engineering" }).click();
+  await search.fill("support");
+  await list.getByRole("option", { name: "Support" }).click();
+  await search.press("Escape");
+  await expect(trigger).toBeFocused();
+  await expect(trigger).toContainText("Design, Support");
+
+  const values = await page
+    .locator('[data-test="demo-combobox-multiple-form"]')
+    .evaluate((form: HTMLFormElement) => new FormData(form).getAll("teams[]"));
+  expect(values).toEqual(["design", "support"]);
+});
+
 test("new fields support password keyboard toggling, country selection, and postcode validation", async ({
   page,
 }) => {

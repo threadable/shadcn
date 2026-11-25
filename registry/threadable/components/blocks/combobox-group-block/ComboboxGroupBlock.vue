@@ -22,8 +22,10 @@ import {
 
 import { useElementSize } from "@vueuse/core";
 
+type ComboboxValue = string | number;
+
 interface ComboboxItems {
-  value: string | number;
+  value: ComboboxValue;
   name: string;
 }
 
@@ -41,6 +43,9 @@ interface Props extends PrimitiveProps {
   description?: string;
   name: string;
   placeholder?: string;
+  searchPlaceholder?: string;
+  emptyText?: string;
+  multiple?: boolean;
   id?: string;
   dataTest?: string;
   processing?: boolean;
@@ -53,11 +58,12 @@ interface Props extends PrimitiveProps {
 const props = withDefaults(defineProps<Props>(), {
   processing: false,
   placeholder: "Please select value",
+  emptyText: "No results found.",
   disabled: false,
   showError: true,
 });
 
-const model = defineModel<any | null>("modelValue");
+const model = defineModel<ComboboxValue | ComboboxValue[] | null>();
 
 const open = ref(false);
 const generatedId = "combobox-group-block-" + guidGenerator();
@@ -80,18 +86,24 @@ const allItems = computed(() =>
   props.groups.flatMap((group: ComboboxGroup) => group.items),
 );
 
-const hasSelection = computed(
-  () => model.value !== null && model.value !== undefined && model.value !== "",
-);
-
-const selectedLabel = computed(() => {
-  if (!hasSelection.value) return "";
-
-  return (
-    allItems.value.find((item) => item.value === model.value)?.name ??
-    String(model.value)
-  );
+const selectedValues = computed(() => {
+  if (Array.isArray(model.value)) return model.value;
+  return model.value === null || model.value === undefined || model.value === ""
+    ? []
+    : [model.value];
 });
+const selectedLabel = computed(() =>
+  selectedValues.value
+    .map(
+      (value) =>
+        allItems.value.find((item) => item.value === value)?.name ??
+        String(value),
+    )
+    .join(", "),
+);
+const multipleName = computed(() =>
+  props.name.endsWith("[]") ? props.name : `${props.name}[]`,
+);
 
 const triggerLabelledBy = computed(() => {
   if (props.ariaLabel || !props.label) return undefined;
@@ -99,11 +111,13 @@ const triggerLabelledBy = computed(() => {
   return `${labelId.value} ${valueId.value}`;
 });
 
+const accessibleLabel = computed(
+  () => props.ariaLabel || props.label || props.placeholder || props.name,
+);
 const triggerAriaLabel = computed(() => {
   if (!props.ariaLabel && props.label) return undefined;
 
-  const baseLabel =
-    props.ariaLabel || props.label || props.placeholder || props.name;
+  const baseLabel = accessibleLabel.value;
   const valueLabel = selectedLabel.value || props.placeholder;
 
   if (!valueLabel || valueLabel === baseLabel) return baseLabel;
@@ -114,13 +128,19 @@ const triggerAriaLabel = computed(() => {
 const el = useTemplateRef("el");
 const { width } = useElementSize(el);
 
-const selectItem = (value: string | number) => {
+const selectItem = (value: ComboboxValue) => {
+  if (props.multiple) return;
   model.value = value;
   open.value = false;
 };
 
 const handleCommandValueChange = (value: AcceptableValue) => {
-  if (typeof value === "string" || typeof value === "number") {
+  if (props.multiple && Array.isArray(value)) {
+    model.value = value.filter(
+      (item): item is ComboboxValue =>
+        typeof item === "string" || typeof item === "number",
+    );
+  } else if (typeof value === "string" || typeof value === "number") {
     selectItem(value);
   }
 };
@@ -135,23 +155,38 @@ const handleCommandValueChange = (value: AcceptableValue) => {
     :label-id="labelId"
     :description-id="descriptionId"
     :error-id="errorId"
-    :class="cn('grid gap-1', props.class)"
+    :class="cn('grid grid-cols-1 gap-1', props.class)"
     :showError="showError"
     :required="required"
     ref="el"
   >
-    <input type="hidden" :name="name" :value="model" :required="required" />
+    <template v-if="multiple">
+      <input
+        v-for="value in selectedValues"
+        :key="value"
+        type="hidden"
+        :name="multipleName"
+        :value="value"
+      />
+    </template>
+    <input
+      v-else
+      type="hidden"
+      :name="name"
+      :value="model"
+      :required="required"
+    />
     <Popover v-model:open="open">
       <PopoverTrigger as-child>
         <Button
           :id="comboboxId"
           :disabled="disabled || processing"
           variant="outline"
-          role="combobox"
+          :role="multiple ? undefined : 'combobox'"
           :aria-expanded="open"
-          :aria-controls="contentId"
+          :aria-controls="multiple ? undefined : contentId"
           :aria-invalid="error ? 'true' : 'false'"
-          :aria-required="required ? 'true' : undefined"
+          :aria-required="required && !multiple ? 'true' : undefined"
           :aria-errormessage="errorId"
           :aria-describedby="describedBy"
           :aria-labelledby="triggerLabelledBy"
@@ -170,13 +205,25 @@ const handleCommandValueChange = (value: AcceptableValue) => {
       </PopoverTrigger>
       <PopoverContent
         :id="contentId"
+        :aria-label="accessibleLabel"
         class="p-0"
         :style="'width:' + width + 'px !important;'"
       >
-        <Command @update:model-value="handleCommandValueChange">
-          <CommandInput class="h-9" :placeholder="placeholder" />
-          <CommandList>
-            <CommandEmpty>No found.</CommandEmpty>
+        <Command
+          :multiple="multiple"
+          :model-value="multiple ? selectedValues : undefined"
+          @update:model-value="handleCommandValueChange"
+        >
+          <CommandInput
+            class="h-9"
+            :aria-label="searchPlaceholder || placeholder"
+            :placeholder="searchPlaceholder || placeholder"
+          />
+          <CommandList
+            :aria-label="multiple ? accessibleLabel : undefined"
+            :aria-required="multiple && required ? 'true' : undefined"
+          >
+            <CommandEmpty>{{ emptyText }}</CommandEmpty>
             <template v-for="group in groups" :key="group.group">
               <CommandGroup :heading="group.group">
                 <CommandItem
@@ -184,19 +231,18 @@ const handleCommandValueChange = (value: AcceptableValue) => {
                   :key="item.value"
                   :value="item.value"
                   :data-value="item.value"
-                  @select="
-                    () => {
-                      selectItem(item.value);
-                    }
-                  "
-                  @click="() => selectItem(item.value)"
+                  @select="selectItem(item.value)"
+                  @click="selectItem(item.value)"
                 >
-                  {{ item.name }}
+                  <span class="min-w-0 truncate">{{ item.name }}</span>
                   <CheckIcon
+                    aria-hidden="true"
                     :class="
                       cn(
                         'ml-auto',
-                        model === item.value ? 'opacity-100' : 'opacity-0',
+                        selectedValues.includes(item.value)
+                          ? 'opacity-100'
+                          : 'opacity-0',
                       )
                     "
                   />

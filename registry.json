@@ -120,7 +120,7 @@
     {
       "name": "combobox-group-block",
       "type": "registry:block",
-      "description": "An accessible grouped combobox block with keyboard navigation and validation.",
+      "description": "A searchable grouped combobox with single or multiple selection, keyboard navigation, and validation.",
       "registryDependencies": [
         "@shadcn/button",
         "@shadcn/command",

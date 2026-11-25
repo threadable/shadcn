@@ -19,7 +19,7 @@ describe("interactive block accessibility contracts", () => {
     ],
     [
       "combobox-group-block/ComboboxGroupBlock.vue",
-      ['role="combobox"', "aria-expanded", "aria-controls"],
+      ["'combobox'", "aria-expanded", "aria-controls"],
     ],
     ["field/Field.vue", ["FieldLabel", "FieldDescription", "FieldError"]],
   ] as const;

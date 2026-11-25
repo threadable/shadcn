@@ -39,9 +39,7 @@ test.describe("registry block keyboard harness", () => {
   }) => {
     await page.waitForTimeout(25);
 
-    await expect(
-      page.locator('[data-testid="registry-block-combobox-group-block"] input'),
-    ).not.toBeFocused();
+    await expect(page.locator('[data-slot="command-input"]')).toHaveCount(0);
     expect(await page.evaluate(() => window.scrollY)).toBe(0);
   });
 

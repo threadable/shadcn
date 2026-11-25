@@ -55,6 +55,7 @@ const radioValue = ref("engineering");
 const selectValue = ref("engineering");
 const groupedSelectValue = ref("design");
 const comboboxValue = ref("engineering");
+const multipleComboboxValue = ref(["engineering"]);
 
 const selectItems = [
   { value: "engineering", name: "Engineering" },
@@ -251,6 +252,18 @@ const groupedItems = [
           :groups="groupedItems"
           data-test="demo-combobox"
         />
+        <form data-test="demo-combobox-multiple-form">
+          <ComboboxGroupBlock
+            v-model="multipleComboboxValue"
+            name="teams"
+            label="Allowed teams"
+            placeholder="Choose teams"
+            search-placeholder="Filter teams"
+            :groups="groupedItems"
+            multiple
+            data-test="demo-combobox-multiple"
+          />
+        </form>
       </article>
       <article
         data-testid="registry-block-password-block"

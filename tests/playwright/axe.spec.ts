@@ -24,6 +24,20 @@ test.describe("registry playground axe checks", () => {
       .analyze();
     expect(results.violations).toEqual([]);
   });
+
+  test("has no automated axe violations when the searchable multi-select is open", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await page.getByRole("button", { name: /Allowed teams/ }).click();
+    await expect(
+      page.getByRole("listbox", { name: "Allowed teams" }),
+    ).toBeVisible();
+    const results = await new AxeBuilder({ page })
+      .include('[data-slot="popover-content"]')
+      .analyze();
+    expect(results.violations).toEqual([]);
+  });
 });
 
 for (const example of [
